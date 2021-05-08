@@ -1,13 +1,13 @@
-<div class="text-gray-600 body-font bg-pc-blue font-cd">
+<div class="text-gray-600 body-font bg-red-100 font-cd">
   <div class="mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
     <a class="flex w-2/5 title-font font-medium items-center justify-center md:justify-start mb-4 text-pc-brown md:mb-0">
       <img class ="object-contain w-4/12 sm:w-12" src="{{ url_for('static', filename='src/img/logo-header.png') }}" alt="logo">
-      <span class="ml-3 text-2xl">MindReader.ai</span>
+      <span class="ml-3 text-2xl">Bazi Algorithms</span>
     </a>
     <nav class="md:ml-auto flex flex-wrap items-center text-lg justify-center text-pc-brown">
-      <a class="mr-5 sm:mr-16 hover:text-gray-900" href="{{ url_for('main_bp.ai') }}">AI</a>
-      <a class="mr-5 sm:mr-16 hover:text-gray-900" href="{{ url_for('crm_bp.profiles') }}">Profiles</a>
-      <a class="mr-5 sm:mr-16 hover:text-gray-900" href="{{ url_for('accounts_bp.account_info') }}">Account</a>
+      <a class="mr-5 sm:mr-16 hover:text-gray-900" href="{{ url_for('main_bp.main') }}">AI</a>
+      <a class="mr-5 sm:mr-16 hover:text-gray-900" href="{{ url_for('main_bp.main') }}">Profiles</a>
+      <a class="mr-5 sm:mr-16 hover:text-gray-900" href="{{ url_for('main_bp.main') }}">Account</a>
     
     <button class="inline-flex items-center bg-gray-100 border-0 py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-lg mt-4 md:mt-0">
     <a href="{{ url_for('auth_bp.logout') }}">Log Out</a>

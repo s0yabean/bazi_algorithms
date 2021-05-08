@@ -30,9 +30,9 @@ def create_app():
 
     with app.app_context():
         from . import routes
-        # from .auth import auth
-        # from .landing import landing
-        # from .demo import demo
+        from .auth import auth
+        from .landing import landing
+        from .demo import demo
         # from .crm import crm
         # from .accounts import accounts
         # from .mbti_content import mbti_content
@@ -40,8 +40,8 @@ def create_app():
 
         # Register Blueprints
         app.register_blueprint(routes.main_bp)
-        # app.register_blueprint(auth.auth_bp)
-        # app.register_blueprint(landing.landing_bp)
+        app.register_blueprint(auth.auth_bp)
+        app.register_blueprint(landing.landing_bp)
         # app.register_blueprint(demo.demo_bp)
         # app.register_blueprint(mbti_content.mbti_content_bp)
         # app.register_blueprint(crm.crm_bp)

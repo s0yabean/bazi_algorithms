@@ -11,7 +11,7 @@ main_bp = Blueprint(
 
 @main_bp.route("/", methods=['GET', 'POST'])
 def main():
-        return "ok"
+        return render_template("home.jinja2")
 
 
 

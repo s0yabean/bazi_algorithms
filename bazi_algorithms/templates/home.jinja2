@@ -5,9 +5,8 @@
 {% endblock %}
 
 {% block content %}
- <div class="bg-pc-blue">
+ <div class="">
     {% include 'navigation.jinja2' %}
-    {# {% include 'spinner.jinja2' %}  #}
 
   <div class="md:flex md:space-x-4 mt-8 mx-6 font-hn">
   {% include 'spinner.jinja2' %} 
@@ -28,33 +27,21 @@
 
   </div> 
 
-  <div class="md:flex md:space-x-4 mt-8 font-hn">
-      <div class="md:mx-4 md:w-2/6 mx-6 mb-8 ">
-        {% include 'ai_form_submit.jinja2' %}
-      </div>
-
-        <div class="mx-6 mb-8">
-        {% include 'tutorial_carousel.jinja2' %} 
-        </div>
-
       <div class="md:pr-4 md:w-4/6 pr-3 flex-shrink-0">
-        {% include 'chart.jinja2' %}
+        {# {% include 'chart.jinja2' %} #}
       </div>
-  </div>
-
-  <div class="mt-8 mx-6 md:mt-2 font-hn">
-      {% include 'progress_bar.jinja2' %}
   </div>
 
 <div class="mt-8 font-hn">
-   {% include 'profile_buttons.jinja2' %}
+  Brand New Web App Here!
+   {# {% include 'profile_buttons.jinja2' %} #}
    </div>
 
 <div class="mt-8">
   {% include 'footer.jinja2' %}
    </div>
    
-        <div class="font-mono text-white">
+        {# <div class="font-mono text-white">
         <br>
         <p class="font-cd">(Knight, Explorer, Healer, Wizard)</p>
         <p>{{data_output}}</p>
@@ -68,10 +55,8 @@
         <br>
         <p>User Posts</p>
         <p>{{user_input}}</p>
-        </div>
+        </div> #}
 
 </div>
-
-
 {% endblock %} 
 
