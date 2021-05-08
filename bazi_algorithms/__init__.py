@@ -49,7 +49,7 @@ def create_app():
 
         # Create Database Models
         # Seems like just need to create once, and then don't run it anymore.
-        # db.create_all()
+        db.create_all()
 
         # Compile static assets
         if app.config['FLASK_ENV'] == 'development':

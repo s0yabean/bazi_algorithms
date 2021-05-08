@@ -5,25 +5,11 @@
 {% endblock %}
 
 {% block content %}
- <div class="">
+ <div class="font-serif">
     {% include 'navigation.jinja2' %}
 
   <div class="md:flex md:space-x-4 mt-8 mx-6 font-hn">
   {% include 'spinner.jinja2' %} 
-
-      {% for category, message in get_flashed_messages(with_categories=true) %}
-        {%if category == "info" %} 
-          <div class="alert text-green-700 bg-green-100 border border-green-400 text-left rounded pb-3 pt-2 px-4">
-            <button type="button" class="close text-2xl" data-dismiss="alert">&#10003;</button>
-        
-        {%elif category == "error"%}
-          <div class="alert text-red-700 bg-red-100 border border-red-400 text-left rounded pb-3 pt-2 px-4">
-            <button type="button" class="close text-2xl" data-dismiss="alert">&times;</button>
-        
-        {%endif%}    
-          {{ message }} 
-          </div>
-        {% endfor %}
 
   </div> 
 
@@ -34,28 +20,27 @@
 
 <div class="mt-8 font-hn">
   Brand New Web App Here!
-   {# {% include 'profile_buttons.jinja2' %} #}
+
+<h3> Select a date range </h3>
+<form action="" method='POST' name="myform">
+    {{ form.csrt_token }}
+    {{ form.startdate.label }} {{form.startdate(class='datepicker')}} {{form.hidden_tag()}}
+    {{ form.enddate.label }} {{form.enddate(class='datepicker')}} {{form.hidden_tag()}}
+    <p>
+    {{form.submit()}}
+    </p>
+</form>
+
+<h4>Start Date is: {{session['startdate']}}</h4>
+<h4>End Date is: {{session['enddate']}}</h4>
+
+
+
    </div>
 
 <div class="mt-8">
   {% include 'footer.jinja2' %}
    </div>
-   
-        {# <div class="font-mono text-white">
-        <br>
-        <p class="font-cd">(Knight, Explorer, Healer, Wizard)</p>
-        <p>{{data_output}}</p>
-        <br>
-        <p>----------------------------------</p>
-        <br>
-        <p class="font-hn">Beta Distribution Parameters</p>
-        <p>{{session_data}}</p>
-        <br>
-        <p>----------------------------------</p>
-        <br>
-        <p>User Posts</p>
-        <p>{{user_input}}</p>
-        </div> #}
 
 </div>
 {% endblock %} 
