@@ -1,0 +1,26 @@
+{% extends 'layout.jinja2' %}
+
+{% block pagestyles %}
+  <link rel="stylesheet" href="{{url_for('static',filename='src/css/tailwind.css')}}">
+{% endblock %}
+
+{% block content %}
+ <div>
+  {% include 'navigation.jinja2' %}
+
+   <div class="flex h-screen">
+        <div class="m-10 text-3xl">
+            {{ current_user.name }}
+            <br>
+            <br>
+            {{ current_user.email }} 
+        </div>
+    </div>
+  
+    <div class="mt-8">
+        {% include 'footer.jinja2' %}
+    </div>
+
+</div>
+
+{% endblock %} 

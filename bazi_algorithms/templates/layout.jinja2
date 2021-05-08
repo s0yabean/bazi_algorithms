@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+  <title>{{ title }}</title>
+  <meta name="HandheldFriendly" content="True"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
+  <meta name="theme-color" content="#5eb9d7"/>
+  <link rel="shortcut icon" href="{{ url_for('static', filename='dist/img/logo-color.png') }}" type="image/x-icon"/>
+  <meta name="description" content="AI Tool for tripling your sales conversions."/>
+  <meta property="og:site_name" content="Personality Central - MindReader.ai"/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:title" content="MindReader.ai"/>
+  <meta property="og:description" content="AI Tool for tripling your sales conversions."/>
+  <meta name="twitter:url" content="https://flasklogin.hackersandslackers.app/"/>
+  <meta name="twitter:site" content="@personcentral"/>
+  {# <meta property="og:url" content="https://flasklogin.hackersandslackers.app/"/> #}
+  {% block pagestyles %}{% endblock %}
+</head>
+
+<body class="block">
+<div>
+  {% block content %}{% endblock %}
+</div>
+<script src="{{ url_for('static', filename='dist/js/main.min.js') }}"></script>
+{% block additionalscripts %}{% endblock %}
+</body>
+
+</html>

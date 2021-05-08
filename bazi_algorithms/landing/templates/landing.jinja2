@@ -1,0 +1,19 @@
+{% extends "layout.jinja2" %}
+
+{% block pagestyles %}
+<link rel="stylesheet" href="{{url_for('static',filename='src/css/tailwind.css')}}">
+{% endblock %}
+
+{% block content %}
+  {% include 'header.jinja2' %}
+  {% include 'hero.jinja2' %}
+  {% include 'feature.jinja2' %}
+  {% include 'steps.jinja2' %}
+  {% include 'statistic.jinja2' %}
+  {% include 'cta.jinja2' %}
+  {% include 'testimonial.jinja2' %}
+  {% include 'pricing.jinja2' %}
+  {% include 'team.jinja2' %}
+  {% include 'contact.jinja2' %}
+  {% include 'landing_footer.jinja2' %}
+{% endblock %}

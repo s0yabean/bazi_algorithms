@@ -1,0 +1,10 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    @font-face {
+      font-family: Condor;
+      src: url(./CONDOR-REGULAR-EDU.otf) format("otf");
+    }
+  }

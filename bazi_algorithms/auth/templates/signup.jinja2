@@ -1,0 +1,101 @@
+{% extends "layout.jinja2" %}
+
+{% block pagestyles %}
+<link rel="stylesheet" href="{{url_for('static',filename='src/css/tailwind.css')}}">
+{% endblock %}
+
+{% block content %}
+  <div class="bg-grey-lighter min-h-screen flex flex-col bg-pc-brown">
+    <div class="container max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-2">
+    <div class="bg-white px-6 py-8 rounded shadow-md text-black w-full">
+
+    {% for message in get_flashed_messages() %}
+      <div class="alert text-red-700 mb-4 bg-red-100 border border-red-400 text-center rounded justify-self-center pb-3">
+        <button type="button" class="close text-4xl" data-dismiss="alert">&times;</button>
+        {{ message }}
+      </div>
+    {% endfor %}
+
+    <h1 class="mt-6 mb-8 text-3xl text-center">Sign up</h1>
+
+    <form method="POST" action="/signup">
+      {{ form.csrf_token }}
+
+      <fieldset class="name block border border-grey-light w-full rounded mb-4">
+        {{ form.name(placeholder='John Smith', class="w-full pl-2  py-3 rounded") }}
+      </fieldset>
+
+            <div class="mb-4 ">
+      {% if form.name.errors %}
+          <ul class="errors text-red-700">
+            {% for error in form.email.errors %}
+              <li>{{ error }}</li>{% endfor %}
+          </ul>
+        {% endif %}
+        </div>
+
+      <fieldset class="email block border border-grey-light w-full rounded mb-4">
+        {{ form.email(placeholder='Email', class="w-full pl-2 py-3 rounded") }}
+      </fieldset>
+
+      <div class="mb-4 ">
+      {% if form.email.errors %}
+          <ul class="errors bg-blue-400 text-red-700">
+            {% for error in form.email.errors %}
+              <li>{{ error }}</li>{% endfor %}
+          </ul>
+        {% endif %}
+        </div>
+
+      <fieldset class="password block border border-grey-light w-full rounded mb-4">
+        {{ form.password(placeholder='Password', class="w-full pl-2  py-3 rounded") }}
+        </fieldset>
+
+      <div class="mb-4 ">
+      {% if form.password.errors %}
+          <ul class="errors text-red-700">
+            {% for error in form.password.errors %}
+              <li><h1>{{ error }}</h1></li>{% endfor %}
+          </ul>
+        {% endif %}
+        </div>
+
+      <fieldset class="confirm block border border-grey-light w-full rounded mb-4">
+        {{ form.confirm(placeholder='Confirm Password', class="w-full pl-2  py-3 rounded") }}
+      </fieldset>
+
+      <div class="mb-4 ">
+          {% if form.confirm.errors %}
+          <ul class="errors text-red-700">
+            {% for error in form.confirm.errors %}
+              <li>{{ error }}</li>{% endfor %}
+          </ul>
+        {% endif %}
+        </div>
+
+
+      <div class="submit-button w-full text-center">
+        {{ form.submit(class="w-full pl-2 py-3 rounded bg-blue-400 hover:bg-blue-500") }}
+      </div>
+
+    </form>
+
+    <div class="text-center text-sm text-grey-dark mt-4">
+                        By signing up, you agree to the 
+                        <a class="no-underline border-b border-grey-dark text-grey-dark" href="#">
+                            Terms of Service
+                        </a> and 
+                        <a class="no-underline border-b border-grey-dark text-grey-dark" href="#">
+                            Privacy Policy
+                        </a>
+                    </div>
+
+    <div class="login-signup text-grey-dark mt-6">
+      <span>Already have an account? 
+        <a class="underline font-extrabold text-blue" href="{{ url_for('auth_bp.login') }}">Log in</a>.</span>
+    </div>
+    </div>
+    </div>
+  </div>
+
+{% endblock %}
