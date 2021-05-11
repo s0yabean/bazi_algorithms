@@ -1,3 +1,4 @@
+import collections
 
 def count_earth_clash(natal_earth, external_earth):
     count = 0
