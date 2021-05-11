@@ -2,10 +2,10 @@
   <div class="mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
     <a class="flex w-2/5 title-font font-medium items-center justify-center md:justify-start mb-4 md:mb-0">
       {# <img class ="object-contain w-4/12 sm:w-12" src="{{ url_for('static', filename='src/img/logo-header.png') }}" alt="logo"> #}
-      <span class="ml-3 text-2xl text-gray-900">Bazi Algos</span>
+      <span class="ml-3 text-2xl text-gray-900" href="{{ url_for('main_bp.main') }}">Bazi Algos</span>
     </a>
     <nav class="md:ml-auto flex flex-wrap items-center text-lg justify-center">
-      <a class="mr-5 sm:mr-16 hover:text-gray-900" href="{{ url_for('main_bp.main') }}">Timeline</a>
+      <a class="mr-5 sm:mr-16 hover:text-gray-900" href="{{ url_for('timeline_bp.main') }}">Timeline</a>
       <a class="mr-5 sm:mr-16 hover:text-gray-900" href="{{ url_for('main_bp.main') }}">Network</a>
       <a class="mr-5 sm:mr-16 hover:text-gray-900" href="{{ url_for('main_bp.main') }}">Account</a>
     

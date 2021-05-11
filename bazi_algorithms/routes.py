@@ -13,15 +13,5 @@ main_bp = Blueprint(
 def main():
     from .forms.date_forms import DateForm
     Dateform = DateForm()
-    if Dateform.validate_on_submit():
-        session['startdate'] = Dateform.startdate.data
-        session['enddate'] = Dateform.enddate.data
-        return redirect(url_for('main_bp.main'))
-    return render_template('home.jinja2', form=Dateform)
-
-@main_bp.route('/date', methods=['GET','POST'])
-def date():
-    startdate = session['startdate']
-    enddate = session['enddate']
-    return render_template('date.jinja2')
-
+    return render_template('home.jinja2', current_user = current_user,
+    form = Dateform)

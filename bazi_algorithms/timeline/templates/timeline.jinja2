@@ -6,27 +6,32 @@
 
 {% block content %}
  <div class="font-serif">
-    {% include 'navigation.jinja2' %}
+  {% include 'navigation.jinja2' %}
 
-  <div class="md:flex md:space-x-4 mt-8 mx-6">
-  {% include 'spinner.jinja2' %} 
+  <div class="my-10">
+  {% include 'dropdown_search.jinja2' %} 
   </div> 
 
-  <div class="mt-4">
-  Welcome to Tony Tong's Bazi Algo App!
-  <br>
-  User: {{current_user.name}}
-  <br>
-  User Id: {{current_user.id}}
-   </div>
+  <div class="my-10">
+  {% include 'date.jinja2' %}
+  </div> 
+
+  Session Data:
+  {{session["contact_name"]}}
+  {{session["start_date"]}}
+  {{session["end_date"]}}
+
+  <div class="my-10">
+  {% include 'chart_2.jinja2' %}
+  </div>
 
 <div class="mt-8">
   {% include 'footer.jinja2' %}
    </div>
 
 </div>
+
 {% endblock %} 
 
 {% block additionalscripts %}
 {% endblock %}
-

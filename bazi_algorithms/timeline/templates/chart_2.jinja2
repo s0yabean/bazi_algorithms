@@ -1,0 +1,110 @@
+{% block pagestyles %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
+{% endblock %}
+
+  {% block content %}
+    {# <canvas id="timelineChart" width="600" height="400"></canvas> #}
+    <canvas id="timelineChart"></canvas>
+  {% endblock %}
+
+{% block additionalscripts %}
+  <script>
+      Chart.defaults.global.responsive = true;
+
+var ctx = document.getElementById('timelineChart');
+var myChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+        labels: [{% for item in labels %}
+                   "{{item}}",
+                  {% endfor %}],
+
+        datasets: [{
+            label: 'Combine Score',
+            data: [{% for item in values %}
+                      {{item}},
+                    {% endfor %}],
+            fill: false,
+            borderColor: "rgba(75,192,192,1)",
+            backgroundColor: "rgba(75,192,192,0.4)",
+            borderCapStyle: 'butt',
+            borderDash: [],
+            borderDashOffset: 0.0,
+            borderJoinStyle: 'miter',
+            pointBorderColor: "rgba(75,192,192,1)",
+            pointBackgroundColor: "#fff",
+            pointBorderWidth: 1,
+            pointHoverRadius: 5,
+            pointHoverBackgroundColor: "rgba(75,192,192,1)",
+            pointHoverBorderColor: "rgba(220,220,220,1)",
+            pointHoverBorderWidth: 2,
+            pointRadius: 1,
+            pointHitRadius: 10,
+            borderWidth: 1
+        },
+
+        {
+            label: 'Clash Score',
+            data: [{% for item in e_clash %}
+                      {{item}},
+                    {% endfor %}],
+            fill: false,
+            borderColor: "rgba(100,192,192,1)",
+            backgroundColor: "rgba(75,192,100,0.4)",
+            borderCapStyle: 'butt',
+            borderDash: [],
+            borderDashOffset: 0.0,
+            borderJoinStyle: 'miter',
+            pointBorderColor: "rgba(75,192,192,1)",
+            pointBackgroundColor: "#fff",
+            pointBorderWidth: 1,
+            pointHoverRadius: 5,
+            pointHoverBackgroundColor: "rgba(75,192,192,1)",
+            pointHoverBorderColor: "rgba(220,220,220,1)",
+            pointHoverBorderWidth: 2,
+            pointRadius: 1,
+            pointHitRadius: 10,
+            borderWidth: 1
+        }
+        
+        
+        ]
+    },
+    options: {
+        legend: {
+    	display: false
+        },
+        scales: {
+            yAxes: [{
+                ticks: {
+                    fontColor:["black"],
+                    beginAtZero: true,
+                    suggestedMax: 25,
+                    fontSize: 18,
+                    callback: function(value){return value}
+                },
+                scaleLabel: {
+                   display: true,
+                   fontSize: 18,
+                   fontColor: ["black"],
+                   labelString: "Clashes & Combines"
+                },
+                gridLines: {
+                    color: "#000000"
+                },
+            }],
+            xAxes: [{
+                ticks: {fontSize: 18, fontColor: ["black"]},
+                scaleLabel: {
+                   display: true,
+                   fontSize: 18,
+                   fontColor: ["black"]
+                }}],
+        }
+    }
+});
+</script>
+
+{% endblock %}
+
+

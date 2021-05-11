@@ -3,14 +3,14 @@
 {% endblock %}
 
   {% block content %}
-    <canvas id="myChart"></canvas>
+    <canvas id="timelineChart"></canvas>
   {% endblock %}
 
 {% block additionalscripts %}
   <script>
       Chart.defaults.global.responsive = true;
 
-var ctx = document.getElementById('myChart');
+var ctx = document.getElementById('timelineChart');
 var myChart = new Chart(ctx, {
     type: 'bar',
     data: {

@@ -1,9 +1,17 @@
 {% block content %}
-<body>
-<h2>Results Dates</h3>
+<h1> Select a date range </h1>
+<form action="" method='POST' name="myform">
+    {{ form.csrt_token }}
+    {{ form.startdate.label }}:  {{form.startdate(class='datepicker')}} {{form.hidden_tag()}}
+    {{ form.enddate.label }}:  {{form.enddate(class='datepicker')}} {{form.hidden_tag()}}
+    <p>
+    {{form.submit()}}
+    </p>
+</form>
+<br>
+{% if session['end_date'] and session["start_date"] %}
+  Date range {{session.start_date}} to {{session.end_date}} is selected
+    {% else %}
+    {% endif %}
 
-<h4>Start Date is: {{session['startdate']}}</h4>
-<h4>End Date is: {{session['enddate']}}</h4>
-
-</body>
-{% endblock %}
+  {% endblock %}

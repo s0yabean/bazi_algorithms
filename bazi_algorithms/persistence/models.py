@@ -51,10 +51,10 @@ class User(UserMixin, db.Model):
 	def __repr__(self):
 		return '<User {}>'.format(self.username)
 
-class Profile(db.Model):
-	"""Profile model."""
+class NatalChart(db.Model):
+	"""Natal Charts"""
 
-	__tablename__ = 'profile'
+	__tablename__ = 'natal_chart'
 	id = db.Column(
 		db.Integer,
 		primary_key=True
@@ -63,33 +63,78 @@ class Profile(db.Model):
 		db.Integer,
 		db.ForeignKey('user.id')
 	)
-	profile_name = db.Column(
+	contact_name = db.Column(
 		db.String(100),
 		nullable=False,
 		unique=False
 	)
-	# Maybe can compress/ serialise into text blob that is smaller? Need to test.
-	# input_text = db.Column(
-	# 	db.String(100),
-	# 	nullable=False,
-	# 	unique=False
-	# )
-	beta_dist = db.Column(
-		db.JSON,
-		nullable=False,
-		unique=False
+	hour_s = db.Column(
+		db.String(10),
+		unique=False,
+		nullable=True
 	)
-	created_on = db.Column(
-        db.DateTime,
-        index=False,
-        unique=False,
-        nullable=True
-    )
-	last_updated = db.Column(
-        db.DateTime,
-        index=False,
-        unique=False,
-        nullable=True
-    )
+	hour_e = db.Column(
+		db.String(10),
+		unique=False,
+		nullable=True
+	)
+	day_s = db.Column(
+		db.String(10),
+		unique=False,
+		nullable=False
+	)
+	day_e = db.Column(
+		db.String(10),
+		unique=False,
+		nullable=False
+	)
+	month_s = db.Column(
+		db.String(10),
+		unique=False,
+		nullable=False
+	)
+	month_e = db.Column(
+		db.String(10),
+		unique=False,
+		nullable=False
+	)
+	year_s = db.Column(
+		db.String(10),
+		unique=False,
+		nullable=False
+	)
+	year_e = db.Column(
+		db.String(10),
+		unique=False,
+		nullable=False
+	)
 
+class ExternalPillars(db.Model):
+	"""External Charts"""
+
+	__tablename__ = 'external_pillars'
+	id = db.Column(
+		db.Integer,
+		primary_key=True
+	)
+	date = db.Column(
+		db.String(20),
+		nullable=False,
+		unique=True
+	)
+	day_pillar = db.Column(
+		db.String(20),
+		unique=False,
+		nullable=False
+	)
+	month_pillar = db.Column(
+		db.String(20),
+		unique=False,
+		nullable=False
+	)
+	year_pillar = db.Column(
+		db.String(20),
+		unique=False,
+		nullable=False
+	)
 

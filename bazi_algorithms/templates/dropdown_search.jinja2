@@ -1,0 +1,87 @@
+{% block pagestyles %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<link href="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/css/select2.min.css" rel="stylesheet" />
+{% endblock %}
+
+{% block content %} 
+
+<form class="form-inline" method="POST" action="{{ url_for('timeline_bp.main') }}" id="project-search_2">
+<input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+<select class="js-example-basic-single" name="dropdown_menu" id='id_projekt' style="width: 25%">
+  <option></option>
+  {% for person in natal_chart %}
+    <option value= "{{person.id}}">{{person.contact_name}}</option>"
+  {% endfor %}
+      {% for error in choice_form.contact_name.errors %}
+      <span class="label label-danger">{{ error }}</span>
+      {% endfor %}
+      <input type="hidden" name="security_token" value="123">
+  </select>
+</form>
+
+<br>
+
+{% if session['contact_name'] %}
+  {{session.contact_name}} is selected
+    {% else %}
+    {% endif %}
+
+{# <form class="form-inline" method="POST" action="{{ url_for('timeline_bp.main') }}" id="project-search">
+<input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+<select class="js-example-basic-single" id="id_projekt" name="state" style="width: 25%">
+  {% for person in persons %}
+    <option value= "{{person}}">{{person.contact_name}}</option>"
+    {% endfor %}
+</select>
+<button type="submit" class="btn btn-default">Go</button>
+</form> #}
+
+{# <form class="form-inline" method="POST" action="{{ url_for('timeline_bp.main') }}" id="project-search_3">
+<input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+<div class="form-group" name="form-group" id=form-group>
+                        {{ form_2.single_dynamic_select.label }}
+                        <small class="text-muted">{{ form_2.single_dynamic_select.description }}</small>
+                        {{ form_2.single_dynamic_select() }}
+
+                        {% for error in form_2.single_dynamic_select.errors %}
+                        <span class="label label-danger">{{ error }}</span>
+                        {% endfor %}
+                    </div>
+</form> #}
+
+{# <form action="" method="get" id="project-search">
+        <select class="form-control"
+                data-autocomplete-light-function="select2"
+                data-autocomplete-light-url="/output/project-autocomplete/"
+                data-placeholder="Suche nach Projektnr. oder Projektleiter"
+                id="id_projekdvt" name="projekt">
+            <option value="----" selected="selected">----------</option>
+            <option value="123" selected="selected">123</option>
+            <option value="345" selected="selected">345</option>
+            <option value="456" selected="selected">456</option>
+        </select>
+</form> #}
+
+{% endblock %} 
+
+{% block additionalscripts %}
+{# Loads the dropdown search from https://select2.org/ #}
+<script>
+
+
+$(document).ready(function() {
+  $selectElement = $('select').select2({
+    placeholder: "Please select a person",
+    allowClear: true
+  });
+});
+
+
+$('#id_projekt').change(function(){
+    $('#project-search_2').submit();
+});
+
+</script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/select2.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+{% endblock %}
