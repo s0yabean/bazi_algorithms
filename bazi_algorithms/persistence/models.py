@@ -27,6 +27,12 @@ class User(UserMixin, db.Model):
 		unique=False,
 		nullable=False
 	)
+	natal_chart_id = db.Column(
+		db.Integer,
+		#db.ForeignKey('natal_chart.id'), if uncomment, cannot edit directly in UI
+		unique=True,
+		nullable=True
+	)
 	created_on = db.Column(
         db.DateTime,
         index=False,

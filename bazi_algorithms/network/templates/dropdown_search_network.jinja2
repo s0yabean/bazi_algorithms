@@ -5,26 +5,26 @@
 
 {% block content %} 
 
-<form class="form-inline" method="POST" action="{{ url_for('timeline_bp.main') }}" id="dropdown_form">
+<form class="form-inline" method="POST" action="{{ url_for('network_bp.main') }}" id="dropdown_qn_form">
 <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-<select class="js-example-basic-single" name="dropdown_menu" id='dropdown_id' style="width: 25%">
+<select class="js-example-basic-single" name="dropdown_menu" id='dropdown_qn_id' style="width: 50%">
   <option></option>
-  {% for person in natal_chart %}
-    <option value= "{{person.id}}">{{person.contact_name}}</option>"
+  {% for ques in questions %}
+    <option value= "{{ques}}">{{ques}}</option>"
   {% endfor %}
-      {% for error in choice_form.contact_name.errors %}
+      {% for error in network_form.question.errors %}
       <span class="label label-danger">{{ error }}</span>
       {% endfor %}
-      <input type="hidden" name="security_token" value="123">
+      <input type="hidden" name="security_key" value="456">
   </select>
 </form>
 
 <br>
 
-{% if session['contact_name'] %}
-  {{session.contact_name}} is selected
+{% if session['question'] %}
+  Question Selected: {{session.question}}
     {% else %}
-    Please select a person.
+    Please select a question.
     {% endif %}
 
 {% endblock %} 
@@ -33,13 +33,13 @@
 <script>
 $(document).ready(function() {
   $selectElement = $('select').select2({
-    placeholder: "Please select a person",
+    placeholder: "Please select a question",
     allowClear: true
   });
 });
 
-$('#dropdown_id').change(function(){
-    $('#dropdown_form').submit();
+$('#dropdown_qn_id').change(function(){
+    $('#dropdown_qn_form').submit();
 });
 
 </script>

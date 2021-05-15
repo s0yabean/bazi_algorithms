@@ -38,6 +38,7 @@ def create_app():
         from .landing import landing
         from .demo import demo
         from .timeline import timeline
+        from .network import network
         from .assets.assets import compile_static_assets
         from .persistence.models import User, NatalChart, ExternalPillars
 
@@ -46,12 +47,17 @@ def create_app():
         app.register_blueprint(auth.auth_bp)
         app.register_blueprint(landing.landing_bp)
         app.register_blueprint(timeline.timeline_bp)
+        app.register_blueprint(network.network_bp)
 
         # Create Database Models
         db.create_all()
 
-        admin.add_view(ModelView(User, db.session))
-        admin.add_view(ModelView(NatalChart, db.session))
+        class NatalChartView(ModelView):
+            column_list = ("id","user_id",'contact_name',"hour_s","hour_e", "day_s", "day_e", "month_s", "month_e", "year_s", "year_e")
+        class UserView(ModelView):
+            column_list = ('name','email', 'natal_chart_id')
+        admin.add_view(UserView(User, db.session))
+        admin.add_view( NatalChartView(NatalChart, db.session))
         admin.add_view(ModelView(ExternalPillars, db.session))
 
         # Compile static assets

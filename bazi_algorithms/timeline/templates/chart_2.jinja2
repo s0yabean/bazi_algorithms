@@ -8,8 +8,8 @@
   {% endblock %}
 
 {% block additionalscripts %}
-  <script>
-      Chart.defaults.global.responsive = true;
+<script>
+Chart.defaults.global.responsive = true;
 
 var ctx = document.getElementById('timelineChart');
 var myChart = new Chart(ctx, {
@@ -38,8 +38,50 @@ var myChart = new Chart(ctx, {
             pointHoverBorderWidth: 4,
             pointRadius: 1,
             pointHitRadius: 20,
-            borderWidth: 3,
+            borderWidth: 1,
 
+        },
+
+        {
+            label: 'Rolling Average',
+            data: {{rolling_data}},
+            fill: false,
+            borderColor: '#FF0000',
+            backgroundColor: '#FF0000',
+            borderCapStyle: 'butt',
+            borderJoinStyle: 'miter',
+            pointBorderColor: "rgba(75,192,192,1)",
+            pointBackgroundColor: "#fff",
+            pointBorderWidth: 1,
+            pointHoverRadius: 5,
+            pointHoverBackgroundColor: "rgba(75,192,192,1)",
+            pointHoverBorderColor: "rgba(0,192,192,1)",
+            pointHoverBorderWidth: 4,
+            pointRadius: 1,
+            pointHitRadius: 20,
+            borderWidth: 1,
+
+        },
+
+        {
+            label: 'Average Combine Score',
+            data: {{avg_combine}},
+            fill: false,
+            borderColor: "rgba(0,192,192,1)",
+            backgroundColor: "rgba(75,192,192,0.4)",
+            borderCapStyle: 'butt',
+            borderJoinStyle: 'miter',
+            borderDash: [10,5],
+            pointBorderColor: "rgba(75,192,192,1)",
+            pointBackgroundColor: "#fff",
+            pointBorderWidth: 1,
+            pointHoverRadius: 5,
+            pointHoverBackgroundColor: "rgba(75,192,192,1)",
+            pointHoverBorderColor: "rgba(0,192,192,1)",
+            pointHoverBorderWidth: 4,
+            pointRadius: 1,
+            pointHitRadius: 20,
+            borderWidth: 1
         },
 
         {
@@ -61,15 +103,31 @@ var myChart = new Chart(ctx, {
             pointHoverBorderWidth: 4,
             pointRadius: 1,
             pointHitRadius: 20,
-            borderWidth: 3
+            borderWidth: 1
         }
-        
-        
         ]
     },
     options: {
+        annotation: {
+        annotations: [
+          {
+            drawTime: "afterDatasetsDraw",
+            type: "line",
+            mode: "vertical",
+            scaleID: "x-axis-0",
+            value: "2021-06-14",
+            borderWidth: 20,
+            borderColor: "red",
+            label: {
+              content: "TODAY",
+              enabled: true,
+              position: "top"
+            }
+          }
+        ]
+      },
         legend: {
-    	display: false
+    	display: true
         },
         scales: {
             yAxes: [{
@@ -100,6 +158,7 @@ var myChart = new Chart(ctx, {
         }
     }
 });
+
 </script>
 
 {% endblock %}
