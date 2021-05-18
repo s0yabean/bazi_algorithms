@@ -63,16 +63,19 @@ class NatalChart(db.Model):
 	__tablename__ = 'natal_chart'
 	id = db.Column(
 		db.Integer,
-		primary_key=True
+		primary_key=True,
+		unique=True
 	)
 	user_id = db.Column(
 		db.Integer,
-		db.ForeignKey('user.id')
+		db.ForeignKey('user.id'),
+		nullable=False,
+		unique=False,
 	)
 	contact_name = db.Column(
 		db.String(100),
-		nullable=False,
-		unique=False
+		unique=False,
+		nullable=False
 	)
 	hour_s = db.Column(
 		db.String(10),

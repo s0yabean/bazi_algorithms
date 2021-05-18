@@ -1,5 +1,5 @@
  {% block content %} 
-<div class="centered z-10 items-center hidden justify-center" id="spinner">
+{# <div class="centered z-10 items-center hidden justify-center" id="spinner">
     <div class="size bg-white rounded justify-center shadow p-4 m-4 text-center overflow-hidden opacity-99">      
         <lottie-player class="hidden" id="animation_1" src="{{ url_for('static', filename='src/lottie/10956-user-data-bank.json') }}" mode="bounce" background="transparent" speed="1.5"  style="width: 300px; height: 300px; left: 50%; transform: translateX(-50%); position: relative" loop autoplay></lottie-player>
         <lottie-player class="hidden" id="animation_2" src="{{ url_for('static', filename='src/lottie/35049-data-analyst.json') }}" mode="bounce" background="transparent"  speed="1"  style="width: 300px; height: 300px; left: 50%; transform: translateX(-50%); position: relative" loop autoplay></lottie-player>
@@ -8,7 +8,7 @@
         <lottie-player class="hidden" id="animation_bonus_2" src="{{ url_for('static', filename='src/lottie/38587-great-job.json') }}"  background="transparent"  speed="1"  style="width: 300px; height: 300px; left: 50%; transform: translateX(-50%); position: relative"  loop autoplay></lottie-player>  
         <p class="popup text-center mb-50 justify-center" id="spam"></p>
     </div>
-</div>
+</div> #}
 {% endblock %} 
 
 {% block additionalscripts %}
@@ -66,7 +66,7 @@ function randomAnimation() {
 }
 
 </script>
-<script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+{# <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script> #}
 {% endblock %}
 
 <style type="text/css">

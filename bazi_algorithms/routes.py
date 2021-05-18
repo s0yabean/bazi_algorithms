@@ -9,7 +9,7 @@ main_bp = Blueprint(
     static_folder='static'
 )
 
-@main_bp.route("/", methods=['GET', 'POST'])
+@main_bp.route("/home", methods=['GET', 'POST'])
 def main():
     from .forms.date_forms import DateForm
     Dateform = DateForm()

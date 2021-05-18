@@ -54,6 +54,7 @@ def create_app():
 
         class NatalChartView(ModelView):
             column_list = ("id","user_id",'contact_name',"hour_s","hour_e", "day_s", "day_e", "month_s", "month_e", "year_s", "year_e")
+            form_columns = ("id", "user_id",'contact_name',"hour_s","hour_e", "day_s", "day_e", "month_s", "month_e", "year_s", "year_e")
         class UserView(ModelView):
             column_list = ('name','email', 'natal_chart_id')
         admin.add_view(UserView(User, db.session))
