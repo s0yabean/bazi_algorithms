@@ -1,5 +1,4 @@
 
-
 def find_nobleman(dm):
     if dm in ["Jia", "Wu", "Geng"]:
         return ["Chou", "Wei"]
