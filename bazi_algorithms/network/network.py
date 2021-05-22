@@ -79,10 +79,6 @@ def answer_question(input, table_data, natal_chart_id, start_date, end_date):
         return peach_blossom_me_to_others(table_data, natal_chart_id)
     elif input == ques[7]:
         return peach_blossom_others_to_me(table_data, natal_chart_id)
-    # elif input == ques[7]:
-    #     return attracts_me(table_data, natal_chart_id, start_date, end_date)
-    # elif input == ques[8]:
-    #     return attracts_me(table_data, natal_chart_id, start_date, end_date)
 
 def question_list():
     return ["Who would be a good career partner/ colleague/ mentor?", 
@@ -92,5 +88,7 @@ def question_list():
                  "Who is more rebellious than normal this period?",
                  "Who are my nobleman (贵人)?",
                  "Who am I more attracted to (has my peach blossom)?",
-                 "Who is attracted to me (I have their peach blossom)?",
-                 "Who is open to romantic relationships?"]
+                 "Who is attracted to me (I have their peach blossom)?"]
+
+def explanation_list():
+    text = ""
