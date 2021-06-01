@@ -27,9 +27,7 @@ class SaveProfileForm(FlaskForm):
     submit_field = SubmitField('Save Profile')
 
     def validate_input_name(self, input_name):
-        print(f"session: {session}")
         count = len(session["input_text"])
-        print(f"count: {count}")
         if count == 0:
             flash("No data entered yet, cannot create Profile.",  'error')
             raise ValidationError()

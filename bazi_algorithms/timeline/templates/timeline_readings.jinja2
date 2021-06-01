@@ -1,0 +1,78 @@
+{% if session['contact_name'] %}
+<section class="text-gray-600 body-font">
+    <div class="bg-gray-100 pt-4 pb-2 shadow-lg">
+    <div class="mx-auto md:w-11/12 md:w-9/12">
+        <div class="p-2 bg-gray-100 rounded">
+            <div class="flex flex-col md:flex-row">
+                <div class="md:w-1/3 p-4 text-sm">
+                    <div class="text-2xl"><span class="font-medium">Person:</span></div>
+                    <div class="my-2 text-base">{{session['contact_name']}}</div>
+
+                    {% if ((session.end_date)) %}
+                        <div class="mt-6 text-xl"><span class="font-medium">Date Range:</span></div>
+                        <div class="text-base"><span class="font-medium">{{session.start_date}} to {{session.end_date}}</span></div>
+                        {% else %}
+                    {% endif %}
+
+                    {# <div class="mt-6 text-xl"><span class="font-medium">Relative to Chart: </span></div>
+                    <div class="text-base"><span class="font-medium">{{current_user.name}}</span></div> #}
+                    
+                </div>
+
+                {# <div class="md:w-2/3">
+                    <div class="p-4">
+
+                        <div class="mb-2">
+                        {% for i in range(1, explanations|length) %}
+                            <div class="font-medium rounded-sm text-lg px-2 py-3 flex text-gray-800 flex-row-reverse mt-2 cursor-pointer text-black bg-white hover:bg-white items-center">
+                                <div class="flex-auto">{{explanations[i][0]}}</div>
+                                <div class="px-2 mt-1">
+                                    <button id="question_{{i}}" type="button" onclick="toggleView(this)">
+
+                                        {% if i == 1 %} 
+                                        <span id="down_{{i}}" class="iconify hidden" data-icon="feather-chevron-down" data-inline="false"></span>
+                                        <span id="up_{{i}}" class="iconify" data-icon="feather-chevron-up" data-inline="false"></span>
+                                        {% else %}
+                                        <span id="down_{{i}}" class="iconify" data-icon="feather-chevron-down" data-inline="false"></span>
+                                        <span id="up_{{i}}" class="iconify hidden" data-icon="feather-chevron-up" data-inline="false"></span>
+                                        {% endif %}
+
+                                    </button>
+                                </div>
+                            </div>
+
+                            {% if i == 1 %} 
+                                <div id="answer_{{i}}" class="px-6 pb-6 text-justify text-left text-gray-800 mb-5 bg-white">
+                                    {{explanations[i][1]}}
+                                </div>
+                            {% else %}
+                                <div id="answer_{{i}}" class="hidden px-6 pb-6 text-justify text-left text-gray-800 mb-5 bg-white">
+                                    {{explanations[i][1]}}
+                                </div>
+                            {% endif %}
+                            
+                        {% endfor %}
+                        </div>
+
+                    </div> #}
+        </div>
+    </div>
+</div>
+
+</section>
+ {% endif %}
+
+{% block additionalscripts %}
+<script>
+function toggleView(elem) {
+    var i = elem.id.substring(elem.id.indexOf("_") + 1, elem.id.length + 1)
+    document.getElementById("answer_" + i).classList.toggle("hidden")
+    document.getElementById("up_" + i).classList.toggle("hidden")
+    document.getElementById("down_" + i).classList.toggle("hidden")
+}
+</script>
+
+<style>
+.iconify { width: 40px; height: 40px; }
+</style>
+{% endblock %}

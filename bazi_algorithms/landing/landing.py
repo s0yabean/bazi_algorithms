@@ -14,3 +14,17 @@ def landing():
         'landing.jinja2',
         title='MBTI App Demo.'
     )
+
+@landing_bp.route('/about', methods=['GET'])
+def about_us():
+    return render_template(
+        'about.jinja2',
+        title='MBTI App Demo.'
+    )
+
+@landing_bp.route('/newsletter', methods=['GET'])
+def newsletter():
+    return render_template(
+        'newsletter.jinja2',
+        title='MBTI App Demo.'
+    )

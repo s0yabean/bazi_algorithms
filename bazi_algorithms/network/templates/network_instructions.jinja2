@@ -1,0 +1,99 @@
+<section class="text-gray-600 body-font">
+    <div class="bg-theme-l-green rounded shadow-lg">
+    <div class="mx-auto">
+        <div class="p-2 bg-theme-l-green rounded">
+            <div class="flex flex-col md:flex-row">
+
+                <div class="w-full">
+                    <div class="p-4">
+
+                        <div class="mb-2">
+                            <div class="font-medium rounded-sm text-lg px-2 py-3 flex text-gray-800 flex-row-reverse mt-2 cursor-pointer text-black bg-white hover:bg-white items-center">
+                                <div class="text-left flex-auto">What is <i>Network</i> Feature?</div>
+                                <div class="px-2 mt-1">
+                                    <button id="question_100" type="button" onclick="toggleInstructionView(this)">
+                                        <span id="down_100" class="iconify" data-icon="feather-chevron-down" data-inline="false"></span>
+                                        <span id="up_100" class="iconify hidden" data-icon="feather-chevron-up" data-inline="false"></span>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div id="answer_100" class="hidden px-6 pb-6 text-justify text-left text-gray-800 mb-5 bg-white">
+                            <i>Network</i> studies your network so you can do scalable Bazi analysis on them, without manually calculating their charts one-by-one.
+                            <br>
+                            <br>
+                            You can use these results for all types of engagement, like sales, partnerships and personal relationships. 
+                            <br>
+                            <br>
+                            Knowing how external energies are likely to influence your contacts helps you plan ahead and select the right time to do the right activities.
+                            </div>
+                        </div>
+
+                        <div class="mb-2">
+                            <div class="font-medium rounded-sm text-lg px-2 py-3 flex text-gray-800 flex-row-reverse mt-2 cursor-pointer text-black bg-white hover:bg-white items-center">
+                                <div class="text-left flex-auto">How do I use this?</div>
+                                <div class="px-2 mt-1">
+                                    <button id="question_101" type="button" onclick="toggleInstructionView(this)">
+                                        <span id="down_101" class="iconify" data-icon="feather-chevron-down" data-inline="false"></span>
+                                        <span id="up_101" class="iconify hidden" data-icon="feather-chevron-up" data-inline="false"></span>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div id="answer_101" class="hidden px-6 pb-6 text-justify text-left text-gray-800 mb-5 bg-white">
+                            1) Click "Filters" button.
+                            <br>
+                            <br>
+                            2) Select a question from the dropdown.
+                            <br>
+                            <br>
+                            3) Select a time range (optional for some questions).
+                            <br>
+                            <br>
+                            4) See the table <i>remarks</i> column below that calculates your network's charts.
+                            </div>
+                        </div>
+
+                        <div class="mb-2">
+                            <div class="font-medium rounded-sm text-lg px-2 py-3 flex text-gray-800 flex-row-reverse mt-2 cursor-pointer text-black bg-white hover:bg-white items-center">
+                                <div class="text-left flex-auto">How does this benefit me?</div>
+                                <div class="px-2 mt-1">
+                                    <button id="question_102" type="button" onclick="toggleInstructionView(this)">
+                                        <span id="down_102" class="iconify" data-icon="feather-chevron-down" data-inline="false"></span>
+                                        <span id="up_102" class="iconify hidden" data-icon="feather-chevron-up" data-inline="false"></span>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div id="answer_102" class="hidden px-6 pb-6 text-justify text-left text-gray-800 mb-5 bg-white">
+                                Knowing how external energies are likely to influence your contacts helps you plan ahead and select the right time to do the right activities.
+                                <br>
+                                <br>
+                                To see this in action, click on any question, select any time range and see the readings tab, where we provide recommendations on how you can utilise this information to your advantage. 
+                            </div>
+                        </div>
+
+
+
+
+                    </div>
+                </div>
+    </div>
+</div>
+
+</section>
+
+{% block additionalscripts %}
+<script>
+function toggleInstructionView(elem) {
+    var i = elem.id.substring(elem.id.indexOf("_") + 1, elem.id.length + 1)
+    document.getElementById("answer_" + i).classList.toggle("hidden")
+    document.getElementById("up_" + i).classList.toggle("hidden")
+    document.getElementById("down_" + i).classList.toggle("hidden")
+}
+</script>
+
+<style>
+.iconify { width: 40px; height: 40px; }
+</style>
+{% endblock %}

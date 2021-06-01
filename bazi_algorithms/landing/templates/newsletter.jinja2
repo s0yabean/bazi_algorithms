@@ -2,17 +2,19 @@
 
 {% block pagestyles %}
 <link rel="stylesheet" href="{{url_for('static',filename='src/css/tailwind.css')}}">
-<script src="https://code.iconify.design/1/1.0.7/iconify.min.js"></script>
 {% endblock %}
 
 {% block content %}
   {% include 'header.jinja2' %}
-  {% include 'hero.jinja2' %}
-  {% include 'feature.jinja2' %}
-  {% include 'steps.jinja2' %}
-  {% include 'pricing.jinja2' %}
-  {% include 'bazi_faq.jinja2' %}
-  {% include 'cta.jinja2' %}
+  
+    <div class="flex h-screen">
+    <div class="m-10 text-3xl">
+      Building in Progress.
+      <br>
+      <br>
+    </div>
+  </div>
+
   {% include 'landing_footer.jinja2' %}
 {% endblock %}
 

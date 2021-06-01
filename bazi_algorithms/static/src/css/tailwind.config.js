@@ -7,15 +7,8 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        'pc-blue': '#323451',
-        'pc-blue-dark': '#1e1f30',
-        'pc-gray': '#797A88',
-        'pc-brown': '#BFA59C',
-        'pc-brown-dark': '#5F524E'
-      },
-      fontFamily: {
-        'hn': ["Helvetica Neue"],
-        'cd': ["Condor"]
+        'theme-l-green': '#CCF5AC',
+        'theme-d-green': '#223127',
       }
     },
   },

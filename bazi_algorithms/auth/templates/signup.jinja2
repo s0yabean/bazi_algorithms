@@ -1,13 +1,6 @@
-{% extends "layout.jinja2" %}
-
-{% block pagestyles %}
-<link rel="stylesheet" href="{{url_for('static',filename='src/css/tailwind.css')}}">
-{% endblock %}
-
-{% block content %}
-  <div class="bg-grey-lighter min-h-screen flex flex-col bg-pc-brown">
+  <div class="min-h-screen flex flex-col">
     <div class="container max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-2">
-    <div class="bg-white px-6 py-8 rounded shadow-md text-black w-full">
+    <div class="bg-pink-200 px-6 py-8 rounded shadow-md text-black w-full">
 
     {% for message in get_flashed_messages() %}
       <div class="alert text-red-700 mb-4 bg-red-100 border border-red-400 text-center rounded justify-self-center pb-3">
@@ -21,8 +14,8 @@
     <form method="POST" action="/signup">
       {{ form.csrf_token }}
 
-      <fieldset class="name block border border-grey-light w-full rounded mb-4">
-        {{ form.name(placeholder='John Smith', class="w-full pl-2  py-3 rounded") }}
+      <fieldset class="name text-lg block border border-grey-light w-full rounded mb-4">
+        {{ form.name(placeholder='John Smith', class="w-full text-lg pl-2  py-3 rounded") }}
       </fieldset>
 
             <div class="mb-4 ">
@@ -34,8 +27,8 @@
         {% endif %}
         </div>
 
-      <fieldset class="email block border border-grey-light w-full rounded mb-4">
-        {{ form.email(placeholder='Email', class="w-full pl-2 py-3 rounded") }}
+      <fieldset class="email text-lg block border border-grey-light w-full rounded mb-4">
+        {{ form.email(placeholder='Email', class="w-full text-lg pl-2 py-3 rounded") }}
       </fieldset>
 
       <div class="mb-4 ">
@@ -74,8 +67,8 @@
         </div>
 
 
-      <div class="submit-button w-full text-center">
-        {{ form.submit(class="w-full pl-2 py-3 rounded bg-blue-400 hover:bg-blue-500") }}
+      <div class="submit-button w-full text-center text-2xl">
+        {{ form.submit(class="w-full pl-2 py-3 rounded bg-indigo-400 hover:bg-indigo-500") }}
       </div>
 
     </form>
@@ -86,7 +79,7 @@
                             Terms of Service
                         </a> and 
                         <a class="no-underline border-b border-grey-dark text-grey-dark" href="#">
-                            Privacy Policy
+                            Privacy Policy.
                         </a>
                     </div>
 
@@ -97,5 +90,3 @@
     </div>
     </div>
   </div>
-
-{% endblock %}

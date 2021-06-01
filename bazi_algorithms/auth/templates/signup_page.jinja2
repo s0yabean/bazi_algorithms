@@ -1,0 +1,14 @@
+{% extends "layout.jinja2" %}
+
+{% block pagestyles %}
+<link rel="stylesheet" href="{{url_for('static',filename='src/css/tailwind.css')}}">
+{% endblock %}
+
+{% block content %}
+    {% include 'header.jinja2' %}
+    {% include 'signup.jinja2' %}
+    {% include 'footer_bottom.jinja2' %}
+{% endblock %}
+
+{% block additionalscripts %}
+{% endblock %}

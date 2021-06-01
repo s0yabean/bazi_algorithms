@@ -10,6 +10,7 @@ main_bp = Blueprint(
 )
 
 @main_bp.route("/home", methods=['GET', 'POST'])
+@login_required
 def main():
     from .forms.date_forms import DateForm
     Dateform = DateForm()

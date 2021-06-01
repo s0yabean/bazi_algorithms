@@ -1,0 +1,124 @@
+<section class="text-gray-600 body-font">
+    <div class="bg-theme-l-green rounded shadow-lg">
+    <div class="mx-auto">
+        <div class="p-2 bg-theme-l-green rounded">
+            <div class="flex flex-col md:flex-row">
+
+                <div class="w-full">
+                    <div class="p-4">
+
+                        <div class="mb-2">
+                            <div class="font-medium rounded-sm text-lg px-2 py-3 flex text-gray-800 flex-row-reverse mt-2 cursor-pointer text-black bg-white hover:bg-white items-center">
+                                <div class="text-left flex-auto">What is <i>Timeline</i> Feature?</div>
+                                <div class="px-2 mt-1">
+                                    <button id="question_200" type="button" onclick="toggleInstructionView(this)">
+                                        <span id="down_200" class="iconify" data-icon="feather-chevron-down" data-inline="false"></span>
+                                        <span id="up_200" class="iconify hidden" data-icon="feather-chevron-up" data-inline="false"></span>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div id="answer_200" class="hidden px-6 pb-6 text-justify text-left text-gray-800 mb-5 bg-white">
+                            <i>Timeline</i> measures the chart interactions (clashes and combinations) for each person based on the External Day, Month and Year.
+                            <br>
+                            <br>
+                            This is used to gauge the person's mood and mental state over time, to see when they are in "lucky" periods so we can decide how to engage them.
+                            <br>
+                            <br>
+                            Generally, more combines are considered auspicious and smooth, while clashes are deemed inauspicious and turbulent. 
+                            </div>
+                        </div>
+
+                        <div class="mb-2">
+                            <div class="font-medium rounded-sm text-lg px-2 py-3 flex text-gray-800 flex-row-reverse mt-2 cursor-pointer text-black bg-white hover:bg-white items-center">
+                                <div class="text-left flex-auto">How do I use this?</div>
+                                <div class="px-2 mt-1">
+                                    <button id="question_201" type="button" onclick="toggleInstructionView(this)">
+                                        <span id="down_201" class="iconify" data-icon="feather-chevron-down" data-inline="false"></span>
+                                        <span id="up_201" class="iconify hidden" data-icon="feather-chevron-up" data-inline="false"></span>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div id="answer_201" class="hidden px-6 pb-6 text-justify text-left text-gray-800 mb-5 bg-white">
+                            1) Click "Filters" button.
+                            <br>
+                            <br>
+                            2) Choose someone in your network.
+                            <br>
+                            <br>
+                            3) Choose a time range.
+                            <br>
+                            <br>
+                            4) See the chart that calculates everything for you.
+                            </div>
+                        </div>
+
+                        <div class="mb-2">
+                            <div class="font-medium rounded-sm text-lg px-2 py-3 flex text-gray-800 flex-row-reverse mt-2 cursor-pointer text-black bg-white hover:bg-white items-center">
+                                <div class="text-left flex-auto">How does this benefit me?</div>
+                                <div class="px-2 mt-1">
+                                    <button id="question_202" type="button" onclick="toggleInstructionView(this)">
+                                        <span id="down_202" class="iconify" data-icon="feather-chevron-down" data-inline="false"></span>
+                                        <span id="up_202" class="iconify hidden" data-icon="feather-chevron-up" data-inline="false"></span>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div id="answer_202" class="hidden px-6 pb-6 text-justify text-left text-gray-800 mb-5 bg-white">
+                                Knowing when your network is having their "lucky" and "unlucky" periods can assist you in making decisions.
+                                <br>
+                                <br>
+                                For eg. if you know a potential business partner is in a combine year, then it might be a good idea to partner with them.
+                                <br>
+                                <br>
+                                For eg. If you know a loved one who is experiencing more clashes than normal, then it might be a good idea to look out for them for any distress or turbulence. You could consider being more pro-active in helping them.
+                            </div>
+                        </div>
+
+                        <div class="mb-2">
+                            <div class="font-medium rounded-sm text-lg px-2 py-3 flex text-gray-800 flex-row-reverse mt-2 cursor-pointer text-black bg-white hover:bg-white items-center">
+                                <div class="text-left flex-auto">How are calculations made?</div>
+                                <div class="px-2 mt-1">
+                                    <button id="question_203" type="button" onclick="toggleInstructionView(this)">
+                                        <span id="down_203" class="iconify" data-icon="feather-chevron-down" data-inline="false"></span>
+                                        <span id="up_203" class="iconify hidden" data-icon="feather-chevron-up" data-inline="false"></span>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div id="answer_203" class="hidden px-6 pb-6 text-justify text-left text-gray-800 mb-5 bg-white">
+                                Only earthly branch interactions between the natal and external chart are counted. Static interactions within the natal chart is not counted.
+                                <br>
+                                <br>
+                                Pair combinations and clashes are given a score of 1 per interaction.
+                                <br>
+                                <br>
+                                Combinations of 3 elements (directional, seasonal) are give a 3 for a complete combination, and 1 for 2/3 combinations. 
+                            </div>
+                        </div>
+
+
+
+
+                    </div>
+                </div>
+    </div>
+</div>
+
+</section>
+
+{% block additionalscripts %}
+<script>
+function toggleInstructionView(elem) {
+    var i = elem.id.substring(elem.id.indexOf("_") + 1, elem.id.length + 1)
+    document.getElementById("answer_" + i).classList.toggle("hidden")
+    document.getElementById("up_" + i).classList.toggle("hidden")
+    document.getElementById("down_" + i).classList.toggle("hidden")
+}
+</script>
+
+<style>
+.iconify { width: 40px; height: 40px; }
+</style>
+{% endblock %}

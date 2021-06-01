@@ -1,24 +1,24 @@
 {% block pagestyles %}
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <link href="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/css/select2.min.css" rel="stylesheet" />
+<script src="https://code.iconify.design/1/1.0.7/iconify.min.js"></script>
 {% endblock %}
 
 {% block content %} 
-<div class="">
-<form class="form-inline text-lg" method="POST" action="{{ url_for('network_bp.main') }}" id="dropdown_qn_form">
+
+<form class="form-inline" method="POST" action="{{ url_for('timeline_bp.main') }}" id="dropdown_form">
 <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-<select class="js-example-basic-single" name="dropdown_menu" id='dropdown_qn_id' style="width: 90%">
+<select class="js-example-basic-single" name="dropdown_menu" id='dropdown_id' style="width: 90%">
   <option></option>
-  {% for ques in questions %}
-    <option value= "{{ques}}">{{ques}}</option>"
+  {% for person in natal_chart %}
+    <option value= "{{person.id}}">{{person.contact_name}}</option>"
   {% endfor %}
-      {% for error in network_form.question.errors %}
+      {% for error in choice_form.contact_name.errors %}
       <span class="label label-danger">{{ error }}</span>
       {% endfor %}
-      <input type="hidden" name="security_key" value="456">
+      <input type="hidden" name="security_token" value="123">
   </select>
 </form>
-</div>
 
 {% endblock %} 
 
@@ -26,13 +26,13 @@
 <script>
 $(document).ready(function() {
   $selectElement = $('select').select2({
-    placeholder: "Please select a question",
+    placeholder: "Please select a person",
     allowClear: true
   });
 });
 
-$('#dropdown_qn_id').change(function(){
-    $('#dropdown_qn_form').submit();
+$('#dropdown_id').change(function(){
+    $('#dropdown_form').submit();
 });
 
 </script>

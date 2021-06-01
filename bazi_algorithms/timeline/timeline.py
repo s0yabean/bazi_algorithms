@@ -45,7 +45,7 @@ def main():
         return redirect(url_for('timeline_bp.main'))
     
     if 'start_date' not in session.keys() and 'end_date' not in session.keys():
-        flash("Please select a date range", "info")
+        flash("Please Select A Date Range", "error")
 
     display_chart = 'start_date' in session.keys() and 'end_date' in session.keys() and 'contact_name' in session.keys() and 'contact_name_id' in session.keys()
     if display_chart:

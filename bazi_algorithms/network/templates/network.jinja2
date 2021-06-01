@@ -1,22 +1,23 @@
 {% extends 'layout.jinja2' %}
 
 {% block pagestyles %}
-  <link rel="stylesheet" href="{{url_for('static',filename='src/style.css')}}">
+<link rel="stylesheet" href="{{url_for('static',filename='src/style.css')}}">
+<script src="https://code.iconify.design/1/1.0.7/iconify.min.js"></script>
 {% endblock %}
 
 {% block content %}
  <div class="font-serif">
   {% include 'navigation.jinja2' %}
 
-<div class="my-10">
+<div class="my-10 w-11/12 mx-auto">
 {% for category, message in get_flashed_messages(with_categories=true) %}
         {%if category == "info" %} 
-          <div class="alert text-green-700 bg-green-100 border border-green-400 text-left rounded pb-3 pt-2 px-4">
-            <button type="button" class="close text-2xl" data-dismiss="alert">&#10003;</button>
+          <div id="successMessage" class="alert text-green-700 bg-green-100 border border-green-400 text-left rounded pb-3 pt-2 px-4">
+            <button onclick=delete_flash(this) type="button" class="close text-2xl" data-dismiss="alert">&#10003;</button>
         
         {%elif category == "error"%}
           <div class="alert text-red-700 bg-red-100 border border-red-400 text-left rounded pb-3 pt-2 px-4">
-            <button type="button" class="close text-2xl" data-dismiss="alert">&times;</button>
+            <button onclick=delete_flash(this) type="button" class="close text-2xl" data-dismiss="alert">&times;</button>
         
         {%endif%}    
           {{ message }} 
@@ -24,32 +25,36 @@
         {% endfor %}
 </div> 
 
-<div class="my-10">
-    Relative to Chart: {{current_user.name}}
+<div class="my-10 w-11/12 mx-auto flex-row justify-center">
+
+    <button onclick="toggleFilter(this)" class="inline-flex items-center bg-indigo-400 border-0 py-3 text-xl px-6 focus:outline-none hover:bg-indigo-500 rounded">
+      Filters
+    </button>
+
+     <button onclick="toggleInstruction(this)" class="modal-open text-lg bg-transparent border border-gray-500 align-bottom hover:border-indigo-400 text-gray-500 hover:text-black font-bold py-2 px-4 ml-6 rounded">?
+     </button>
+
+    <div class="hidden pt-10 text-center rounded" id='network_instruction'>
+      {% include 'network_instructions.jinja2' %} 
+    </div>
+  
+    <div class="shadow-lg hidden mt-10 pt-10 pb-8 bg-theme-l-green text-center rounded" id='filter_buttons'>
+      {% include 'dropdown_search_network.jinja2' %} 
+      {% include 'date_network.jinja2' %} 
+    </div>
+
   </div> 
 
   <div class="my-10">
-  {% include 'dropdown_search_network.jinja2' %} 
-  </div> 
-
-  <div class="my-10">
-  {% include 'date_network.jinja2' %} 
-  </div> 
+  {% include 'readings.jinja2' %} 
+  </div>
 
   <div class="my-10">
   {% include 'table.jinja2' %} 
   </div> 
 
-  Session Data:
-  {{session["contact_name"]}}
-  {{session["start_date"]}}
-  {{session["end_date"]}}
-  <div class="my-10">
-  
-  </div>
-
 <div class="mt-8">
-  {% include 'footer.jinja2' %}
+  {% include 'footer_bottom.jinja2' %}
    </div>
 
 </div>
@@ -57,4 +62,23 @@
 {% endblock %} 
 
 {% block additionalscripts %}
+<script>
+function toggleFilter(elem) {
+    document.getElementById('filter_buttons').classList.toggle("hidden")
+}
+
+function toggleInstruction(elem) {
+    document.getElementById('network_instruction').classList.toggle("hidden")
+}
+
+setTimeout(function() {
+    $('#successMessage').fadeOut('fast');
+}, 3000); 
+
+function delete_flash(flash){
+        $(flash).parent().remove()
+}
+
+
+</script>
 {% endblock %}

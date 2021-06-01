@@ -4,7 +4,9 @@
 
   {% block content %}
     {# <canvas id="timelineChart" width="600" height="400"></canvas> #}
+    <div class="w-11/12 mx-auto min-h-500">
     <canvas id="timelineChart"></canvas>
+    </div>
   {% endblock %}
 
 {% block additionalscripts %}
@@ -25,16 +27,16 @@ var myChart = new Chart(ctx, {
                       {{item["e_combine"]}},
                     {% endfor %}],
             fill: false,
-            borderColor: "rgba(0,192,192,1)",
-            backgroundColor: "rgba(75,192,192,0.4)",
+            borderColor: "#223127",
+            backgroundColor: "#223127",
             borderCapStyle: 'butt',
             borderJoinStyle: 'miter',
-            pointBorderColor: "rgba(75,192,192,1)",
-            pointBackgroundColor: "#fff",
+            pointBorderColor: "#223127",
+            pointBackgroundColor: "#223127",
             pointBorderWidth: 1,
             pointHoverRadius: 5,
-            pointHoverBackgroundColor: "rgba(75,192,192,1)",
-            pointHoverBorderColor: "rgba(0,192,192,1)",
+            pointHoverBackgroundColor: "#223127",
+            pointHoverBorderColor: "#223127",
             pointHoverBorderWidth: 4,
             pointRadius: 1,
             pointHitRadius: 20,
@@ -43,19 +45,19 @@ var myChart = new Chart(ctx, {
         },
 
         {
-            label: 'Rolling Average',
+            label: 'Rolling Average Combine Score',
             data: {{rolling_data}},
             fill: false,
-            borderColor: '#FF0000',
-            backgroundColor: '#FF0000',
+            borderColor: '#5bb416',
+            backgroundColor: '#5bb416',
             borderCapStyle: 'butt',
             borderJoinStyle: 'miter',
-            pointBorderColor: "rgba(75,192,192,1)",
-            pointBackgroundColor: "#fff",
+            pointBorderColor: "#5bb416",
+            pointBackgroundColor: "#5bb416",
             pointBorderWidth: 1,
             pointHoverRadius: 5,
-            pointHoverBackgroundColor: "rgba(75,192,192,1)",
-            pointHoverBorderColor: "rgba(0,192,192,1)",
+            pointHoverBackgroundColor: "#5bb416",
+            pointHoverBorderColor: "#5bb416",
             pointHoverBorderWidth: 4,
             pointRadius: 1,
             pointHitRadius: 20,
@@ -67,17 +69,17 @@ var myChart = new Chart(ctx, {
             label: 'Average Combine Score',
             data: {{avg_combine}},
             fill: false,
-            borderColor: "rgba(0,192,192,1)",
-            backgroundColor: "rgba(75,192,192,0.4)",
+            borderColor: "#2f5c0b",
+            backgroundColor: "#2f5c0b",
             borderCapStyle: 'butt',
             borderJoinStyle: 'miter',
             borderDash: [10,5],
-            pointBorderColor: "rgba(75,192,192,1)",
-            pointBackgroundColor: "#fff",
+            pointBorderColor: "#2f5c0b",
+            pointBackgroundColor: "#2f5c0b",
             pointBorderWidth: 1,
             pointHoverRadius: 5,
-            pointHoverBackgroundColor: "rgba(75,192,192,1)",
-            pointHoverBorderColor: "rgba(0,192,192,1)",
+            pointHoverBackgroundColor: "#2f5c0b",
+            pointHoverBorderColor: "#2f5c0b",
             pointHoverBorderWidth: 4,
             pointRadius: 1,
             pointHitRadius: 20,
@@ -134,7 +136,7 @@ var myChart = new Chart(ctx, {
                 ticks: {
                     fontColor:["black"],
                     beginAtZero: true,
-                    suggestedMax: 20,
+                    suggestedMax: 5,
                     fontSize: 18,
                     callback: function(value){return value}
                 },
@@ -145,7 +147,7 @@ var myChart = new Chart(ctx, {
                    labelString: "Clashes & Combines"
                 },
                 gridLines: {
-                    color: "#000000"
+                    color: "#e2e2e2"
                 },
             }],
             xAxes: [{
