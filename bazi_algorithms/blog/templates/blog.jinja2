@@ -1,0 +1,25 @@
+{% extends 'layout.jinja2' %}
+
+{% block pagestyles %}
+  <link rel="stylesheet" href="{{url_for('static',filename='src/style.css')}}">
+{% endblock %}
+
+{% block content %}
+	{% include 'navigation.jinja2' %}
+  <div class="mt-8 w-11/12 mx-auto">
+
+    {%if article == "clash_combine_article"%}
+         {% include 'clash_combine_article.jinja2' %}
+    {%endif%}
+
+    {%if article == "nobleman"%}
+         {% include 'nobleman_article.jinja2' %}
+    {%endif%}
+
+    {%if article == "bazi_does_not_predict_future"%}
+         {% include 'bazi_does_not_predict_future.jinja2' %}
+    {%endif%}
+
+   </div>
+    {% include 'landing_footer.jinja2' %}
+{% endblock %}

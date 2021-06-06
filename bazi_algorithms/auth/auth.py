@@ -1,5 +1,5 @@
 """Routes for user authentication."""
-from flask import Blueprint, flash, redirect, render_template, request, url_for
+from flask import Blueprint, flash, redirect, render_template, request, url_for, abort
 from flask_login import current_user, login_user, login_required, logout_user
 from .. import login_manager
 from ..forms.auth_forms import LoginForm, SignupForm
@@ -29,8 +29,13 @@ def signup():
                 email=form.email.data
             )
             user.set_password(form.password.data)
-            db.session.add(user)
-            db.session.commit()  # Create new user
+
+            try:
+                db.session.add(user)
+                db.session.commit() 
+            except:
+                abort(500)
+            
             login_user(user)  # Log in as newly created user
             return redirect(url_for('main_bp.main'))
         flash('A user already exists with that email address.')
@@ -93,3 +98,7 @@ def unauthorized():
     """Redirect unauthorized users to Login page."""
     flash('You must be logged in to view that page.')
     return redirect(url_for('auth_bp.login'))
+
+@auth_bp.errorhandler(500)
+def not_found_error(error):
+    return render_template('500.jinja2')

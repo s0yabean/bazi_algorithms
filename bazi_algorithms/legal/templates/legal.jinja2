@@ -1,0 +1,37 @@
+{% extends 'layout.jinja2' %}
+
+{% block pagestyles %}
+  <link rel="stylesheet" href="{{url_for('static',filename='src/style.css')}}">
+{% endblock %}
+
+{% block content %}
+	{% include 'navigation.jinja2' %}
+  <div class="mt-8 w-11/12 mx-auto">
+
+    {%if content == "privacy_policy"%}
+         {% include 'privacy_policy.jinja2' %}
+    {%endif%}
+
+    {%if content == "terms_and_conditions"%}
+         {% include 'terms_and_conditions.jinja2' %}
+    {%endif%}
+
+    {%if content == "terms_of_use"%}
+         {% include 'terms_of_use.jinja2' %}
+    {%endif%}
+
+    {%if content == "return_and_refund"%}
+         {% include 'return_and_refund.jinja2' %}
+    {%endif%}
+
+    {%if content == "disclaimer"%}
+         {% include 'disclaimer.jinja2' %}
+    {%endif%}
+
+    {%if content == "eula"%}
+         {% include 'eula.jinja2' %}
+    {%endif%}
+
+   </div>
+    {% include 'landing_footer.jinja2' %}
+{% endblock %}

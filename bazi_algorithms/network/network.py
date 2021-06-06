@@ -29,7 +29,7 @@ def main():
     Dateform = DateForm()
     if Dateform.validate_on_submit():
         session['start_date'] = Dateform.startdate.data
-        session['end_date'] = Dateform.enddate.datax
+        session['end_date'] = Dateform.enddate.data
         return redirect(url_for('network_bp.main'))
 
     if request.method == 'POST':

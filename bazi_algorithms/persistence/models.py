@@ -3,6 +3,27 @@ from flask_login import UserMixin
 from werkzeug.security import check_password_hash, generate_password_hash
 from .. import db
 
+# class Sessions_table(db.Model):
+# 	"""sessions"""
+
+# 	__tablename__ = 'natal_chart'
+# 	__table_args__ = {'extend_existing': True} 
+
+# 	id = db.Column(
+# 		db.Integer,
+# 		nullable=False
+# 	)
+# 	session_id = db.Column(
+# 		db.String(255),
+# 		nullable=False
+# 	)
+# 	data = db.Column(
+# 		db.blob,
+# 	)
+# 	expiry = db.Column(
+# 		db.DateTime,
+# 	)
+
 class User(UserMixin, db.Model):
 	"""User account model."""
 
