@@ -1,17 +1,41 @@
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Flask + Stripe Subscriptions</title>
-    <script src="https://js.stripe.com/v3/"></script>
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" crossorigin="anonymous">
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" crossorigin="anonymous"></script>
-    <script src="{{ url_for('static', filename='src/js/stripe.js') }}"></script>
-  </head>
-  <body>
-    <div class="container mt-5">
-      <button type="submit" class="btn btn-primary" id="submitBtn">Success</button>
+{% extends 'layout.jinja2' %}
+
+{% block pagestyles %}
+  <link rel="stylesheet" href="{{url_for('static',filename='src/css/tailwind.css')}}">
+  <script src="{{ url_for('static', filename='src/js/stripe.js') }}"></script>
+  <script src="https://js.stripe.com/v3/"></script>
+{% endblock %}
+
+{% block content %}
+
+<div>
+  {%if current_user.email %} 
+    {% include 'navigation.jinja2' %}
+  {%else%}
+    {% include 'header.jinja2' %}
+  {%endif%} 
+
+   <div class="flex h-screen justify-center">
+      <div class="mt-12 w-11/12">
+    Payment Success!
+    <br>
+    <br>
+    It might take a moment for your payment to reach us.
+    <br>
+    <br>
+    Once it reaches, we will unlock your paid plan. (You can check under the <i>Account</i> tab -> <i>Plan</i>)
+    <br>
+    <br>
+    Thank you for your patience.
+      </div>
     </div>
-  </body>
-</html>
+
+<div class="mt-8">
+  {% include 'footer_bottom.jinja2' %}
+   </div>
+
+</div>
+
+
+{% endblock %} 
+

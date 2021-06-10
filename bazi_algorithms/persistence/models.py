@@ -1,28 +1,22 @@
 """Database models."""
 from flask_login import UserMixin
+from stripe.api_resources import plan
 from werkzeug.security import check_password_hash, generate_password_hash
 from .. import db
 
-# class Sessions_table(db.Model):
-# 	"""sessions"""
-
-# 	__tablename__ = 'natal_chart'
-# 	__table_args__ = {'extend_existing': True} 
-
-# 	id = db.Column(
-# 		db.Integer,
-# 		nullable=False
-# 	)
-# 	session_id = db.Column(
-# 		db.String(255),
-# 		nullable=False
-# 	)
-# 	data = db.Column(
-# 		db.blob,
-# 	)
-# 	expiry = db.Column(
-# 		db.DateTime,
-# 	)
+class StripeCustomer(db.Model):
+	__tablename__ = 'stripe_customer'
+	id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+	user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+	email = db.Column(db.String(40), unique=False, nullable=True)
+	payment_status = db.Column(db.String(40), unique=False, nullable=False)
+	amount_subtotal = db.Column(db.Numeric, unique=False, nullable=False)
+	amount_total = db.Column(db.Numeric, unique=False, nullable=False)
+	currency = db.Column(db.String(40), unique=False, nullable=False)
+	date = db.Column(db.BigInteger)
+	stripe_session_id = db.Column(db.String(255), nullable=False)
+	stripe_customer_id = db.Column(db.String(255), nullable=False)
+	stripe_subscription_id = db.Column(db.String(255), nullable=True)
 
 class User(UserMixin, db.Model):
 	"""User account model."""
@@ -53,6 +47,12 @@ class User(UserMixin, db.Model):
 		#db.ForeignKey('natal_chart.id'), if uncomment, cannot edit directly in UI
 		unique=True,
 		nullable=True
+	)
+	plan = db.Column(
+		db.String(40),
+		primary_key=False,
+		unique=False,
+		nullable=False
 	)
 	created_on = db.Column(
         db.DateTime,

@@ -1,72 +1,12 @@
  {% block content %} 
-{# <div class="centered z-10 items-center hidden justify-center" id="spinner">
-    <div class="size bg-white rounded justify-center shadow p-4 m-4 text-center overflow-hidden opacity-99">      
-        <lottie-player class="hidden" id="animation_1" src="{{ url_for('static', filename='src/lottie/10956-user-data-bank.json') }}" mode="bounce" background="transparent" speed="1.5"  style="width: 300px; height: 300px; left: 50%; transform: translateX(-50%); position: relative" loop autoplay></lottie-player>
-        <lottie-player class="hidden" id="animation_2" src="{{ url_for('static', filename='src/lottie/35049-data-analyst.json') }}" mode="bounce" background="transparent"  speed="1"  style="width: 300px; height: 300px; left: 50%; transform: translateX(-50%); position: relative" loop autoplay></lottie-player>
-        <lottie-player class="hidden" id="animation_3" src="{{ url_for('static', filename='src/lottie/30723-data-animation.json') }}" mode="bounce" background="transparent" speed="1" style="width: 300px; height: 300px; left: 50%; transform: translateX(-50%); position: relative" loop autoplay></lottie-player>   
-        <lottie-player class="hidden" id="animation_bonus_1" src="{{ url_for('static', filename='src/lottie/34695-greetingscongratulations.json') }}"  background="transparent"  speed="1"  style="width: 300px; height: 300px; left: 50%; transform: translateX(-50%); position: relative"  loop autoplay></lottie-player>  
-        <lottie-player class="hidden" id="animation_bonus_2" src="{{ url_for('static', filename='src/lottie/38587-great-job.json') }}"  background="transparent"  speed="1"  style="width: 300px; height: 300px; left: 50%; transform: translateX(-50%); position: relative"  loop autoplay></lottie-player>  
-        <p class="popup text-center mb-50 justify-center" id="spam"></p>
-    </div>
-</div> #}
 {% endblock %} 
 
 {% block additionalscripts %}
 <script>
-function randomText() {
-    var randomtxt = [
-        'Learning language patterns….',
-        'Deciphering your client….',
-        'Analyzing language…',
-        'Deconstructing phrases…',
-        'Fixing grammar…'];
-    return randomtxt[Math.floor((Math.random() * 4.99))];
-}
-document.getElementById("spam").innerHTML = randomText();
-setInterval(function(){ 
-    document.getElementById("spam").innerHTML = randomText();  
-}, 2500);
 
-function randomAnimation() {
-
-    // reset all animations to hidden first
-    if (document.getElementById("animation_1").classList != "hidden") {
-        document.getElementById("animation_1").classList.toggle("hidden")
-    }
-    if (document.getElementById("animation_2").classList != "hidden") {
-        document.getElementById("animation_2").classList.toggle("hidden")
-    }
-    if (document.getElementById("animation_3").classList != "hidden") {
-        document.getElementById("animation_3").classList.toggle("hidden")
-    }
-    if (document.getElementById("animation_bonus_1").classList != "hidden") {
-        document.getElementById("animation_bonus_1").classList.toggle("hidden")
-    }
-    if (document.getElementById("animation_bonus_2").classList != "hidden") {
-        document.getElementById("animation_bonus_2").classList.toggle("hidden")
-    }
-
-    if (Math.random() < 0.08) {
-        var randomBonusAnimation = [
-            "animation_bonus_1",
-            "animation_bonus_2"];
-        var id = randomBonusAnimation[Math.floor((Math.random() * 1.99))];
-        document.getElementById(id).classList.toggle("hidden")
-
-        } else {
-
-        // randomly show 1 normal animation
-        var randomanimation = [
-            "animation_1",
-            "animation_2",
-            "animation_3"];
-        var id = randomanimation[Math.floor((Math.random() * 2.99))];
-        document.getElementById(id).classList.toggle("hidden")
-    }
-}
 
 </script>
-{# <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script> #}
+
 {% endblock %}
 
 <style type="text/css">

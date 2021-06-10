@@ -12,13 +12,16 @@
   {% include 'spinner.jinja2' %} 
   </div> 
 
-  <div class="mt-4 h-screen">
-  Welcome to Tony Tong's Bazi Algo App!
+  <div class="mt-4 h-screen flex justify-center">
+    <div class="w-11/12 text-lg">
+  <b>Account Info:</b>
   <br>
-  User: {{current_user.name}}
   <br>
-  User Id: {{current_user.id}}
+  Name: {{current_user.name}}
+  <br>
+  Plan: {{current_user.plan}}
    </div>
+</div>
 
 <div class="mt-8">
   {% include 'footer_bottom.jinja2' %}

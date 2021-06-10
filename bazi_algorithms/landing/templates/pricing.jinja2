@@ -31,11 +31,11 @@
               </svg>
             </span>Email Support
           </p>
-          <button class="flex items-center mt-auto text-white bg-gray-400 border-0 py-2 px-4 w-full focus:outline-none hover:bg-gray-500 rounded">Sign Up
+          <a href="{{ url_for('auth_bp.signup') }}" class="flex items-center mt-auto text-white bg-gray-400 border-0 py-2 px-4 w-full focus:outline-none hover:bg-gray-500 rounded">Sign Up
             <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-auto" viewBox="0 0 24 24">
               <path d="M5 12h14M12 5l7 7-7 7"></path>
             </svg>
-          </button>
+          </a>
           <p class="text-xs text-gray-500 mt-3">BONUS: For our first 20 LITE users, we will import your contact list for you. Just send us some birthdays.</p>
         </div>
       </div>
@@ -75,18 +75,22 @@
             <br>30% off after a 30min discovery call with the founder.</h2>
             <br>
           </p>
-          <button class="flex items-center mt-auto text-white bg-indigo-300 border-0 py-2 px-4 w-full focus:outline-none hover:bg-indigo-500 rounded">Buy Now
+          {% if current_user.is_authenticated %}
+          <button type="submit" id="plusPlanSubmitBtn" class="flex items-center mt-auto text-white bg-indigo-300 border-0 py-2 px-4 w-full focus:outline-none hover:bg-indigo-500 rounded">Buy Now
             <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-auto" viewBox="0 0 24 24">
               <path d="M5 12h14M12 5l7 7-7 7"></path>
             </svg>
           </button>
+          {%else%}
+          <a href="{{ url_for('pay_bp.pay') }}" class="flex items-center mt-auto text-white bg-indigo-300 border-0 py-2 px-4 w-full focus:outline-none hover:bg-indigo-500 rounded">Sign Up
+            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-auto" viewBox="0 0 24 24">
+              <path d="M5 12h14M12 5l7 7-7 7"></path>
+            </svg>
+          </a>
+          {%endif%}
           <p class="text-xs text-gray-500 mt-3">BONUS: For our first 30 PLUS users, we will import your contact list for you. Just send us some birthdays.</p>
         </div>
       </div>
-
-
-
-
 
       <div class="p-4 xl:w-1/4 md:w-1/2 w-full">
         <div class="h-full p-6 rounded-lg border-2 border-gray-300 flex flex-col relative overflow-hidden">
@@ -128,17 +132,22 @@
             <br>40% off after a 30min discovery call with the founder.</h2>
             <br>
           </p>
-          <button class="flex items-center mt-auto text-white bg-gray-400 border-0 py-2 px-4 w-full focus:outline-none hover:bg-gray-500 rounded">Buy Now
+          {% if current_user.is_authenticated %}
+          <button type="submit" id="premiumPlanSubmitBtn" class="flex items-center mt-auto text-white bg-indigo-300 border-0 py-2 px-4 w-full focus:outline-none hover:bg-indigo-500 rounded">Buy Now
             <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-auto" viewBox="0 0 24 24">
               <path d="M5 12h14M12 5l7 7-7 7"></path>
             </svg>
           </button>
+          {%else%}
+          <a href="{{ url_for('pay_bp.pay') }}" class="flex items-center mt-auto text-white bg-indigo-300 border-0 py-2 px-4 w-full focus:outline-none hover:bg-indigo-500 rounded">Sign Up
+            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-auto" viewBox="0 0 24 24">
+              <path d="M5 12h14M12 5l7 7-7 7"></path>
+            </svg>
+          </a>
+          {%endif%}
           <p class="text-xs text-gray-500 mt-3">BONUS: For our first 40 PREMIUM users, we will import your contact list for you. Just send us some birthdays.</p>
         </div>
       </div>
-
-
-
       
       <div class="p-4 xl:w-1/4 md:w-1/2 w-full">
         <div class="h-full p-6 rounded-lg border-2 border-gray-300 flex flex-col relative overflow-hidden">
@@ -180,11 +189,19 @@
             <br>50% off after a 30min discovery call with the founder.</h2>
             <br>
           </p>
-          <button class="flex items-center mt-auto text-white bg-gray-400 border-0 py-2 px-4 w-full focus:outline-none hover:bg-gray-500 rounded">Buy Now
+          {% if current_user.is_authenticated %}
+          <button type="submit" id="annualPlanSubmitBtn" class="flex items-center mt-auto text-white bg-indigo-300 border-0 py-2 px-4 w-full focus:outline-none hover:bg-indigo-500 rounded">Buy Now
             <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-auto" viewBox="0 0 24 24">
               <path d="M5 12h14M12 5l7 7-7 7"></path>
             </svg>
           </button>
+          {%else%}
+          <a href="{{ url_for('pay_bp.pay') }}" class="flex items-center mt-auto text-white bg-indigo-300 border-0 py-2 px-4 w-full focus:outline-none hover:bg-indigo-500 rounded">Sign Up
+            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-auto" viewBox="0 0 24 24">
+              <path d="M5 12h14M12 5l7 7-7 7"></path>
+            </svg>
+          </a>
+          {%endif%}
           <p class="text-xs text-gray-500 mt-3">BONUS: For our first 50 ANNUAL users, we will import your contact list for you. Just send us some birthdays.</p>
         </div>
       </div>

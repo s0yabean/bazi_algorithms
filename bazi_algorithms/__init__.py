@@ -61,6 +61,9 @@ def create_app():
         app.register_blueprint(blog.blog_bp)
         app.register_blueprint(payment.pay_bp)
 
+        # Remove protection for Stripe webhooks
+        csrf.exempt(payment.pay_bp)
+
         # Create Database Models
         db.create_all()
 
@@ -79,7 +82,7 @@ def create_app():
             column_list = ("id","user_id",'contact_name',"hour_s","hour_e", "day_s", "day_e", "month_s", "month_e", "year_s", "year_e")
             form_columns = ("id", "user_id",'contact_name',"hour_s","hour_e", "day_s", "day_e", "month_s", "month_e", "year_s", "year_e")
         class UserView(MyModelView):
-            column_list = ('name','email', 'natal_chart_id')
+            column_list = ('name','email', 'natal_chart_id', 'plan')
         admin.add_view(UserView(User, db.session))
         admin.add_view(NatalChartView(NatalChart, db.session))
         admin.add_view(MyModelView(ExternalPillars, db.session))
