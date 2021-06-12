@@ -12,7 +12,9 @@ main_bp = Blueprint(
 @main_bp.route("/home", methods=['GET', 'POST'])
 @login_required
 def main():
-    from .forms.date_forms import DateForm
-    Dateform = DateForm()
-    return render_template('home.jinja2', current_user = current_user,
-    form = Dateform)
+    from .forms.chart_form import ChartForm
+    chart_form = ChartForm()
+    return render_template('home.jinja2', 
+    current_user = current_user,
+    form = chart_form
+    )

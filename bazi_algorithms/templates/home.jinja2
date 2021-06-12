@@ -8,19 +8,89 @@
  <div>
     {% include 'navigation.jinja2' %}
 
-  <div class="md:flex md:space-x-4 mt-8 mx-6">
-  {% include 'spinner.jinja2' %} 
-  </div> 
+<div class="min-h-screen">
+  <div class="mt-12 text-xl w-11/12 flex justify-center flex-col item-center mx-auto">
+    Account Info:
+    <div class="mt-6 rounded bg-pink-200">
+    <div class="text-xl mt-6 mb-6 px-12">
+      Name: {{current_user.name}}
+      <br>
+      Plan: {{current_user.plan}}
+   </div> 
+   </div> 
 
-  <div class="mt-4 h-screen flex justify-center">
-    <div class="w-11/12 text-lg">
-  <b>Account Info:</b>
-  <br>
-  <br>
-  Name: {{current_user.name}}
-  <br>
-  Plan: {{current_user.plan}}
-   </div>
+   <div class="text-xl mt-6">
+    <hr>
+    </div>
+
+    <div class="text-xl mt-6">
+    Add New Chart:
+    </div>
+   <div class="text-lg mt-6 bg-pink-200 rounded px-12 h-full">
+      <div class="">
+      <form method="POST" action="">
+      <div class="w-11/12 flex md:flex-row flex-col justify-between md:mt-12 mt-4">
+        {{ form.csrt_token }}
+        <div class="mt-8 md:mt-0">
+          <div class="form-field" style="width: 100%">
+              {{ form.hour_stem.label(class_="text-xl") }}
+              {{ form.hour_stem(class_="text-xl") }}
+          </div>
+
+          <div class="form-field md:mt-12 mt-8">
+              {{ form.hour_branch.label(class_="text-xl") }}
+              {{ form.hour_branch(class_="text-xl") }}
+          </div>
+        </div>
+  
+        <div class="mt-8 md:mt-0">
+          <div class="form-field">
+              {{ form.day_stem.label(class_="text-xl") }}
+              {{ form.day_stem(class_="text-xl") }}
+          </div>
+
+          <div class="form-field md:mt-12 mt-8">
+              {{ form.day_branch.label(class_="text-xl") }}
+              {{ form.day_branch(class_="text-xl") }}
+          </div>
+        </div>
+
+        <div class="mt-8 md:mt-0">
+          <div class="form-field">
+              {{ form.month_stem.label(class_="text-xl") }}
+              {{ form.month_stem(class_="text-xl") }}
+          </div>
+
+          <div class="form-field md:mt-12 mt-8">
+              {{ form.month_branch.label(class_="text-xl") }}
+              {{ form.month_branch(class_="text-xl") }}
+          </div>
+        </div>
+
+        <div class="mt-8 md:mt-0">
+          <div class="form-field">
+              {{ form.year_stem.label(class_="text-xl") }}
+              {{ form.year_stem(class_="text-xl") }}
+          </div>
+
+          <div class="form-field md:mt-12 mt-8">
+              {{ form.year_branch.label(class_="text-xl") }}
+              {{ form.year_branch(class_="text-xl") }}
+          </div>
+        </div>
+
+      </div>
+          <div class="form-field mt-10 mb-12">
+          <span class="inline-flex text-white bg-indigo-400 border-0 py-6 px-8 sm:py-4 sm:px-6 focus:outline-none hover:text-black rounded text-xl">
+          {{ form.submit(class_="bg-indigo-400") }}
+          </span>
+          </div>
+      
+      </form>
+    </div>
+    </div>
+
+  </div>
 </div>
 
 <div class="mt-8">
