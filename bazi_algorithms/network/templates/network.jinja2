@@ -39,8 +39,30 @@
     </div>
   
     <div class="shadow-lg hidden mt-10 pt-10 pb-8 bg-theme-l-green text-center rounded" id='filter_buttons'>
-      {% include 'dropdown_search_network.jinja2' %} 
-      {% include 'date_network.jinja2' %} 
+      {# {% include 'dropdown_search_network.jinja2' %} 
+      {% include 'date_network.jinja2' %}  #}
+
+    <form class="" action="" method='POST' name="myform">
+        {{ network_form_2.csrt_token }}
+        <div class="">
+          <div class="ml-8 text-lg" onchange="toggleDateFields(this)">
+            {{ network_form_2.category.label }}:  {{network_form_2.category()}} {{network_form_2.hidden_tag()}}
+        </div>
+        <div class="ml-8 text-lg hidden" id='startDateId'>
+            {{ network_form_2.startdate.label }}:  {{network_form_2.startdate(class='datepicker')}} {{network_form_2.hidden_tag()}}
+        </div>
+        <div class="mt-4 ml-8 text-lg hidden" id='endDateId'>
+            {{ network_form_2.enddate.label }}:  {{network_form_2.enddate(class='datepicker')}} {{network_form_2.hidden_tag()}}
+        </div>
+       </div>
+
+      <div class="mt-12 ml-8 flex">
+        <button class="justify-left bg-gray-100 border-2 py-1 text-xl px-3 border-gray-400 hover:border-black rounded text-lg">
+          {{network_form_2.submit()}}
+        </button>
+      </div>
+    </form>
+
     </div>
 
   </div> 
@@ -79,6 +101,19 @@ function delete_flash(flash){
         $(flash).parent().remove()
 }
 
+function toggleDateFields() {
+  requireDate = ["1","2","3","4"]
+  let box_value = document.getElementById("category").value;
+  if (requireDate.includes(box_value)) {
+    document.getElementById("startDateId").style.display = "block"
+    document.getElementById("endDateId").style.display = "block"
+  } else {
+    document.getElementById("startDateId").style.display = "none"
+    document.getElementById("endDateId").style.display = "none"
+  }
+}
+
+toggleDateFields()
 
 </script>
 {% endblock %}

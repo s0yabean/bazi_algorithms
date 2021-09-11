@@ -1,10 +1,13 @@
 from flask_wtf import FlaskForm
 from wtforms.validators import DataRequired
-from wtforms import validators, SelectField, SubmitField
+from wtforms import validators, SelectField, SubmitField, StringField
 
 class ChartForm(FlaskForm):
-    stem_choices = [(1,'Jia'),(2,'Yi'),(3,'Bing'),(4,'Ding'),(5,'Wu'),(6,'Ji'),(7,'Gen'),(8,'Xin'),(9,'Ren'),(10,'Gui')]
-    branch_choices = [(1,'Zi'),(2,'Chou'),(3,'Yin'),(4,'Mao'),(5,'Chen'),(6,'Si'),(7,'Wu'),(8,'Wei'),(9,'Shen'),(10,'You'),(11,'Xu'),(12,'Hai')]
+
+    name = StringField('Name',validators=[DataRequired()])
+
+    stem_choices = [("Jia",'Jia'),("Yi",'Yi'),("Bing",'Bing'),("Ding",'Ding'),("Wu",'Wu'),("Ji",'Ji'),("Gen",'Gen'),("Xin",'Xin'),('Ren','Ren'),("Gui",'Gui')]
+    branch_choices = [("Zi",'Zi'),("Chou",'Chou'),("Yin",'Yin'),("Mao",'Mao'),("Chen",'Chen'),("Si",'Si'),("Wu",'Wu'),("Wei",'Wei'),("Shen",'Shen'),("You",'You'),("Hai",'Hai')]
     hour_stem = SelectField('Hour Stem', choices=[(None, "")] + stem_choices)
     hour_branch = SelectField('Hour Branch', choices=[(None, "")] + branch_choices)
     day_stem = SelectField('Day Stem', [DataRequired()], choices=stem_choices)

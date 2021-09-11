@@ -85,7 +85,7 @@ class NatalChart(db.Model):
 	id = db.Column(
 		db.Integer,
 		primary_key=True,
-		unique=True
+		autoincrement=True
 	)
 	user_id = db.Column(
 		db.Integer,

@@ -23,59 +23,81 @@
     <hr>
     </div>
 
+      {% for category, message in get_flashed_messages(with_categories=true) %}
+        {%if category == "info" %} 
+          <div class="alert text-green-700 bg-green-100 border border-green-400 text-left rounded pb-3 pt-2 px-4">
+            <button type="button" class="close text-2xl" data-dismiss="alert">&#10003;</button>
+        
+        {%elif category == "error"%}
+          <div class="alert text-red-700 bg-red-100 border border-red-400 text-left rounded pb-3 pt-2 px-4">
+            <button type="button" class="close text-2xl" data-dismiss="alert">&times;</button>
+        
+        {%endif%}    
+          {{ message }} 
+          </div>
+        {% endfor %}
+
     <div class="text-xl mt-6">
     Add New Chart:
     </div>
    <div class="text-lg mt-6 bg-pink-200 rounded px-12 h-full">
       <div class="">
       <form method="POST" action="">
+
+        <div class="mt-10">
+        {{ form.name.label(class_="text-xl rounded") }}:
+         {{ form.name(class_="text-xl rounded") }}
+         </div>
+
       <div class="w-11/12 flex md:flex-row flex-col justify-between md:mt-12 mt-4">
-        {{ form.csrt_token }}
+        
+
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
         <div class="mt-8 md:mt-0">
           <div class="form-field" style="width: 100%">
-              {{ form.hour_stem.label(class_="text-xl") }}
-              {{ form.hour_stem(class_="text-xl") }}
+              {{ form.hour_stem.label(class_="text-xl rounded") }}:
+              {{ form.hour_stem(class_="text-xl rounded") }}
           </div>
 
           <div class="form-field md:mt-12 mt-8">
-              {{ form.hour_branch.label(class_="text-xl") }}
-              {{ form.hour_branch(class_="text-xl") }}
+              {{ form.hour_branch.label(class_="text-xl rounded") }}:
+              {{ form.hour_branch(class_="text-xl rounded") }}
           </div>
         </div>
   
         <div class="mt-8 md:mt-0">
           <div class="form-field">
-              {{ form.day_stem.label(class_="text-xl") }}
-              {{ form.day_stem(class_="text-xl") }}
+              {{ form.day_stem.label(class_="text-xl rounded") }}:
+              {{ form.day_stem(class_="text-xl rounded") }}
           </div>
 
           <div class="form-field md:mt-12 mt-8">
-              {{ form.day_branch.label(class_="text-xl") }}
-              {{ form.day_branch(class_="text-xl") }}
+              {{ form.day_branch.label(class_="text-xl rounded") }}:
+              {{ form.day_branch(class_="text-xl rounded") }}
           </div>
         </div>
 
         <div class="mt-8 md:mt-0">
           <div class="form-field">
-              {{ form.month_stem.label(class_="text-xl") }}
-              {{ form.month_stem(class_="text-xl") }}
+              {{ form.month_stem.label(class_="text-xl rounded") }}:
+              {{ form.month_stem(class_="text-xl rounded") }}
           </div>
 
           <div class="form-field md:mt-12 mt-8">
-              {{ form.month_branch.label(class_="text-xl") }}
-              {{ form.month_branch(class_="text-xl") }}
+              {{ form.month_branch.label(class_="text-xl rounded") }}:
+              {{ form.month_branch(class_="text-xl rounded") }}
           </div>
         </div>
 
         <div class="mt-8 md:mt-0">
           <div class="form-field">
-              {{ form.year_stem.label(class_="text-xl") }}
-              {{ form.year_stem(class_="text-xl") }}
+              {{ form.year_stem.label(class_="text-xl rounded") }}:
+              {{ form.year_stem(class_="text-xl rounded") }}
           </div>
 
           <div class="form-field md:mt-12 mt-8">
-              {{ form.year_branch.label(class_="text-xl") }}
-              {{ form.year_branch(class_="text-xl") }}
+              {{ form.year_branch.label(class_="text-xl rounded") }}:
+              {{ form.year_branch(class_="text-xl rounded") }}
           </div>
         </div>
 

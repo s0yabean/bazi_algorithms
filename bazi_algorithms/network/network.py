@@ -19,44 +19,47 @@ network_bp = Blueprint(
 def main():
     from ..forms.date_forms import DateForm
     from ..forms.name_forms import NetworkForm
+    from ..forms.network_forms import NetworkForm_2
     from ..persistence.models import NatalChart, ExternalPillars
     """Table showing natal charts belonging to my account."""
     table_data = NatalChart.query.filter_by(user_id=current_user.id).all() 
     natal_chart_id = current_user.natal_chart_id
     remarks = []
     explanations = None
-
-    Dateform = DateForm()
-    if Dateform.validate_on_submit():
-        session['start_date'] = Dateform.startdate.data
-        session['end_date'] = Dateform.enddate.data
-        return redirect(url_for('network_bp.main'))
-
-    if request.method == 'POST':
-        if "dropdown_menu" and "security_key" in request.form.keys():
-            session['question'] = request.form["dropdown_menu"] 
+    show_success_flash = False 
             
-    NetworkForm = NetworkForm()
     questions = question_list()
+    NetworkForm_2 = NetworkForm_2()
+
+    if NetworkForm_2.validate_on_submit():
+        show_success_flash = True
+        if NetworkForm_2.category.data is not None:
+            session['question'] = int(NetworkForm_2.category.data)
+        if NetworkForm_2.startdate.data is not None:
+            session['start_date'] = NetworkForm_2.startdate.data
+        if NetworkForm_2.enddate.data is not None:    
+            session['end_date'] = NetworkForm_2.enddate.data
 
     if 'question' in session.keys():
-        if session['question'] in questions[:5]:
-            if 'start_date' not in session.keys() and 'end_date' not in session.keys():
+        if session['question'] in [1,2,3,4]:
+            if ('start_date' not in session.keys() and 'end_date' not in session.keys()) or (session['start_date'] is None or session['end_date'] is None):
                 flash("Please Select A Date Range", "error")
                 table_data, remarks = [], []
             elif (session['start_date'] > session['end_date']):
                 flash(f"End Date ({session['end_date']}) cannot be before Start Date ({session['start_date']}). Please change date range.", "error")
                 table_data, remarks = [], []
             else:
-                table_data, remarks = answer_question(session['question'], table_data, natal_chart_id, session['start_date'], session['end_date'])
+                table_data, remarks = answer_question(questions[session['question']], table_data, natal_chart_id, session['start_date'], session['end_date'])
+                if show_success_flash:
+                    flash("Calculation Success.","info")
+        elif session['question'] in [0,5,6,7]:
+            table_data, remarks = answer_question(questions[session['question']], table_data, natal_chart_id, "", "")
+            if show_success_flash:
                 flash("Calculation Success.","info")
-        elif session['question'] in questions[5:]:
-            table_data, remarks = answer_question(session['question'], table_data, natal_chart_id, "", "")
-            flash("Calculation Success.","info")
 
         explanations = explanation_list()
         for i in range(len(explanations)):
-            if session['question'] == explanations[i][0][1]:
+            if questions[session['question']] == explanations[i][0][1]:
                 explanations = explanations[i]
                 break
             
@@ -64,8 +67,7 @@ def main():
         'network.jinja2',
         current_user=current_user,
         table_data = table_data,
-        form=Dateform,
-        network_form=NetworkForm,
+        network_form_2=NetworkForm_2,
         questions=questions,
         remarks=remarks,
         explanations=explanations)
