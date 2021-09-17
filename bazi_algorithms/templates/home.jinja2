@@ -47,17 +47,57 @@
         {% endfor %}
 
     <div class="text-xl mt-6">
-    Add New Chart:
+    Add New Charts:
     </div>
 
-    <span class="text-lg mt-2 italic">Time of Birth:</span>
+    <span class="text-lg mt-2 italic">Method 1 - Time of Birth:</span>
     <div class="text-lg mt-6 mb-6 bg-pink-200 rounded px-12 h-full">
       <div class="">
-      Hello World
+      
+        <form method="POST" action="">
+
+        <div class="mt-10">
+         {{ chart_form_birth_time.name.label(class_="text-xl rounded") }}:
+         {{ chart_form_birth_time.name(class_="text-xl rounded") }}
+
+         {{ chart_form_birth_time.my_own_chart_checkbox(class_="text-l rounded-xl")  }}
+         {{ chart_form_birth_time.my_own_chart_checkbox.label(class_="text-l rounded italic") }}
+         </div>
+
+      <div class="w-11/12 flex md:flex-row flex-col justify-between md:mt-12 mt-4">
+        
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+
+        <div class="mt-8 md:mt-0">
+          <div class="" style="width: 100%">
+              {{ chart_form_birth_time.birth_date.label(class_="text-l rounded-xl") }}:
+              {{ chart_form_birth_time.birth_date(class_='datepicker') }}
+              {{ chart_form_birth_time.hidden_tag()}}
+          </div>
+
+          <div class="form-field md:mt-12 mt-8">
+              {{ chart_form_birth_time.hour_range.label(class_="text-xl rounded") }}:
+              {{ chart_form_birth_time.hour_range(class_="text-xl rounded") }}
+              <span class="text-lg italic">(Optional)</span>
+          </div>
+
+          <div class="form-field md:mt-12 mt-8">
+              {{ chart_form_birth_time.gender.label(class_="text-xl rounded") }}:
+              {{ chart_form_birth_time.gender(class_="text-xl rounded") }}
+          </div>
+        </div>
+
+      </div class="">
+          <div class="form-field mt-10 mb-12">
+          {{ form.submit(class_="bg-indigo-400 inline-flex text-white bg-indigo-400 border-0 py-6 px-8 sm:py-4 sm:px-6 focus:outline-none hover:text-black rounded text-xl") }}
+          </div>
+      
+      </form>
+
       </div>
     </div>
 
-   <span class="text-lg italic">Manual Input:</span>
+   <span class="text-lg italic">Method 2 - Manual Input:</span>
    <div class="text-lg mt-6 bg-pink-200 rounded px-12 h-full">
       <div class="">
       <form method="POST" action="">
@@ -67,7 +107,7 @@
          {{ form.name(class_="text-xl rounded") }}
 
          {{ form.my_own_chart_checkbox(class_="text-l rounded-xl")  }}
-         {{ form.my_own_chart_checkbox.label(class_="text-xl rounded") }}
+         {{ form.my_own_chart_checkbox.label(class_="text-l rounded italic") }}
          </div>
 
       <div class="w-11/12 flex md:flex-row flex-col justify-between md:mt-12 mt-4">
