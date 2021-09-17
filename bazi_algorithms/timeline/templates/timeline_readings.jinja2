@@ -10,7 +10,7 @@
 
                     {% if ((session.end_date)) %}
                         <div class="mt-6 text-xl"><span class="font-medium">Date Range:</span></div>
-                        <div class="text-base"><span class="font-medium">{{session.start_date}} to {{session.end_date}}</span></div>
+                        <div class="text-base"><span class="font-medium">{{(session.start_date|string)[:10]}} to {{(session.end_date|string)[:10]}}</span></div>
                         {% else %}
                     {% endif %}
 

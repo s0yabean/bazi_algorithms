@@ -18,7 +18,7 @@ class ChartFormManual(FlaskForm):
     month_branch = SelectField('Month Branch', [DataRequired()], choices=branch_choices)
     year_stem = SelectField('Year Stem', [DataRequired()], choices=stem_choices)
     year_branch = SelectField('Year Branch', [DataRequired()], choices=branch_choices)
-    my_own_chart_checkbox = BooleanField('(This is My Chart)')
+    my_own_chart_checkbox = BooleanField('(This is My Own Chart)')
     submit = SubmitField('Submit')
 
 class ChartFormBirthTime(FlaskForm):
@@ -28,6 +28,6 @@ class ChartFormBirthTime(FlaskForm):
     hour_choices = [("12am-1am",'12am-1am'),("1am-3am",'1am-3am'),("3am-5am",'3am-5am'),("5am-7am",'5am-7am'),("7am-9am",'7am-9am'),("9am-11am",'9am-11am'),("11am-1pm",'11am-1pm'),("1pm-3pm",'1pm-3pm'),('3pm-5pm','3pm-5pm'),("5pm-7pm",'5pm-7pm'),("7pm-9pm",'7pm-9pm'),("9pm-11pm",'9pm-11pm'),("11pm-12pm",'11pm-12pm')]
     hour_range = SelectField('Hour Range', choices=[(None, "")] + hour_choices)
     gender = SelectField('Gender', choices=[("False", "Female"), ("True", "Male")], validators=(DataRequired(),))
-    my_own_chart_checkbox = BooleanField('(This is My Chart)')
+    my_own_chart_checkbox = BooleanField('(This is My Own Chart)')
     submit = SubmitField('Submit')
 

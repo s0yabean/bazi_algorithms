@@ -16,3 +16,8 @@ class DateForm(FlaskForm):
     #             flash(f"End Date ({self.enddate.data}) cannot be before Start Date ({self.startdate.data})",  'error')
     #             return False
     #         return True
+
+class TimelineDateForm(FlaskForm):
+    startdate = DateField('Start Date', format='%Y-%m-%d', default=datetime(int(str(datetime.today())[:4]), 1, 1), validators=(DataRequired(),))
+    enddate = DateField('End Date', format='%Y-%m-%d', default=datetime(int(str(datetime.today())[:4]), 12, 31), validators=(DataRequired(),))
+    submit = SubmitField('Submit')
