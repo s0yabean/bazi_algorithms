@@ -75,9 +75,6 @@ class User(UserMixin, db.Model):
 		"""Check hashed password."""
 		return check_password_hash(self.password, password)
 
-	def __repr__(self):
-		return '<User {}>'.format(self.username)
-
 class NatalChart(db.Model):
 	"""Natal Charts"""
 

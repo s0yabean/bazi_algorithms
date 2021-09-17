@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
 from wtforms.validators import DataRequired
-from wtforms import validators, SelectField, SubmitField, StringField
+from wtforms import validators, SelectField, SubmitField, StringField, BooleanField
 
 class ChartForm(FlaskForm):
 
@@ -16,4 +16,5 @@ class ChartForm(FlaskForm):
     month_branch = SelectField('Month Branch', [DataRequired()], choices=branch_choices)
     year_stem = SelectField('Year Stem', [DataRequired()], choices=stem_choices)
     year_branch = SelectField('Year Branch', [DataRequired()], choices=branch_choices)
+    my_own_chart_checkbox = BooleanField('This is My Chart')
     submit = SubmitField('Submit')

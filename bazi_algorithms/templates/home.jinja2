@@ -13,9 +13,18 @@
     Account Info:
     <div class="mt-6 rounded bg-pink-200">
     <div class="text-xl mt-6 mb-6 px-12">
-      Name: {{current_user.name}}
+      Name: <span class="font-bold">{{current_user.name}}</span>
       <br>
-      Plan: {{current_user.plan}}
+      Plan: <span class="font-bold">{{current_user.plan}}</span>
+      <br>
+       {%if user_chart %}
+        My Bazi Chart: <span class="font-bold">{{user_chart.hour_s}} {{user_chart.hour_e}},
+      {{user_chart.day_s}} {{user_chart.day_e}},
+      {{user_chart.month_s}} {{user_chart.month_e}},
+      {{user_chart.year_s}} {{user_chart.year_e}}</span>
+      {%else%}
+        My Bazi Chart: <span class="italic">(Empty. Add Your Own Chart First.)</span>
+      {%endif%}
    </div> 
    </div> 
 
@@ -40,18 +49,29 @@
     <div class="text-xl mt-6">
     Add New Chart:
     </div>
+
+    <span class="text-lg mt-2 italic">Time of Birth:</span>
+    <div class="text-lg mt-6 mb-6 bg-pink-200 rounded px-12 h-full">
+      <div class="">
+      Hello World
+      </div>
+    </div>
+
+   <span class="text-lg italic">Manual Input:</span>
    <div class="text-lg mt-6 bg-pink-200 rounded px-12 h-full">
       <div class="">
       <form method="POST" action="">
 
         <div class="mt-10">
-        {{ form.name.label(class_="text-xl rounded") }}:
+         {{ form.name.label(class_="text-xl rounded") }}:
          {{ form.name(class_="text-xl rounded") }}
+
+         {{ form.my_own_chart_checkbox(class_="text-l rounded-xl")  }}
+         {{ form.my_own_chart_checkbox.label(class_="text-xl rounded") }}
          </div>
 
       <div class="w-11/12 flex md:flex-row flex-col justify-between md:mt-12 mt-4">
         
-
         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
         <div class="mt-8 md:mt-0">
           <div class="form-field" style="width: 100%">
@@ -101,11 +121,9 @@
           </div>
         </div>
 
-      </div>
+      </div class="">
           <div class="form-field mt-10 mb-12">
-          <span class="inline-flex text-white bg-indigo-400 border-0 py-6 px-8 sm:py-4 sm:px-6 focus:outline-none hover:text-black rounded text-xl">
-          {{ form.submit(class_="bg-indigo-400") }}
-          </span>
+          {{ form.submit(class_="bg-indigo-400 inline-flex text-white bg-indigo-400 border-0 py-6 px-8 sm:py-4 sm:px-6 focus:outline-none hover:text-black rounded text-xl") }}
           </div>
       
       </form>
