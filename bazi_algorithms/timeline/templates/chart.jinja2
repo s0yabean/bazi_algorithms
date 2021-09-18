@@ -3,7 +3,7 @@
 {% endblock %}
 
   {% block content %}
-    {# <canvas id="timelineChart" width="600" height="400"></canvas> #}
+
     <div class="w-11/12 mx-auto min-h-500">
     <canvas id="timelineChart"></canvas>
     </div>
@@ -27,6 +27,7 @@ var myChart = new Chart(ctx, {
                       {{item["e_combine"]}},
                     {% endfor %}],
             fill: false,
+            hidden: true,
             borderColor: "#223127",
             backgroundColor: "#223127",
             borderCapStyle: 'butt',
@@ -43,7 +44,6 @@ var myChart = new Chart(ctx, {
             borderWidth: 1,
 
         },
-
         {
             label: 'Rolling Average Combine Score',
             data: {{rolling_data}},
@@ -64,11 +64,30 @@ var myChart = new Chart(ctx, {
             borderWidth: 1,
 
         },
-
+        {
+            label: 'Rolling Average CPDH (Clash, Punishment, Destruction, Harm) Score',
+            data: {{rolling_data_clash}},
+            fill: false,
+            borderColor: '#FF7F7F',
+            backgroundColor: '#FF7F7F',
+            borderCapStyle: 'butt',
+            borderJoinStyle: 'miter',
+            pointBorderColor: '#FF7F7F',
+            pointBackgroundColor: "#FF7F7F",
+            pointBorderWidth: 1,
+            pointHoverRadius: 5,
+            pointHoverBackgroundColor: '#FF7F7F',
+            pointHoverBorderColor: '#FF7F7F',
+            pointHoverBorderWidth: 4,
+            pointRadius: 1,
+            pointHitRadius: 20,
+            borderWidth: 1
+        },
         {
             label: 'Average Combine Score',
             data: {{avg_combine}},
             fill: false,
+            hidden: true,
             borderColor: "#2f5c0b",
             backgroundColor: "#2f5c0b",
             borderCapStyle: 'butt',
@@ -85,13 +104,13 @@ var myChart = new Chart(ctx, {
             pointHitRadius: 20,
             borderWidth: 1
         },
-
         {
-            label: 'Clash Score',
+            label: 'CPDH (Clash, Punishment, Destruction, Harm) Score',
             data: [{% for item in data %}
                       {{item["e_clash"]}},
                     {% endfor %}],
             fill: false,
+            hidden: true,
             borderColor: '#FF0000',
             backgroundColor: '#FF0000',
             borderCapStyle: 'butt',

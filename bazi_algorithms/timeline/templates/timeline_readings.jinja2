@@ -14,6 +14,18 @@
                         {% else %}
                     {% endif %}
 
+                    {%if user_chart %}
+                    <div class="mt-6 text-xl">
+                    <span class="mt-6 text-xl">Bazi:</span>
+                        <span class="italic text-base">{{user_chart.hour_s}} {{user_chart.hour_e}},
+                            {{user_chart.day_s}} {{user_chart.day_e}},
+                            {{user_chart.month_s}} {{user_chart.month_e}},
+                            {{user_chart.year_s}} {{user_chart.year_e}}</span>
+                    {%else%}
+                        <span class="mt-6 text-xl">Bazi:</span><span class="italic">(Empty. Add Your Own Chart First.)</span>
+                    </div>
+                    {%endif%}
+
                     {# <div class="mt-6 text-xl"><span class="font-medium">Relative to Chart: </span></div>
                     <div class="text-base"><span class="font-medium">{{current_user.name}}</span></div> #}
                     

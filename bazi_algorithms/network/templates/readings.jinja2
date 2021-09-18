@@ -14,9 +14,26 @@
                         {% else %}
                     {% endif %}
 
-                    <div class="mt-6 text-xl"><span class="font-medium">Relative to Chart: </span></div>
+                    <div class="mt-6 text-xl"><span class="font-medium">Account Chart: </span></div>
                     <div class="text-base"><span class="font-medium">{{current_user.name}}</span></div>
-                    
+
+                    {% if ((session.end_date)) %}
+                        <div class="mt-6 text-xl"><span class="font-medium">Date Range:</span></div>
+                        <div class="text-base"><span class="font-medium">{{(session.start_date|string)[:10]}} to {{(session.end_date|string)[:10]}}</span></div>
+                        {% else %}
+                    {% endif %}
+
+                    <div class="mt-6 text-base">
+                    {%if user_chart %}
+                    <span class="font-bold">Bazi:</span>
+                        <span class="italic">{{user_chart.hour_s}} {{user_chart.hour_e}},
+                            {{user_chart.day_s}} {{user_chart.day_e}},
+                            {{user_chart.month_s}} {{user_chart.month_e}},
+                            {{user_chart.year_s}} {{user_chart.year_e}}</span>
+                    {%else%}
+                        <span class="font-bold">Bazi:</span><span class="italic">(Empty. Add Your Own Chart First.)</span>
+                    {%endif%}
+                    </div>
                 </div>
 
                 <div class="md:w-2/3">
