@@ -18,6 +18,8 @@ def create_app():
     """Construct the core app object."""
     app = Flask(__name__, instance_relative_config=False)
     
+    print("start:")
+    print(os.getenv('FLASK_ENV'))
     if os.getenv('FLASK_ENV') == 'development':
         app.config.from_object('config.DevConfig')
         print("inside loop")
@@ -25,6 +27,7 @@ def create_app():
     elif os.getenv('FLASK_ENV') == 'production':
         app.config.from_object('config.ProdConfig')
 
+    app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:////home/tony/database/prod.db"
     print(app.config['SQLALCHEMY_DATABASE_URI'])
 
     # Initialize Plugins
