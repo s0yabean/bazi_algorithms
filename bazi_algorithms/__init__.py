@@ -21,7 +21,7 @@ def create_app():
     if os.getenv('FLASK_ENV') == 'development':
         app.config.from_object('config.DevConfig')
         print("inside loop")
-        print(app.config['SQLALCHEMY_DATABASE_URI'])
+        app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:////home/tony/database/prod.db"
     elif os.getenv('FLASK_ENV') == 'production':
         app.config.from_object('config.ProdConfig')
 
