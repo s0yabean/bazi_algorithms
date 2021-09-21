@@ -20,8 +20,12 @@ def create_app():
     
     if os.getenv('FLASK_ENV') == 'development':
         app.config.from_object('config.DevConfig')
+        print("inside loop")
+        print(app.config['SQLALCHEMY_DATABASE_URI'])
     elif os.getenv('FLASK_ENV') == 'production':
         app.config.from_object('config.ProdConfig')
+
+    print(app.config['SQLALCHEMY_DATABASE_URI'])
 
     # Initialize Plugins
     db.init_app(app)
