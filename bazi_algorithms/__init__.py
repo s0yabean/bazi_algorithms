@@ -9,8 +9,10 @@ from flask_wtf.csrf import CSRFProtect
 from flask_admin.contrib.sqla import ModelView
 from flask_admin import Admin
 import os
+from dotenv import load_dotenv
 
 patch_all()
+load_dotenv()
 db = SQLAlchemy()
 login_manager = LoginManager()
 
@@ -23,12 +25,12 @@ def create_app():
     if os.getenv('FLASK_ENV') == 'development':
         app.config.from_object('config.DevConfig')
         print("inside loop")
-        app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:////home/tony/database/prod.db"
+        # app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:////home/tony/database/prod.db"
     elif os.getenv('FLASK_ENV') == 'production':
         app.config.from_object('config.ProdConfig')
 
-    app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:////home/tony/database/prod.db"
-    print(app.config['SQLALCHEMY_DATABASE_URI'])
+    #app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:////home/tony/database/prod.db"
+    #print(app.config['SQLALCHEMY_DATABASE_URI'])
 
     # Initialize Plugins
     db.init_app(app)
