@@ -24,8 +24,9 @@ def main():
     # Dummy Data
     print("timeline logs")
     print(str(date.today()))
-    dates = [ExternalPillars.query.filter(ExternalPillars.date == str(date.today()))]
-    print(dates)
+    #dates = [ExternalPillars.query.filter(ExternalPillars.date == str(date.today()))]
+    #print(dates)
+    
     data = [{'s_combine': 0, 's_clash': 0, 'e_combine': 0, 'e_clash': 0}]
     avg_combine = [0] 
     avg_clash = [0]
@@ -41,6 +42,7 @@ def main():
     if 'start_date' not in session.keys():
         session['start_date'] = datetime(int(str(datetime.today())[:4]), 1, 1)
         session['end_date'] = datetime(int(str(datetime.today())[:4]), 12, 31)
+        dates = ExternalPillars.query.filter(ExternalPillars.date >= session["start_date"] - timedelta(days=window_size), ExternalPillars.date <= session["end_date"]).all()
 
     if request.method == 'GET':
         if current_user.natal_chart_id is None:
