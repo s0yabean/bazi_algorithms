@@ -22,8 +22,10 @@ def main():
     from ..bazi_formulas.timeline_scoring import calc_comb_clash
 
     # Dummy Data
+    print("timeline logs")
     print(str(date.today()))
     dates = [ExternalPillars.query.filter(ExternalPillars.date == str(date.today()))]
+    print(dates)
     data = [{'s_combine': 0, 's_clash': 0, 'e_combine': 0, 'e_clash': 0}]
     avg_combine = [0] 
     avg_clash = [0]
