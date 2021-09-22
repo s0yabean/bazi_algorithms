@@ -9,6 +9,7 @@
  <div class="">
   {% include 'navigation.jinja2' %}
 
+ <div class="min-h-screen">
 <div class="my-10 w-11/12 mx-auto">
 {% for category, message in get_flashed_messages(with_categories=true) %}
         {%if category == "info" %} 
@@ -39,8 +40,6 @@
     </div>
   
     <div class="shadow-lg hidden mt-10 pt-10 pb-8 bg-theme-l-green text-center rounded" id='filter_buttons'>
-      {# {% include 'dropdown_search_network.jinja2' %} 
-      {% include 'date_network.jinja2' %}  #}
 
     <form class="" action="" method='POST' name="myform">
         {{ network_form_2.csrt_token }}
@@ -48,7 +47,7 @@
           <div class="ml-8 text-lg" onchange="toggleDateFields(this)">
             {{ network_form_2.category.label }}:  {{network_form_2.category()}} {{network_form_2.hidden_tag()}}
         </div>
-        <div class="ml-8 text-lg hidden" id='startDateId'>
+        <div class="ml-8 text-lg hidden mt-8" id='startDateId'>
             {{ network_form_2.startdate.label }}:  {{network_form_2.startdate(class='datepicker')}} {{network_form_2.hidden_tag()}}
         </div>
         <div class="mt-4 ml-8 text-lg hidden" id='endDateId'>
@@ -64,7 +63,7 @@
     </form>
 
     </div>
-
+    
   </div> 
 
   <div class="my-10">
@@ -74,10 +73,12 @@
   <div class="my-10">
   {% include 'table.jinja2' %} 
   </div> 
+  </div> 
 
 <div class="mt-8">
   {% include 'footer_bottom.jinja2' %}
    </div>
+   
 
 </div>
 

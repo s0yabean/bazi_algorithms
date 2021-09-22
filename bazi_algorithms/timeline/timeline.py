@@ -29,6 +29,7 @@ def main():
     window_size = 0
     rolling_data_comb = [0]
     rolling_data_clash = [0]
+    chart = None
 
     natal_chart_list = NatalChart.query.filter_by(user_id=current_user.id).all()
     ChoiceForm = ChoiceForm()

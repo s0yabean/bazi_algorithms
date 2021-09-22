@@ -12,19 +12,19 @@ landing_bp = Blueprint(
 def landing():
     return render_template(
         'landing.jinja2',
-        title='MBTI App Demo.'
+        title='Bazilogy - Master Your Network.'
     )
 
 @landing_bp.route('/about', methods=['GET'])
 def about_us():
     return render_template(
         'about.jinja2',
-        title='MBTI App Demo.'
+        title='Bazilogy - Master Your Network.'
     )
 
 @landing_bp.route('/newsletter', methods=['GET'])
 def newsletter():
     return render_template(
         'newsletter.jinja2',
-        title='MBTI App Demo.'
+        title='Bazilogy - Master Your Network.'
     )
