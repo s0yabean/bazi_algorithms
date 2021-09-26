@@ -73,6 +73,9 @@ def main():
     if display_chart:
         logging.error("entered display chart")
         num_days = ExternalPillars.query.filter(ExternalPillars.date >= session["start_date"], ExternalPillars.date <= session["end_date"]).count()
+        logging.error(num_days)
+        logging.error(session["start_date"])
+        logging.error(session["end_date"])
         window_size = math.ceil(num_days/ 25)
         dates = ExternalPillars.query.filter(ExternalPillars.date >= session["start_date"] - timedelta(days=window_size), ExternalPillars.date <= session["end_date"]).all()
         logging.error(dates)
