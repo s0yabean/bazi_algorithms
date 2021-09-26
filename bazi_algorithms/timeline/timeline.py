@@ -71,9 +71,11 @@ def main():
 
     display_chart = 'start_date' in session.keys() and 'end_date' in session.keys() and 'contact_name' in session.keys() and 'contact_name_id' in session.keys()
     if display_chart:
+        logging.error("entered display chart")
         num_days = ExternalPillars.query.filter(ExternalPillars.date >= session["start_date"], ExternalPillars.date <= session["end_date"]).count()
         window_size = math.ceil(num_days/ 25)
         dates = ExternalPillars.query.filter(ExternalPillars.date >= session["start_date"] - timedelta(days=window_size), ExternalPillars.date <= session["end_date"]).all()
+        logging.error(dates)
         chart = NatalChart.query.filter_by(id=session["contact_name_id"]).one()
         n_chart_stems = [chart.hour_s, chart.day_s, chart.month_s, chart.year_s] 
         n_chart_branches = [chart.hour_e, chart.day_e, chart.month_e, chart.year_e]
