@@ -6,6 +6,7 @@ from datetime import date
 import math
 import numpy as np
 from datetime import datetime, timedelta
+import logging
 
 timeline_bp = Blueprint(
     'timeline_bp', __name__,
@@ -22,8 +23,7 @@ def main():
     from ..bazi_formulas.timeline_scoring import calc_comb_clash
 
     # Dummy Data
-    print("timeline logs")
-    print(str(date.today()))
+    logging.error('This is an error message')
     #dates = [ExternalPillars.query.filter(ExternalPillars.date == str(date.today()))]
     #print(dates)
     
@@ -34,6 +34,8 @@ def main():
     rolling_data_comb = [0]
     rolling_data_clash = [0]
     chart = None
+    dates = [ExternalPillars.query.filter(ExternalPillars.date == str(date.today()))]
+    logging.error(dates)
 
     natal_chart_list = NatalChart.query.filter_by(user_id=current_user.id).all()
     ChoiceForm = ChoiceForm()
