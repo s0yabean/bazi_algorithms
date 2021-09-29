@@ -22,8 +22,8 @@ def main():
     from ..forms.network_forms import NetworkForm_2
     from ..persistence.models import NatalChart, ExternalPillars
     from .explanations import explanation_list
-   
-    table_data = NatalChart.query.filter_by(user_id=current_user.id).all() 
+
+    table_data = NatalChart.query.filter_by(user_id=current_user.id, self_chart=False).all() 
     natal_chart_id = current_user.natal_chart_id
     remarks = []
     explanations = None
@@ -64,6 +64,7 @@ def main():
                 table_data, remarks = [], []
             else:
                 table_data, remarks = answer_question(questions[session['question']], table_data, natal_chart_id, session['start_date'], session['end_date'])
+                
                 if show_success_flash:
                     flash("Calculation Success.","info")
         elif session['question'] in [0,5,6,7]:
@@ -92,6 +93,7 @@ def main():
 
         if NatalChart.query.filter_by(id=current_user.natal_chart_id).all() != []:
             user_chart = NatalChart.query.filter_by(id=current_user.natal_chart_id).one()
+
             
     return render_template(
         'network.jinja2',

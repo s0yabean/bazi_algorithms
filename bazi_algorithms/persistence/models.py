@@ -135,7 +135,7 @@ class NatalChart(db.Model):
 		unique=False,
 		nullable=False
 	)
-	self = db.Column(
+	self_chart = db.Column(
 		db.Boolean
 	)
 

@@ -53,10 +53,11 @@ def main():
                 month_e = month[4],
                 year_s = year[1],
                 year_e = year[4],
-                self = chart_form_2.my_own_chart_checkbox.data
+                self_chart = chart_form_2.my_own_chart_checkbox.data
             )
 
         if chart_form.validate_on_submit():
+
             natal_chart = NatalChart(
                 user_id = current_user.id,
                 contact_name = chart_form.name.data,
@@ -68,7 +69,7 @@ def main():
                 month_e = chart_form.month_branch.data,
                 year_s = chart_form.year_stem.data,
                 year_e = chart_form.year_branch.data,
-                self = chart_form.my_own_chart_checkbox.data
+                self_chart = chart_form.my_own_chart_checkbox.data
             )
 
         chart_validation = NatalChart.query.filter_by(user_id=current_user.id, contact_name=chart_form.name.data).all()

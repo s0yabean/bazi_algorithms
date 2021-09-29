@@ -21,11 +21,6 @@ def main():
     from ..forms.name_forms import ChoiceForm
     from ..persistence.models import NatalChart, ExternalPillars
     from ..bazi_formulas.timeline_scoring import calc_comb_clash
-
-    # Dummy Data
-    logging.error('This is an error message')
-    #dates = [ExternalPillars.query.filter(ExternalPillars.date == str(date.today()))]
-    #print(dates)
     
     data = [{'s_combine': 0, 's_clash': 0, 'e_combine': 0, 'e_clash': 0}]
     avg_combine = [0] 
@@ -35,7 +30,7 @@ def main():
     rolling_data_clash = [0]
     chart = None
     dates = [ExternalPillars.query.filter(ExternalPillars.date == str(date.today()))]
-    logging.error(dates)
+    #logging.error(dates)
 
     natal_chart_list = NatalChart.query.filter_by(user_id=current_user.id).all()
     ChoiceForm = ChoiceForm()
@@ -71,14 +66,9 @@ def main():
 
     display_chart = 'start_date' in session.keys() and 'end_date' in session.keys() and 'contact_name' in session.keys() and 'contact_name_id' in session.keys()
     if display_chart:
-        logging.error("entered display chart")
         num_days = ExternalPillars.query.filter(ExternalPillars.date >= session["start_date"], ExternalPillars.date <= session["end_date"]).count()
-        logging.error(num_days)
-        logging.error(session["start_date"])
-        logging.error(session["end_date"])
         window_size = math.ceil(num_days/ 25)
         dates = ExternalPillars.query.filter(ExternalPillars.date >= session["start_date"] - timedelta(days=window_size), ExternalPillars.date <= session["end_date"]).all()
-        logging.error(dates)
         chart = NatalChart.query.filter_by(id=session["contact_name_id"]).one()
         n_chart_stems = [chart.hour_s, chart.day_s, chart.month_s, chart.year_s] 
         n_chart_branches = [chart.hour_e, chart.day_e, chart.month_e, chart.year_e]
