@@ -41,8 +41,6 @@ def main():
             day = re.search("(?=Day)(.*)(?=Month)", z)[0].split(" ")
             month = re.search("(?=Month)(.*)(?=Year)", z)[0].split(" ")
             year = re.search("(?=Year)(.*)", z)[0].split(" ")
-            print(z)
-            print(hour)
 
             natal_chart = NatalChart(
                 user_id = current_user.id,
@@ -54,7 +52,8 @@ def main():
                 month_s = month[1],
                 month_e = month[4],
                 year_s = year[1],
-                year_e = year[4]
+                year_e = year[4],
+                self = chart_form_2.my_own_chart_checkbox.data
             )
 
         if chart_form.validate_on_submit():
@@ -68,7 +67,8 @@ def main():
                 month_s = chart_form.month_stem.data,
                 month_e = chart_form.month_branch.data,
                 year_s = chart_form.year_stem.data,
-                year_e = chart_form.year_branch.data
+                year_e = chart_form.year_branch.data,
+                self = chart_form.my_own_chart_checkbox.data
             )
 
         chart_validation = NatalChart.query.filter_by(user_id=current_user.id, contact_name=chart_form.name.data).all()
@@ -90,9 +90,8 @@ def main():
                 db.session.commit() 
                 flash("Your personal chart is updated. Bazi: " + natal_chart.hour_s + " " + natal_chart.hour_e + ", " + natal_chart.day_s + " " +  natal_chart.day_e + ", " + natal_chart.month_s + " " + natal_chart.month_e + ", " + natal_chart.year_s + " " + natal_chart.year_e, "info")
 
-    natal_chart_id = User.query.filter_by(id=current_user.id).one().natal_chart_id
-    if NatalChart.query.filter_by(id=natal_chart_id).all() != []:
-        user_chart = NatalChart.query.filter_by(id=natal_chart_id).one()
+    if NatalChart.query.filter_by(id=current_user.natal_chart_id).all() != []:
+        user_chart = NatalChart.query.filter_by(id=current_user.natal_chart_id).one()
     else:
         user_chart = None
 
