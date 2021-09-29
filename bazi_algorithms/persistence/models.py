@@ -135,6 +135,9 @@ class NatalChart(db.Model):
 		unique=False,
 		nullable=False
 	)
+	self = db.Column(
+		db.Boolean
+	)
 
 class ExternalPillars(db.Model):
 	"""External Charts"""
