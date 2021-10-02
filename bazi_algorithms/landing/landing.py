@@ -19,12 +19,12 @@ def landing():
 def about_us():
     return render_template(
         'about.jinja2',
-        title='Bazi for Modern Age.'
+        title='Bazi for the modern age'
     )
 
 @landing_bp.route('/newsletter', methods=['GET'])
 def newsletter():
     return render_template(
         'newsletter.jinja2',
-        title='Bazilogy Newsletter.'
+        title="Sign up for Bazilogy's Newsletter"
     )
