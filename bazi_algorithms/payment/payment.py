@@ -33,7 +33,7 @@ plan_dic = {"plusplan" : "plus_price_id", "premiumplan" : "premium_price_id", "a
 @pay_bp.route("/pay") 
 def pay():
     if not current_user.is_authenticated:
-      flash("To proceed to Pricing, kindly Log In or Signup.", "info")
+      flash("To See Pricing, Kindly Login.", "info")
       return redirect(url_for("auth_bp.login") + '?next=pay')
     
     if "next" in session.keys():
