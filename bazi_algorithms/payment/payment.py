@@ -51,7 +51,7 @@ def create_checkout_session(plan):
     try:
         checkout_session = stripe.checkout.Session.create(
             client_reference_id=current_user.id,
-            success_url= url_for('pay_bp.pay_success', _external=True) + '?session_id=123',
+            success_url= url_for('pay_bp.pay_success', _external=True) + '?session_id={CHECKOUT_SESSION_ID}',
             cancel_url= url_for('pay_bp.pay_cancel', _external=True),
             payment_method_types=['card'],
             mode='subscription',
