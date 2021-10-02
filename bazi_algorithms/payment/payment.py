@@ -1,8 +1,6 @@
 import os
 from flask_login.utils import login_required
 import stripe
-import json
-#from requests import request
 from flask import session, Flask, flash, jsonify, Blueprint, render_template, url_for, redirect, request, abort
 from flask_login import current_user
 from ..persistence.models import StripeCustomer, User, db
@@ -17,15 +15,15 @@ pay_bp = Blueprint(
     static_folder='static'
 )
 
-stripe.api_key = os.getenv("STRIPE_API_KEY")
+stripe.api_key = os.getenv("STRIPE_SECRET_KEY")
 
 stripe_keys = {
-    "secret_key": os.getenv("STRIPE_SECRET_KEY_TEST"),
-    "publishable_key": os.getenv("STRIPE_PUBLISHABLE_KEY_TEST"),
-    "annual_price_id": os.getenv("STRIPE_ANNUAL_PLAN_PRICE_ID_TEST"), 
-    "premium_price_id": os.getenv("STRIPE_PREMIUM_PLAN_PRICE_ID_TEST"), 
-    "plus_price_id": os.getenv("STRIPE_PLUS_PLAN_PRICE_ID_TEST"),
-    "endpoint_secret": os.getenv("STRIPE_ENDPOINT_SECRET_TEST")
+    "secret_key": os.getenv("STRIPE_SECRET_KEY"),
+    "publishable_key": os.getenv("STRIPE_PUBLISHABLE_KEY"),
+    "annual_price_id": os.getenv("STRIPE_ANNUAL_PLAN_PRICE_ID"), 
+    "premium_price_id": os.getenv("STRIPE_PREMIUM_PLAN_PRICE_ID"), 
+    "plus_price_id": os.getenv("STRIPE_PLUS_PLAN_PRICE_ID"),
+    "endpoint_secret": os.getenv("STRIPE_ENDPOINT_SECRET")
 }
 
 plan_dic = {"plusplan" : "plus_price_id", "premiumplan" : "premium_price_id", "annualplan" : "annual_price_id"}
@@ -51,10 +49,9 @@ def create_checkout_session(plan):
     """Creates a Stripe session object that populates their intermediary page.
     User has to be logged in to access this route, so that we can track the current_user.id for later use."""
     try:
-
         checkout_session = stripe.checkout.Session.create(
             client_reference_id=current_user.id,
-            success_url= url_for('pay_bp.pay_success', _external=True) + '?session_id={CHECKOUT_SESSION_ID}',
+            success_url= url_for('pay_bp.pay_success', _external=True) + '?session_id=123',
             cancel_url= url_for('pay_bp.pay_cancel', _external=True),
             payment_method_types=['card'],
             mode='subscription',
@@ -86,6 +83,7 @@ def stripe_webhook():
 
     # Handle the checkout.session.completed event
     if event["type"] == "checkout.session.completed":
+        print("entered checkout.session.completed")
         stripe_data = event["data"]["object"]
         handle_checkout_session(stripe_data)
 

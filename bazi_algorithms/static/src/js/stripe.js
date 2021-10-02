@@ -1,7 +1,7 @@
 console.log("Should Load Automatically - Click Shift Command R to refresh!");
 
 //Get Stripe publishable key
-//client calls this to server whenver payment page is loaded, since this script runs automatically
+//client calls this to server whenever payment page is loaded, since this script runs automatically
 fetch("/stripe_public")
 .then((result) => { return result.json(); })
 .then((data) => {
