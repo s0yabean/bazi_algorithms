@@ -1,5 +1,6 @@
 from flask import Blueprint, redirect, render_template, url_for
 from flask_login import current_user, login_required
+import os
 
 # Blueprint Configuration
 landing_bp = Blueprint(
@@ -19,12 +20,13 @@ def landing():
 def about_us():
     return render_template(
         'about.jinja2',
-        title='Bazi for the modern age'
+        title='Bazi For The Modern Age'
     )
 
 @landing_bp.route('/newsletter', methods=['GET'])
 def newsletter():
     return render_template(
         'newsletter.jinja2',
-        title="Sign up for Bazilogy's Newsletter"
+        title="Sign Up For Bazilogy's Newsletter"
     )
+
