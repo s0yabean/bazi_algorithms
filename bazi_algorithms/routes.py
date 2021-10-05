@@ -55,7 +55,8 @@ def main():
                 month_e = month[4],
                 year_s = year[1],
                 year_e = year[4],
-                self_chart = chart_form_2.my_own_chart_checkbox.data
+                self_chart = chart_form_2.my_own_chart_checkbox.data,
+                gender = chart_form_2.gender.data
             )
 
         if chart_form.validate_on_submit():
@@ -71,7 +72,8 @@ def main():
                 month_e = chart_form.month_branch.data,
                 year_s = chart_form.year_stem.data,
                 year_e = chart_form.year_branch.data,
-                self_chart = chart_form.my_own_chart_checkbox.data
+                self_chart = chart_form.my_own_chart_checkbox.data,
+                gender = chart_form.gender.data
             )
 
 
