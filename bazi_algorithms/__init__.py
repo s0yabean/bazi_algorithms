@@ -81,8 +81,8 @@ def create_app():
                     abort(500)
  
         class NatalChartView(MyModelView):
-            column_list = ("id","user_id",'contact_name',"hour_s","hour_e", "day_s", "day_e", "month_s", "month_e", "year_s", "year_e", "self_chart")
-            form_columns = ("id", "user_id",'contact_name',"hour_s","hour_e", "day_s", "day_e", "month_s", "month_e", "year_s", "year_e", "self_chart")
+            column_list = ("id","user_id",'contact_name',"hour_s","hour_e", "day_s", "day_e", "month_s", "month_e", "year_s", "year_e", "gender", "self_chart")
+            form_columns = ("id", "user_id",'contact_name',"hour_s","hour_e", "day_s", "day_e", "month_s", "month_e", "year_s", "year_e", "gender", "self_chart")
         class UserView(MyModelView):
             column_list = ('name','email', 'natal_chart_id', 'plan')
         admin.add_view(UserView(User, db.session))

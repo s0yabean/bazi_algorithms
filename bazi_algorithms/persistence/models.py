@@ -135,6 +135,9 @@ class NatalChart(db.Model):
 		unique=False,
 		nullable=False
 	)
+	gender = db.Column(
+		db.String(10)
+	)
 	self_chart = db.Column(
 		db.Boolean
 	)

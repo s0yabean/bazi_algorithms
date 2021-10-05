@@ -18,6 +18,7 @@ class ChartFormManual(FlaskForm):
     month_branch = SelectField('Month Branch', [DataRequired()], choices=branch_choices)
     year_stem = SelectField('Year Stem', [DataRequired()], choices=stem_choices)
     year_branch = SelectField('Year Branch', [DataRequired()], choices=branch_choices)
+    gender = SelectField('Gender', choices=[("False", "Female"), ("True", "Male")], validators=(DataRequired(),))
     my_own_chart_checkbox = BooleanField('(This is My Own Chart)')
     submit = SubmitField('Submit')
 
