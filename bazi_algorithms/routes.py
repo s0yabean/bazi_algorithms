@@ -28,7 +28,8 @@ def main():
             hour = re.search(r'[0-9]*', chart_form_2.hour_range.data).group()
             birthday = str(chart_form_2.birth_date.data)
             bazi_api_url = environ.get('BAZI_API_URL')
-            bazi_url = bazi_api_url.format(chart_form_2.gender.data, birthday[:4], birthday[5:7], birthday[8:11], hour,chart_form_2.hour_range.data[:-2])
+            gender_binary = chart_form_2.gender.data == "Male" 
+            bazi_url = bazi_api_url.format(gender_binary, birthday[:4], birthday[5:7], birthday[8:11], hour,chart_form_2.hour_range.data[:-2])
             page = requests.get(bazi_url)
             content = str(page.content)
 
