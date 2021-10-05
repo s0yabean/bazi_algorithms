@@ -9,7 +9,7 @@ class ChartFormManual(FlaskForm):
     name = StringField('Name',validators=[DataRequired()])
 
     stem_choices = [("Jia",'Jia'),("Yi",'Yi'),("Bing",'Bing'),("Ding",'Ding'),("Wu",'Wu'),("Ji",'Ji'),("Gen",'Gen'),("Xin",'Xin'),('Ren','Ren'),("Gui",'Gui')]
-    branch_choices = [("Zi",'Zi'),("Chou",'Chou'),("Yin",'Yin'),("Mao",'Mao'),("Chen",'Chen'),("Si",'Si'),("Wu",'Wu'),("Wei",'Wei'),("Shen",'Shen'),("You",'You'),("Hai",'Hai')]
+    branch_choices = [("Zi",'Zi'),("Chou",'Chou'),("Yin",'Yin'),("Mao",'Mao'),("Chen",'Chen'),("Si",'Si'),("Wu",'Wu'),("Wei",'Wei'),("Shen",'Shen'),("You",'You'),("Xu",'Xu'),("Hai",'Hai')]
     hour_stem = SelectField('Hour Stem', choices=[(None, "")] + stem_choices)
     hour_branch = SelectField('Hour Branch', choices=[(None, "")] + branch_choices)
     day_stem = SelectField('Day Stem', [DataRequired()], choices=stem_choices)
