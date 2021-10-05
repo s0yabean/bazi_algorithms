@@ -21,7 +21,7 @@ def main():
     from ..forms.name_forms import NetworkForm
     from ..forms.network_forms import NetworkForm_2
     from ..persistence.models import NatalChart, ExternalPillars
-    from .explanations import explanation_list
+    from .explanations import explanation_list_paid, explanation_list_free
 
     table_data = NatalChart.query.filter_by(user_id=current_user.id, self_chart=False).all() 
     natal_chart_id = current_user.natal_chart_id
@@ -85,7 +85,11 @@ def main():
             if show_success_flash:
                 flash("Calculation Success.","info")
 
-        explanations = explanation_list()
+        if current_user.plan == "Lite Plan":
+            explanations = explanation_list_free()
+        else:
+            explanations = explanation_list_paid()
+
         for i in range(len(explanations)):
             if questions[session['question']] == explanations[i][0][1]:
                 explanations = explanations[i]

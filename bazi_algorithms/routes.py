@@ -19,6 +19,8 @@ main_bp = Blueprint(
 def main():
     chart_form = ChartFormManual()
     chart_form_2 = ChartFormBirthTime()
+    # checks to see if user can add more users based on plan
+    plan_count = {"Lite Plan" : 15, "Plus Plan" : 50, "Premium plan" : -1, "Annual plan":  -1}
 
     if request.method == 'POST':
         if chart_form_2.validate_on_submit():
@@ -72,24 +74,30 @@ def main():
                 self_chart = chart_form.my_own_chart_checkbox.data
             )
 
-        chart_validation = NatalChart.query.filter_by(user_id=current_user.id, contact_name=chart_form.name.data).all()
-        if len(chart_validation) > 0:
-            flash("There is already a user with name " + chart_form.name.data + ". Please change to another name.", "error")
-        else:
-            try:
-                db.session.add(natal_chart)
-                db.session.commit() 
-                flash("Chart for " + chart_form.name.data + " added. Bazi: " + natal_chart.hour_s + " " + natal_chart.hour_e + ", " + natal_chart.day_s + " " +  natal_chart.day_e + ", " + natal_chart.month_s + " " + natal_chart.month_e + ", " + natal_chart.year_s + " " + natal_chart.year_e, "info")
-            except Exception as e: 
-                db.session.rollback()
-                print(e)
-                abort(500)
 
-            if chart_form.my_own_chart_checkbox.data:
-                new_natal_chart_id = NatalChart.query.filter_by(user_id=current_user.id, contact_name=chart_form.name.data).one().id
-                User.query.filter_by(id=current_user.id).update({"natal_chart_id": new_natal_chart_id})
-                db.session.commit() 
-                flash("Your personal chart is updated. Bazi: " + natal_chart.hour_s + " " + natal_chart.hour_e + ", " + natal_chart.day_s + " " +  natal_chart.day_e + ", " + natal_chart.month_s + " " + natal_chart.month_e + ", " + natal_chart.year_s + " " + natal_chart.year_e, "info")
+        chart_validation = NatalChart.query.filter_by(user_id=current_user.id, contact_name=chart_form.name.data).all()
+
+        if current_user.plan in ("Lite Plan", "Plus Plan") and len(NatalChart.query.filter_by(user_id=current_user.id, self_chart = False).all()) >= plan_count[current_user.plan]:
+            flash(f"Your {current_user.plan} has a limit of {plan_count[current_user.plan]} charts. Please upgrade for better features.", "error")
+
+        else:
+            if len(chart_validation) > 0:
+                flash("There is already a user with name " + chart_form.name.data + ". Please change to another name.", "error")
+            else:
+                try:
+                    db.session.add(natal_chart)
+                    db.session.commit() 
+                    flash("Chart for " + chart_form.name.data + " added. Bazi: " + natal_chart.hour_s + " " + natal_chart.hour_e + ", " + natal_chart.day_s + " " +  natal_chart.day_e + ", " + natal_chart.month_s + " " + natal_chart.month_e + ", " + natal_chart.year_s + " " + natal_chart.year_e, "info")
+                except Exception as e: 
+                    db.session.rollback()
+                    print(e)
+                    abort(500)
+
+                if chart_form.my_own_chart_checkbox.data:
+                    new_natal_chart_id = NatalChart.query.filter_by(user_id=current_user.id, contact_name=chart_form.name.data).one().id
+                    User.query.filter_by(id=current_user.id).update({"natal_chart_id": new_natal_chart_id})
+                    db.session.commit() 
+                    flash("Your personal chart is updated. Bazi: " + natal_chart.hour_s + " " + natal_chart.hour_e + ", " + natal_chart.day_s + " " +  natal_chart.day_e + ", " + natal_chart.month_s + " " + natal_chart.month_e + ", " + natal_chart.year_s + " " + natal_chart.year_e, "info")
 
     if NatalChart.query.filter_by(id=current_user.natal_chart_id).all() != []:
         user_chart = NatalChart.query.filter_by(id=current_user.natal_chart_id).one()

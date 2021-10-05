@@ -5,11 +5,6 @@ def count_earth_six_harmony_combine(natal_earth, external_earth):
     natal_d = dict(collections.Counter(natal_earth))
     external_d = dict(collections.Counter(external_earth))
     
-# Counted in 3 combo calculation in ["Hai","Zi","Chou"]
-#     if "Chou" in natal_d and "Zi" in external_d:
-#         count+=natal_d["Chou"] * external_d["Zi"]
-#     if "Zi" in natal_d and "Chou" in external_d:
-#         count+=natal_d["Zi"] * external_d["Chou"]
     breakdown = []
     if "Yin" in natal_d and "Hai" in external_d:
         breakdown.append("Natal Yin Combines with External Hai: x" + str(natal_d["Yin"] * external_d["Hai"]))
@@ -38,12 +33,6 @@ def count_earth_six_harmony_combine(natal_earth, external_earth):
     if "Shen" in natal_d and "Si" in external_d:
         breakdown.append("Natal Shen Combines with External Si: x" + str(natal_d["Shen"] * external_d["Si"]))
         count+=natal_d["Shen"] * external_d["Si"]
-        
-# Counted in 3 combo calculation in ["Si","Wu","Wei"]       
-#     if "Wu" in natal_d and "Wei" in external_d:
-#         count+=natal_d["Wu"] * external_d["Wei"]
-#     if "Wei" in natal_d and "Wu" in external_d:
-#         count+=natal_d["Wei"] * external_d["Wu"]
         
     return count, breakdown
 
