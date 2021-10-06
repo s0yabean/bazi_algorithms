@@ -20,7 +20,7 @@
        {%if user_chart %}
         My Bazi Chart: 
         <span class="font-bold">
-        {%if user_chart.hour_s %}
+        {%if user_chart.hour_s != "" %}
           {{user_chart.hour_s}} {{user_chart.hour_e}},
         {%else%}
         {%endif%}

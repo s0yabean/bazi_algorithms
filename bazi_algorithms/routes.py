@@ -96,7 +96,7 @@ def main():
                 try:
                     db.session.add(natal_chart)
                     db.session.commit() 
-                    if natal_chart.hour_s:
+                    if natal_chart.hour_s != "":
                         flash("Chart for " + chart_form.name.data + " added. Bazi: " + natal_chart.hour_s + " " + natal_chart.hour_e + ", " + natal_chart.day_s + " " +  natal_chart.day_e + ", " + natal_chart.month_s + " " + natal_chart.month_e + ", " + natal_chart.year_s + " " + natal_chart.year_e, "info")
                     else:
                         flash("Chart for " + chart_form.name.data + " added. Bazi: " + natal_chart.day_s + " " +  natal_chart.day_e + ", " + natal_chart.month_s + " " + natal_chart.month_e + ", " + natal_chart.year_s + " " + natal_chart.year_e, "info")
@@ -109,7 +109,7 @@ def main():
                     new_natal_chart_id = NatalChart.query.filter_by(user_id=current_user.id, contact_name=chart_form.name.data).one().id
                     User.query.filter_by(id=current_user.id).update({"natal_chart_id": new_natal_chart_id})
                     db.session.commit() 
-                    if natal_chart.hour_s:
+                    if natal_chart.hour_s != "":
                         flash("Your personal chart is updated. Bazi: " + natal_chart.hour_s + " " + natal_chart.hour_e + ", " + natal_chart.day_s + " " +  natal_chart.day_e + ", " + natal_chart.month_s + " " + natal_chart.month_e + ", " + natal_chart.year_s + " " + natal_chart.year_e, "info")
                     else:
                         flash("Your personal chart is updated. Bazi: " + natal_chart.day_s + " " +  natal_chart.day_e + ", " + natal_chart.month_s + " " + natal_chart.month_e + ", " + natal_chart.year_s + " " + natal_chart.year_e, "info")

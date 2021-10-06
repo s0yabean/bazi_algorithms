@@ -18,7 +18,7 @@
                     <div class="mt-6 text-xl">
                     <span class="mt-6 text-xl">Bazi:</span>
                         <span class="italic text-base">
-                            {%if user_chart.hour_s %}
+                            {%if user_chart.hour_s != "" %}
                                 {{user_chart.hour_s}} {{user_chart.hour_e}},
                              {%else%}
                              {%endif%}

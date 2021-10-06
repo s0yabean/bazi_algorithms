@@ -27,7 +27,7 @@
                     {%if user_chart %}
                     <span class="font-bold">Bazi:</span>
                     
-                            {%if user_chart.hour_s %}
+                            {%if user_chart.hour_s != "" %}
                                 {{user_chart.hour_s}} {{user_chart.hour_e}},
                             {%else%}
                             {%endif%}
