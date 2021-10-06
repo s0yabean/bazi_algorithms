@@ -26,7 +26,12 @@
                     <div class="mt-6 text-base">
                     {%if user_chart %}
                     <span class="font-bold">Bazi:</span>
-                        <span class="italic">{{user_chart.hour_s}} {{user_chart.hour_e}},
+                    
+                            {%if user_chart.hour_s %}
+                                {{user_chart.hour_s}} {{user_chart.hour_e}},
+                            {%else%}
+                            {%endif%}
+
                             {{user_chart.day_s}} {{user_chart.day_e}},
                             {{user_chart.month_s}} {{user_chart.month_e}},
                             {{user_chart.year_s}} {{user_chart.year_e}}</span>

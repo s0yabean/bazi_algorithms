@@ -26,10 +26,11 @@ def main():
         if chart_form_2.validate_on_submit():
 
             hour = re.search(r'[0-9]*', chart_form_2.hour_range.data).group()
+            am_pm = re.search(r'[a-z]+', chart_form_2.hour_range.data).group()
             birthday = str(chart_form_2.birth_date.data)
             bazi_api_url = environ.get('BAZI_API_URL')
             gender_binary = chart_form_2.gender.data == "Male" 
-            bazi_url = bazi_api_url.format(gender_binary, birthday[:4], birthday[5:7], birthday[8:11], hour,chart_form_2.hour_range.data[:-2])
+            bazi_url = bazi_api_url.format(gender_binary, birthday[:4], birthday[5:7], birthday[8:11], hour, am_pm)
             page = requests.get(bazi_url)
             content = str(page.content)
 
@@ -44,6 +45,7 @@ def main():
                 hour = ["", "", "", "", ""]
             else:
                 hour = re.search("(?=Hour)(.*)(?=Day)", z)[0].split(" ")
+            print(hour)
             
             day = re.search("(?=Day)(.*)(?=Month)", z)[0].split(" ")
             month = re.search("(?=Month)(.*)(?=Year)", z)[0].split(" ")
@@ -94,7 +96,10 @@ def main():
                 try:
                     db.session.add(natal_chart)
                     db.session.commit() 
-                    flash("Chart for " + chart_form.name.data + " added. Bazi: " + natal_chart.hour_s + " " + natal_chart.hour_e + ", " + natal_chart.day_s + " " +  natal_chart.day_e + ", " + natal_chart.month_s + " " + natal_chart.month_e + ", " + natal_chart.year_s + " " + natal_chart.year_e, "info")
+                    if natal_chart.hour_s:
+                        flash("Chart for " + chart_form.name.data + " added. Bazi: " + natal_chart.hour_s + " " + natal_chart.hour_e + ", " + natal_chart.day_s + " " +  natal_chart.day_e + ", " + natal_chart.month_s + " " + natal_chart.month_e + ", " + natal_chart.year_s + " " + natal_chart.year_e, "info")
+                    else:
+                        flash("Chart for " + chart_form.name.data + " added. Bazi: " + natal_chart.day_s + " " +  natal_chart.day_e + ", " + natal_chart.month_s + " " + natal_chart.month_e + ", " + natal_chart.year_s + " " + natal_chart.year_e, "info")
                 except Exception as e: 
                     db.session.rollback()
                     print(e)
@@ -104,8 +109,10 @@ def main():
                     new_natal_chart_id = NatalChart.query.filter_by(user_id=current_user.id, contact_name=chart_form.name.data).one().id
                     User.query.filter_by(id=current_user.id).update({"natal_chart_id": new_natal_chart_id})
                     db.session.commit() 
-                    flash("Your personal chart is updated. Bazi: " + natal_chart.hour_s + " " + natal_chart.hour_e + ", " + natal_chart.day_s + " " +  natal_chart.day_e + ", " + natal_chart.month_s + " " + natal_chart.month_e + ", " + natal_chart.year_s + " " + natal_chart.year_e, "info")
-
+                    if natal_chart.hour_s:
+                        flash("Your personal chart is updated. Bazi: " + natal_chart.hour_s + " " + natal_chart.hour_e + ", " + natal_chart.day_s + " " +  natal_chart.day_e + ", " + natal_chart.month_s + " " + natal_chart.month_e + ", " + natal_chart.year_s + " " + natal_chart.year_e, "info")
+                    else:
+                        flash("Your personal chart is updated. Bazi: " + natal_chart.day_s + " " +  natal_chart.day_e + ", " + natal_chart.month_s + " " + natal_chart.month_e + ", " + natal_chart.year_s + " " + natal_chart.year_e, "info")
     if NatalChart.query.filter_by(id=current_user.natal_chart_id).all() != []:
         user_chart = NatalChart.query.filter_by(id=current_user.natal_chart_id).one()
     else:
