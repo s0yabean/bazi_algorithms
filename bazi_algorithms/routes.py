@@ -39,8 +39,12 @@ def main():
             z = re.sub(r'\\x*[A-z0-9]+', '', z)
             z = z.replace("\\r", "").replace('\\n', "")
             z = re.sub("[ ]+", ' ', z)
+
+            if chart_form_2.hour_range.data == "":
+                hour = ["", "", "", "", ""]
+            else:
+                hour = re.search("(?=Hour)(.*)(?=Day)", z)[0].split(" ")
             
-            hour = re.search("(?=Hour)(.*)(?=Day)", z)[0].split(" ")
             day = re.search("(?=Day)(.*)(?=Month)", z)[0].split(" ")
             month = re.search("(?=Month)(.*)(?=Year)", z)[0].split(" ")
             year = re.search("(?=Year)(.*)", z)[0].split(" ")
