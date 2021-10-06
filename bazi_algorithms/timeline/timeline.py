@@ -29,8 +29,8 @@ def main():
     rolling_data_comb = [0]
     rolling_data_clash = [0]
     chart = None
-    dates = [ExternalPillars.query.filter(ExternalPillars.date == str(date.today()))]
-    #logging.error(dates)
+
+    dates = ExternalPillars.query.filter(ExternalPillars.date == str(date.today())).all()
 
     natal_chart_list = NatalChart.query.filter_by(user_id=current_user.id).all()
     ChoiceForm = ChoiceForm()
@@ -44,17 +44,19 @@ def main():
     if request.method == 'GET':
         if current_user.natal_chart_id is None:
             flash("Please add in your own chart in the Account section to see your own chart on default.", "info")
-        else:
+        if "contact_chart" not in session.keys():
             default_natal_chart = NatalChart.query.filter_by(id=current_user.natal_chart_id).one()
             session['contact_name_id'] = default_natal_chart.id
             session['contact_name'] = default_natal_chart.contact_name
 
     if request.method == 'POST':
         if "dropdown_menu" and "security_token" in request.form.keys():
+            print("entered dropdown")
             contact_id = request.form["dropdown_menu"]
-            contact_name = NatalChart.query.filter_by(id=contact_id).one().contact_name
+            contact_chart = NatalChart.query.filter_by(id=contact_id).one()
             session['contact_name_id'] = contact_id 
-            session['contact_name'] = contact_name
+            session['contact_name'] = contact_chart.contact_name
+            session["contact_chart"] = contact_chart
 
     if Dateform.validate_on_submit():
         session['start_date'] = Dateform.startdate.data

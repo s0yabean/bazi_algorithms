@@ -29,14 +29,14 @@
                 </div>
                 </td>
                 <td class="text-black px-6 py-4 whitespace-nowrap text-lg">
-                {% if table_data[i].hour_s is none %}
+                {% if table_data[i].hour_s ==  "" %}
                     {{table_data[i].day_s}}, {{table_data[i].month_s}}, {{table_data[i].year_s}}
                 {% else %}
                     {{table_data[i].hour_s}}, {{table_data[i].day_s}}, {{table_data[i].month_s}}, {{table_data[i].year_s}}
                 {% endif %}
                 </td>
                 <td class="text-black px-6 py-4 whitespace-nowrap text-lg">
-                {% if table_data[i].hour_s is none %}
+                {% if table_data[i].hour_s ==  "" %}
                     {{table_data[i].day_e}}, {{table_data[i].month_e}}, {{table_data[i].year_e}}
                 {% else %}
                     {{table_data[i].hour_e}}, {{table_data[i].day_e}}, {{table_data[i].month_e}}, {{table_data[i].year_e}}

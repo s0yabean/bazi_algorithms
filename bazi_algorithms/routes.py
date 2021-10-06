@@ -24,9 +24,13 @@ def main():
 
     if request.method == 'POST':
         if chart_form_2.validate_on_submit():
-
-            hour = re.search(r'[0-9]*', chart_form_2.hour_range.data).group()
-            am_pm = re.search(r'[a-z]+', chart_form_2.hour_range.data).group()
+            if chart_form_2.hour_range.data == "":
+                hour = 12 #any random number, does not matter since 
+                am_pm =  "am"
+            else:
+                hour = re.search(r'[0-9]*', chart_form_2.hour_range.data).group()
+                am_pm = re.search(r'[a-z]+', chart_form_2.hour_range.data).group()
+                
             birthday = str(chart_form_2.birth_date.data)
             bazi_api_url = environ.get('BAZI_API_URL')
             gender_binary = chart_form_2.gender.data == "Male" 
