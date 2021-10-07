@@ -3,26 +3,20 @@
     <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
       <div class="shadow overflow-hidden border-b border-gray-200 rounded">
         
-        {% if table_data|length == 0 %}
+        {% if table_data|length == 0 and total_other_ppl_charts == 0 %}
         <div class="bg-red-300 text-xl py-2 px-4">
         Add Some Charts In The Account Section To Populate This Space.
         <br>
         Recommended To Add Close Friends, Family, Relatives And acquaintances.
         </div>
+        {% elif table_data|length == 0 and total_other_ppl_charts != 0%}
+        <div class="bg-red-300 text-xl py-2 px-4">
+        There Is No One In Your Current Chart List That Answers This Question.
+        <br>
+        Add Some Charts In The Account Section To Populate This Space.
+        </div>
+
         {% else %}
-        {% for category, message in get_flashed_messages(with_categories=true) %}
-        {%if category == "info" %} 
-          <div id="successMessage" class="alert text-green-700 bg-green-100 border border-green-400 text-left rounded pb-3 pt-2 px-4">
-            <button onclick=delete_flash(this) type="button" class="close text-2xl" data-dismiss="alert">&#10003;</button>
-        
-        {%elif category == "error"%}
-          <div class="alert text-red-700 bg-red-100 border border-red-400 text-left rounded pb-3 pt-2 px-4">
-            <button onclick=delete_flash(this) type="button" class="close text-2xl" data-dismiss="alert">&times;</button>
-        
-        {%endif%}    
-          {{ message }} 
-          </div>
-        {% endfor %}
 
         <table class="min-w-full divide-y divide-gray-200">
           <thead class="bg-gray-50">

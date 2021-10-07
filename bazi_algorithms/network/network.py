@@ -30,6 +30,7 @@ def main():
     show_success_flash = False 
     questions = question_list()
     user_chart = None
+    total_other_ppl_charts =  0
     NetworkForm_2 = NetworkForm_2()
 
     if request.method == 'GET':
@@ -43,7 +44,8 @@ def main():
                 questions=[],
                 remarks=[],
                 explanations=[],
-                user_chart=user_chart)
+                user_chart=user_chart,
+                total_other_ppl_charts = total_other_ppl_charts)
 
     if NetworkForm_2.validate_on_submit():
         if NetworkForm_2.startdate.data is not None and NetworkForm_2.enddate.data is not None:
@@ -58,7 +60,8 @@ def main():
                 questions=[],
                 remarks=[],
                 explanations=[],
-                user_chart=user_chart)
+                user_chart=user_chart,
+                total_other_ppl_charts = total_other_ppl_charts)
 
         show_success_flash = True
         if NetworkForm_2.category.data is not None:
@@ -92,7 +95,8 @@ def main():
                 questions=[],
                 remarks=[],
                 explanations=[],
-                user_chart=user_chart)
+                user_chart=user_chart,
+                total_other_ppl_charts = total_other_ppl_charts)
 
             table_data, remarks = answer_question(questions[session['question']], table_data, natal_chart_id, "", "")
             if show_success_flash:
@@ -110,7 +114,9 @@ def main():
 
         if NatalChart.query.filter_by(id=current_user.natal_chart_id).all() != []:
             user_chart = NatalChart.query.filter_by(id=current_user.natal_chart_id).one()
-
+            total_other_ppl_charts = NatalChart.query.filter_by(user_id=current_user.id, self_chart=False).count()
+            print("total_other_ppl_charts")
+            print(total_other_ppl_charts)
             
     return render_template(
         'network.jinja2',
@@ -120,7 +126,8 @@ def main():
         questions=questions,
         remarks=remarks,
         explanations=explanations,
-        user_chart=user_chart)
+        user_chart=user_chart,
+        total_other_ppl_charts = total_other_ppl_charts)
 
 from ..bazi_formulas.combines import count_earth_combo, count_earth_six_harmony_combine
 from ..persistence.models import NatalChart, ExternalPillars
