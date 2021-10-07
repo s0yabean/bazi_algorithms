@@ -83,7 +83,6 @@ def stripe_webhook():
 
     # Handle the checkout.session.completed event
     if event["type"] == "checkout.session.completed":
-        print("entered checkout.session.completed")
         stripe_data = event["data"]["object"]
         handle_checkout_session(stripe_data)
 
@@ -164,8 +163,6 @@ def handle_checkout_session(data):
         stripe_subscription_id = "no_result"
 
     date = math.floor(time.time())
-    print("date")
-    print(date)
 
     stripe_customer = StripeCustomer(
             user_id=user_id,

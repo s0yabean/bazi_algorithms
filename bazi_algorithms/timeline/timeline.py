@@ -33,17 +33,26 @@ def main():
 
     natal_chart_list = NatalChart.query.filter_by(user_id=current_user.id).all()
     ChoiceForm = ChoiceForm()
+
     Dateform = TimelineDateForm()
 
     if 'start_date' not in session.keys():
         session['start_date'] = datetime(int(str(datetime.today())[:4]), 1, 1)
         session['end_date'] = datetime(int(str(datetime.today())[:4]), 12, 31)
         dates = ExternalPillars.query.filter(ExternalPillars.date >= session["start_date"] - timedelta(days=window_size), ExternalPillars.date <= session["end_date"]).all()
+    elif 'start_date' in session.keys() and 'end_date' in session.keys():
+        Dateform.startdate.data = session['start_date']
+        Dateform.enddate.data = session['end_date']
 
     if request.method == 'GET':
         if current_user.natal_chart_id is None:
             flash("Please add in your own chart in the Account section to see your own chart on default.", "info")
-        if "contact_chart" not in session.keys():
+            return render_template('timeline.jinja2', form=Dateform, user_chart=chart,
+                natal_chart=natal_chart_list, choice_form=ChoiceForm,
+                session=session, data=data[window_size:], labels=[d.date for d in dates[window_size:]],
+                avg_combine=avg_combine,avg_clash= avg_clash, rolling_data=rolling_data_comb[window_size:], rolling_data_clash=rolling_data_clash[window_size:])
+
+        if "contact_chart" not in session.keys() or ("contact_chart" in session.keys() and session['contact_chart'] is None):    
             default_natal_chart = NatalChart.query.filter_by(id=current_user.natal_chart_id).one()
             session['contact_name_id'] = default_natal_chart.id
             session['contact_name'] = default_natal_chart.contact_name
@@ -55,12 +64,13 @@ def main():
             session['contact_name_id'] = contact_id 
             session['contact_name'] = contact_chart.contact_name
             session["contact_chart"] = contact_chart
-
+            Dateform.startdate.data = session['start_date']
+            Dateform.enddate.data = session['end_date']
+    
     if Dateform.validate_on_submit():
         session['start_date'] = Dateform.startdate.data
         session['end_date'] = Dateform.enddate.data
-        return redirect(url_for('timeline_bp.main'))
-    
+
     if 'contact_name' not in session.keys() and 'contact_name_id' not in session.keys():
         flash("Please Select A Person In The Dropdown Menu.", "info")
 

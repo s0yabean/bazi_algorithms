@@ -21,6 +21,7 @@ class DateForm(FlaskForm):
             return True
 
 class TimelineDateForm(FlaskForm):
-    startdate = DateField('Start Date', format='%Y-%m-%d', default=datetime(int(str(datetime.today())[:4]), 1, 1), validators=(DataRequired(),))
+    default_start = datetime(int(str(datetime.today())[:4]), 1, 1)
+    startdate = DateField('Start Date', format='%Y-%m-%d', default=default_start, validators=(DataRequired(),))
     enddate = DateField('End Date', format='%Y-%m-%d', default=datetime(int(str(datetime.today())[:4]), 12, 31), validators=(DataRequired(),))
     submit = SubmitField('Submit')
