@@ -29,7 +29,6 @@ def main():
     rolling_data_comb = [0]
     rolling_data_clash = [0]
     chart = None
-
     dates = ExternalPillars.query.filter(ExternalPillars.date == str(date.today())).all()
 
     natal_chart_list = NatalChart.query.filter_by(user_id=current_user.id).all()
@@ -51,7 +50,6 @@ def main():
 
     if request.method == 'POST':
         if "dropdown_menu" and "security_token" in request.form.keys():
-            print("entered dropdown")
             contact_id = request.form["dropdown_menu"]
             contact_chart = NatalChart.query.filter_by(id=contact_id).one()
             session['contact_name_id'] = contact_id 
@@ -64,9 +62,9 @@ def main():
         return redirect(url_for('timeline_bp.main'))
     
     if 'contact_name' not in session.keys() and 'contact_name_id' not in session.keys():
-        flash("Please select a person in the dropdown menu.", "info")
+        flash("Please Select A Person In The Dropdown Menu.", "info")
 
-    display_chart = 'start_date' in session.keys() and 'end_date' in session.keys() and 'contact_name' in session.keys() and 'contact_name_id' in session.keys()
+    display_chart = 'start_date' in session.keys() and 'end_date' in session.keys() and session["start_date"] is not None and session["end_date"] is not None and 'contact_name' in session.keys() and 'contact_name_id' in session.keys()
     if display_chart:
         num_days = ExternalPillars.query.filter(ExternalPillars.date >= session["start_date"], ExternalPillars.date <= session["end_date"]).count()
         window_size = math.ceil(num_days/ 25)
