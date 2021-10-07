@@ -40,9 +40,6 @@ def main():
         session['start_date'] = datetime(int(str(datetime.today())[:4]), 1, 1)
         session['end_date'] = datetime(int(str(datetime.today())[:4]), 12, 31)
         dates = ExternalPillars.query.filter(ExternalPillars.date >= session["start_date"] - timedelta(days=window_size), ExternalPillars.date <= session["end_date"]).all()
-    elif 'start_date' in session.keys() and 'end_date' in session.keys():
-        Dateform.startdate.data = session['start_date']
-        Dateform.enddate.data = session['end_date']
 
     if request.method == 'GET':
         if current_user.natal_chart_id is None:
@@ -67,9 +64,15 @@ def main():
             Dateform.startdate.data = session['start_date']
             Dateform.enddate.data = session['end_date']
     
+    print("outside form submit")
     if Dateform.validate_on_submit():
+        print("entered date form")
+        print(Dateform.startdate.data)
+        print(Dateform.enddate.data)
         session['start_date'] = Dateform.startdate.data
         session['end_date'] = Dateform.enddate.data
+        print(session['start_date'])
+        print(session['end_date'])
 
     if 'contact_name' not in session.keys() and 'contact_name_id' not in session.keys():
         flash("Please Select A Person In The Dropdown Menu.", "info")
