@@ -113,15 +113,17 @@ def external_month_range(start_date, end_date):
 
     results = []
     min_index = 0
-    max_index = 0
+    max_index = 1
     
     #date_obj needs min 2 length. Add form validation
     for i in range(len(date_obj)):
         month_pillar = date_obj[i].month_pillar.split(" ")
         if i <= len(date_obj) - 2:
+
             if month_pillar[0] == date_obj[i+1].month_pillar.split(" ")[0]:
                 max_index += 1
             else:
+
                 min_date = min(dates[min_index: max_index])
                 max_date = max(dates[min_index: max_index])
                 results.append([month_pillar[0], min_date, max_date])

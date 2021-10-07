@@ -30,16 +30,16 @@
                 </td>
                 <td class="text-black px-6 py-4 whitespace-nowrap text-lg">
                 {% if table_data[i].hour_s ==  "" %}
-                    {{table_data[i].day_s}}, {{table_data[i].month_s}}, {{table_data[i].year_s}}
+                    <span class="font-bold">{{table_data[i].day_s}}</span>, {{table_data[i].month_s}}, {{table_data[i].year_s}}
                 {% else %}
-                    {{table_data[i].hour_s}}, {{table_data[i].day_s}}, {{table_data[i].month_s}}, {{table_data[i].year_s}}
+                    {{table_data[i].hour_s}}, <span class="font-bold">{{table_data[i].day_s}}</span>, {{table_data[i].month_s}}, {{table_data[i].year_s}}
                 {% endif %}
                 </td>
                 <td class="text-black px-6 py-4 whitespace-nowrap text-lg">
                 {% if table_data[i].hour_s ==  "" %}
-                    {{table_data[i].day_e}}, {{table_data[i].month_e}}, {{table_data[i].year_e}}
+                    <span class="font-bold">{{table_data[i].day_e}}</span>, {{table_data[i].month_e}}, {{table_data[i].year_e}}
                 {% else %}
-                    {{table_data[i].hour_e}}, {{table_data[i].day_e}}, {{table_data[i].month_e}}, {{table_data[i].year_e}}
+                    {{table_data[i].hour_e}}, <span class="font-bold">{{table_data[i].day_e}}</span>, {{table_data[i].month_e}}, {{table_data[i].year_e}}
                 {% endif %}
                 </td>
                 <td class="text-black px-6 py-4 whitespace-nowrap text-lg">

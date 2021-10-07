@@ -21,12 +21,6 @@ class NetworkForm_2(FlaskForm):
     enddate = DateField('End Date', format='%Y-%m-%d', validators=[Optional()])
     submit = SubmitField('Submit')
 
-    # def validate_startdate(self, startdate):
-    #     print(startdate.data)
-    #     print("hello world")
-    #     raise False
-        # if self.enddate.data is not None:
-        #     if (self.startdate.data > self.enddate.data):
-        #         flash(f"End Date ({self.enddate.data}) cannot be before Start Date ({self.startdate.data})",  'error')
-        #         return False
-        #     return True
+       
+
+

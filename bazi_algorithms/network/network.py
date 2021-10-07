@@ -46,13 +46,26 @@ def main():
                 user_chart=user_chart)
 
     if NetworkForm_2.validate_on_submit():
+        if NetworkForm_2.startdate.data is not None and NetworkForm_2.enddate.data is not None:
+            days_apart = (NetworkForm_2.enddate.data - NetworkForm_2.startdate.data).days
+            if days_apart <= 1:
+                flash(f"Date Range of {NetworkForm_2.startdate.data} to {NetworkForm_2.enddate.data} Needs To Be At Least 2 Days Apart. Current range: {days_apart} day.",  'error')
+                return render_template(
+                'network.jinja2',
+                current_user=current_user,
+                table_data = table_data,
+                network_form_2=NetworkForm_2,
+                questions=[],
+                remarks=[],
+                explanations=[],
+                user_chart=user_chart)
+
         show_success_flash = True
         if NetworkForm_2.category.data is not None:
             session['question'] = int(NetworkForm_2.category.data)
-        if NetworkForm_2.startdate.data is not None:
-            session['start_date'] = NetworkForm_2.startdate.data
-        if NetworkForm_2.enddate.data is not None:    
-            session['end_date'] = NetworkForm_2.enddate.data
+        
+        session['start_date'] = NetworkForm_2.startdate.data
+        session['end_date'] = NetworkForm_2.enddate.data
 
     if 'question' in session.keys():
         if session['question'] in [1,2,3,4]:

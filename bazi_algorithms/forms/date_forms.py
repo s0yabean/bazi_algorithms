@@ -10,12 +10,15 @@ class DateForm(FlaskForm):
     enddate = DateField('End Date', format='%Y-%m-%d', validators=(DataRequired(),))
     submit = SubmitField('Submit')
 
-    # def validate_on_submit(self):
-    #     if self.enddate.data is not None:
-    #         if (self.startdate.data > self.enddate.data):
-    #             flash(f"End Date ({self.enddate.data}) cannot be before Start Date ({self.startdate.data})",  'error')
-    #             return False
-    #         return True
+    def validate_on_submit(self):
+        print(self.startdate.data)
+        print(self.enddate.data)
+
+        if self.enddate.data is not None:
+            if (self.startdate.data > self.enddate.data):
+                flash(f"End Date ({self.enddate.data}) cannot be before Start Date ({self.startdate.data})",  'error')
+                return False
+            return True
 
 class TimelineDateForm(FlaskForm):
     startdate = DateField('Start Date', format='%Y-%m-%d', default=datetime(int(str(datetime.today())[:4]), 1, 1), validators=(DataRequired(),))

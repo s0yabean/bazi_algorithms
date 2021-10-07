@@ -237,7 +237,7 @@ def explanation_list_free():
         For eg. A Yi Wood DayMaster has Rat (Zi) and Monkey (Shen) has nobleman elements."),
         ("Interpretation", "These are people who you are generally leverage to help you get to your goals faster. They can bring positive things like opportunities, resources, knowledge, relationships and happiness into your life.\
         <br><br>\
-        However, they don't always look like your best friends or 'Gods'. They might not your best relationships. They could even seem unhelpful, unpleasant or unfriendly to be with. Ever heard of 'tough love'? Read more about nobleman here."),
+        However, they don't always look like your best friends or 'Gods'. They might not your best relationships. They could even seem unhelpful, unpleasant or unfriendly to be with. Ever heard of 'tough love'?"),
         ("Recommendations", "For yourself, know who your nobleman are and leverage opportunities to build the relationship. Healthy relationships thrive on reciprocity so while receiving from the other party, also make sure you are giving so there is an exchange of energy.\
         <br><br>\
         Learn the strengths on these people in your life so you know who to turn to when you need help in a certain area. For eg. You could have noblemen for relationships, work, health and investments.\
