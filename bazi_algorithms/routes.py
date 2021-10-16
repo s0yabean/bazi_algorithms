@@ -20,7 +20,7 @@ def main():
     chart_form = ChartFormManual()
     chart_form_2 = ChartFormBirthTime()
     # checks to see if user can add more users based on plan
-    plan_count = {"Lite Plan" : 15, "Plus Plan" : 50, "Premium plan" : -1, "Annual plan":  -1}
+    plan_count = {"Lite Plan" : 15, "Plus Plan" : 50, "Premium Plan" : -1, "Annual Plan":  -1}
 
     if request.method == 'POST':
         if chart_form_2.validate_on_submit():
@@ -49,7 +49,6 @@ def main():
                 hour = ["", "", "", "", ""]
             else:
                 hour = re.search("(?=Hour)(.*)(?=Day)", z)[0].split(" ")
-            print(hour)
             
             day = re.search("(?=Day)(.*)(?=Month)", z)[0].split(" ")
             month = re.search("(?=Month)(.*)(?=Year)", z)[0].split(" ")
@@ -106,7 +105,6 @@ def main():
                         flash("Chart for " + chart_form.name.data + " added. Bazi: " + natal_chart.day_s + " " +  natal_chart.day_e + ", " + natal_chart.month_s + " " + natal_chart.month_e + ", " + natal_chart.year_s + " " + natal_chart.year_e, "info")
                 except Exception as e: 
                     db.session.rollback()
-                    print(e)
                     abort(500)
 
                 if chart_form.my_own_chart_checkbox.data:
