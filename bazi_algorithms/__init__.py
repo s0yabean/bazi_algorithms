@@ -83,8 +83,16 @@ def create_app():
         class NatalChartView(MyModelView):
             column_list = ("id","user_id",'contact_name',"hour_s","hour_e", "day_s", "day_e", "month_s", "month_e", "year_s", "year_e", "gender", "self_chart")
             form_columns = ("id", "user_id",'contact_name',"hour_s","hour_e", "day_s", "day_e", "month_s", "month_e", "year_s", "year_e", "gender", "self_chart")
+            page_size = 30
+            column_searchable_list = ['user_id', 'contact_name', 'self_chart']
+            column_filters = ['user_id', 'contact_name', 'self_chart']
+            can_export = True
         class UserView(MyModelView):
-            column_list = ('name','email', 'natal_chart_id', 'plan')
+            column_list = ('id','name','email', 'natal_chart_id', 'plan')
+            page_size = 20
+            column_searchable_list = ['id', 'name', 'email', 'natal_chart_id']
+            column_filters = ['id', 'name', 'email', 'natal_chart_id']
+            can_export = True
         admin.add_view(UserView(User, db.session))
         admin.add_view(NatalChartView(NatalChart, db.session))
         admin.add_view(MyModelView(ExternalPillars, db.session))
