@@ -28,11 +28,11 @@ def signup():
 
     form = SignupForm()
     if form.validate_on_submit():
-        existing_user = User.query.filter_by(email=form.email.data).first()
+        existing_user = User.query.filter_by(email=form.email.data.lower()).first()
         if existing_user is None:
             user = User(
                 name=form.name.data,
-                email=form.email.data,
+                email=form.email.data.lower(),
                 plan="Lite Plan"
             )
             user.set_password(form.password.data)
@@ -78,7 +78,7 @@ def login():
     form = LoginForm()
     # Validate login attempt
     if form.validate_on_submit():
-        user = User.query.filter_by(email=form.email.data).first()  
+        user = User.query.filter_by(email=form.email.data.lower()).first()  
         if user and user.check_password(password=form.password.data):
             login_user(user)
             next_page = request.args.get('next')
