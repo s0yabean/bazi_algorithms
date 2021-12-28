@@ -11,10 +11,12 @@ from flask_admin import Admin
 import os
 from dotenv import load_dotenv
 
+
 patch_all()
 load_dotenv()
 db = SQLAlchemy()
 login_manager = LoginManager()
+
 
 def create_app():
     """Construct the core app object."""
@@ -36,6 +38,7 @@ def create_app():
 
     csrf = CSRFProtect()
     csrf.init_app(app)
+
 
     admin = Admin(app, 'Admin Area', template_mode='bootstrap3')
     

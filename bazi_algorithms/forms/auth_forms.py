@@ -22,8 +22,7 @@ class SignupForm(FlaskForm):
         validators=[
             DataRequired(),
             Length(min=6, message='Select a stronger password.')
-        ]
-    )
+        ])
     confirm = PasswordField(
         'Confirm Your Password',
         validators=[
@@ -45,3 +44,35 @@ class LoginForm(FlaskForm):
     )
     password = PasswordField('Password', validators=[DataRequired()])
     submit = SubmitField('Log In')
+
+
+
+class ForgotPasswordForm(FlaskForm):
+    """Forgot Password Form."""
+    email = StringField(
+        'Email',
+        validators=[
+            DataRequired(),
+            Email(message='Enter a valid email.')
+        ]
+    )
+    submit = SubmitField('Request password reset')
+
+
+class ResetPasswordForm(FlaskForm):
+    """User Reset-Password Form."""
+    password = PasswordField(
+    'Password',
+    validators=[
+        DataRequired(),
+        Length(min=6, message='Select a stronger password.')
+    ])
+    confirm = PasswordField(
+        'Confirm Your Password',
+        validators=[
+            DataRequired(),
+            EqualTo('password', message='Passwords must match.')
+        ]
+    )
+
+    submit = SubmitField('Reset password')

@@ -3,6 +3,7 @@ from flask_login import UserMixin
 from stripe.api_resources import plan
 from werkzeug.security import check_password_hash, generate_password_hash
 from .. import db
+from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 
 class StripeCustomer(db.Model):
 	__tablename__ = 'stripe_customer'
@@ -75,6 +76,20 @@ class User(UserMixin, db.Model):
 		"""Check hashed password."""
 		return check_password_hash(self.password, password)
 
+	def get_reset_token(self, expires_sec=3600):
+		s = Serializer('yoursecretkey', expires_sec)
+		return s.dumps({'user_id': self.id}).decode('utf-8')
+
+	
+
+	@staticmethod
+	def verify_reset_token(token):
+		s = Serializer('yoursecretkey')
+		try:
+			user_id = s.loads(token)['user_id']
+		except:
+			return None
+		return User.query.filter_by(id = user_id).first()  
 class NatalChart(db.Model):
 	"""Natal Charts"""
 
