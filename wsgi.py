@@ -4,5 +4,4 @@ from bazi_algorithms import create_app
 app = create_app()
 
 if __name__ == "__main__":
-    # Create Database Models
     app.run(host="0.0.0.0", port=8000)

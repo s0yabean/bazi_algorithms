@@ -1,5 +1,5 @@
   <div class="min-h-screen flex">
-    <div class="container max-w-md mx-auto flex-1 flex flex-col items-center justify-center">
+    <div class="container flex-col">
     {# <div class="bg-indigo-400 px-6 py-8 rounded shadow-md text-black w-full"> #}
 
     {% for message in get_flashed_messages() %}
@@ -9,27 +9,16 @@
       </div>
     {% endfor %}
 
-    <body>
-<div class="text-center">
-	<div class="modal-dialog modal-confirm">
-		<div class="modal-content">
-			<div class="modal-header">
-				<div class="icon-box">
-					<i class="material-icons">&#xE876;</i>
-				</div>
-				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-			</div>
-			<div class="modal-body text-center">
-				<h4>Great , your new password has been set !</h4>	
-				<p>you can now use it to log in to your account.</p>
-				
-			</div>
-		</div>
-	</div>
-</div>
 
-   
-</body>
+        
+        <h1><strong>Great , your new password has been set !</strong></h1>
+        
+				<p>you can now use it to log in to your account , you will be redirected after 3 seconds to login page.</p>
+        <p>or you can go to <a class="hover:underline font-extrabold text-blue" href="{{ url_for('auth_bp.login') }}">login </a>now.</p>
+
+				
+
+
 
 <script>
     setTimeout(function(){

@@ -171,10 +171,9 @@ def send_reset_email(user):
     token = user.get_reset_token()
     app_password = "nyubrygylmnzctdb"
     link = url_for('auth_bp.reset_password', token=token, _external=True)
-    body = open("/home/amr/Desktop/bazi_algorithms/bazi_algorithms/static/src/email.html","r")
+    body = open("bazi_algorithms/static/src/email_forgot_pw.html","r")
     body = body.read()
     body = body.replace("http://www.example.com",link)
-    print(body)
     message = MIMEMultipart('alternative')
     message["Subject"] = Header("Password reset request","utf-8")
     message["From"] = Header(sender_email,"utf-8")
