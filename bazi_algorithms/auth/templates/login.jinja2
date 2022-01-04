@@ -18,7 +18,7 @@
         {{ form.email(placeholder='Email', class="w-full text-lg pl-2 py-3 rounded") }}
       </fieldset>
 
-              <div class="mb-4 ">
+        <div class="mb-4 ">
         {% if form.email.errors %}
           <ul class="errors">
             {% for error in form.email.errors %}
@@ -46,11 +46,22 @@
 
       <div class="login-signup text-xl text-grey-dark mt-12 md:mt-8">
       {%if request.args["next"] == "pay" %}
-        <span>Don't have an account? <a class="hover:underline font-extrabold text-blue" href="/signup?next=pay">Sign up</a>.</span>
+        <div>
+          <span>Don't have an account? <a class="hover:underline font-extrabold text-blue" href="/signup?next=pay">Sign up</a>.</span>
+        </div>
+        <div>
+          <a class="hover:underline font-extrabold text-blue" href="{{ url_for('auth_bp.forgot_password') }}">Forgot password ?</a>.</span>
+        </div>
       {%else%}
-        <span>Don't have an account? <a class="hover:underline font-extrabold text-blue" href="{{ url_for('auth_bp.signup') }}">Sign up</a>.</span>
+        <div>
+          <span>Don't have an account? <a class="hover:underline font-extrabold text-blue" href="{{ url_for('auth_bp.signup') }}">Sign up</a>.</span>
+        </div>
+        <div>
+          <a class="hover:underline font-extrabold text-blue" href="{{ url_for('auth_bp.forgot_password') }}">Forgot password ?</a>
+        </div>
       {%endif%}
       </div>
+      
 
     </form>
       </div>
