@@ -145,15 +145,10 @@ def forgot_password():
         user = User.query.filter_by(email=form.email.data.lower()).first()  
         if user:
             send_reset_email(user)
-            flash('An email has been sent with instructions to reset your password.', 'info')
-            # send_reset_email(user)
+            flash('An email has been sent with instructions to reset your password. Check your spam folder if missing.', 'success')
             return redirect(url_for('auth_bp.login'))
-            # flash('User Exists')
-            # flash(form.email)
-            # flash(user.id)
-            # flash((user.verify_reset_token(user.get_reset_token())).email)
         else:
-            flash('Email not registered')
+            flash('Email not registered', 'info')
             return redirect(url_for('auth_bp.signup'))
 
     return render_template(

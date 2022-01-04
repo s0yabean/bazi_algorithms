@@ -56,7 +56,7 @@ class ForgotPasswordForm(FlaskForm):
             Email(message='Enter a valid email.')
         ]
     )
-    submit = SubmitField('Request password reset')
+    submit = SubmitField('Reset Password')
 
 
 class ResetPasswordForm(FlaskForm):
