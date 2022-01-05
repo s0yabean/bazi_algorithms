@@ -13,8 +13,7 @@ import smtplib,ssl
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from email.header import Header
-# from flaskblog import mail
-
+import os
     
 # Blueprint Configuration
 auth_bp = Blueprint(
@@ -162,9 +161,9 @@ def forgot_password():
 def send_reset_email(user):
     recipient = user.email
     port_number = 465
-    sender_email = "bazi.backend@gmail.com"
+    sender_email = os.getenv('EMAIL_ACC')
     token = user.get_reset_token()
-    app_password = "nyubrygylmnzctdb"
+    app_password = os.getenv('EMAIL_PW')
     link = url_for('auth_bp.reset_password', token=token, _external=True)
     body = open("bazi_algorithms/static/src/email_forgot_pw.html","r")
     body = body.read()
@@ -179,13 +178,6 @@ def send_reset_email(user):
     with smtplib.SMTP_SSL("smtp.gmail.com",port_number,context=context) as server:
         server.login(sender_email,app_password)
         server.sendmail(sender_email,recipient,message.as_string())
-
-    # msg = Message('Password Reset Request',
-    #               sender='noreply@demo.com',
-    #               recipients=[user.email])
-    # msg.body = 
-
-    # mail.send(msg)
 
 @auth_bp.route("/reset_password/<token>", methods=['GET', 'POST'])
 @auth_bp.route("/reset_password",defaults={'token': None}, methods=['GET', 'POST'])
