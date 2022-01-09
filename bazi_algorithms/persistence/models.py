@@ -55,6 +55,17 @@ class User(UserMixin, db.Model):
         unique=True,
         nullable=True
     )
+
+    charts_count = db.Column(
+        db.Integer,
+        default=0,
+        nullable=True
+    )
+    questions_count = db.Column(
+        db.Integer,
+        default=0,
+        nullable=True
+    )
     plan = db.Column(
         db.String(40),
         primary_key=False,

@@ -115,6 +115,10 @@ def main():
                 try:
                     db.session.add(natal_chart)
                     db.session.commit()
+
+                    # Also update user chart count to +1
+                    current_user.charts_count += 1
+
                     if natal_chart.hour_s != "":
                         flash(
                             "Chart for " + chart_form.name.data + " added. Bazi: " + natal_chart.hour_s + " " + natal_chart.hour_e + ", " + natal_chart.day_s + " " + natal_chart.day_e + ", " + natal_chart.month_s + " " + natal_chart.month_e + ", " + natal_chart.year_s + " " + natal_chart.year_e,

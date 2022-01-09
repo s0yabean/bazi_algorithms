@@ -2,9 +2,11 @@ from flask import (Blueprint,
                    render_template,
                    flash,
                    session,
-                   request,
-                   )
+                   request, )
 from flask_login import current_user, login_required
+
+from .explanations import explanation_list_paid, explanation_list_free
+from ..persistence.models import NatalChart, User
 
 network_bp = Blueprint(
     'network_bp', __name__,
@@ -16,10 +18,7 @@ network_bp = Blueprint(
 @network_bp.route("/network", methods=['GET', 'POST'])
 @login_required
 def main():
-    from ..forms.network_forms import NetworkForm_2
-    from ..persistence.models import NatalChart
-    from .explanations import explanation_list_paid, explanation_list_free
-
+    from bazi_algorithms.forms.network_forms import NetworkForm_2
     table_data = NatalChart.query.filter_by(user_id=current_user.id, self_chart=False).all()
     natal_chart_id = current_user.natal_chart_id
     remarks = []
@@ -68,6 +67,9 @@ def main():
 
         session['start_date'] = NetworkForm_2.startdate.data
         session['end_date'] = NetworkForm_2.enddate.data
+
+        # increase counter as question has been asked/selected
+        current_user.questions_count += 1
 
     if 'question' in session.keys():
         if session['question'] in [1, 2, 3, 4]:
@@ -131,6 +133,21 @@ def main():
         explanations=explanations,
         user_chart=user_chart,
         total_other_ppl_charts=total_other_ppl_charts)
+
+
+@network_bp.route("/friends", methods=['GET'])
+@login_required
+def get_list_of_friends():
+    netal_charts = NatalChart.query.all()
+    dropdown_names_list = []
+    for chart in netal_charts:
+        user = User.query.filter_by(id=chart.user_id).first()
+        dropdown_names_list.append({"id": user.name,
+                                    "name": user.name},
+                                   )
+        # use below dropdown_names_list for friends filtering drop down selection
+    return render_template("Jin template here ",
+                           friends_list=dropdown_names_list)
 
 
 from .questions_1 import career_plus
