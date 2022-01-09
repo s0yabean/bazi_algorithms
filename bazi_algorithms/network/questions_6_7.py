@@ -1,6 +1,7 @@
-
-from ..persistence.models import NatalChart
 from ..bazi_formulas.nobleman import find_nobleman
+from ..persistence.models import NatalChart
+
+
 def nobleman_star(table_data, natal_chart_id):
     """In future can check people's luck pillar, for now just 
     check their natal chart"""
@@ -26,7 +27,10 @@ def nobleman_star(table_data, natal_chart_id):
             remarks.append(r)
     return filtered_data, remarks
 
+
 from ..bazi_formulas.peach_blossom import find_pb
+
+
 def peach_blossom_me_to_others(table_data, natal_chart_id):
     """In future can check people's luck pillar, for now just 
     check their natal chart"""
@@ -51,24 +55,24 @@ def peach_blossom_me_to_others(table_data, natal_chart_id):
             remarks.append(r)
     return filtered_data, remarks
 
-    
+
 def peach_blossom_others_to_me(table_data, natal_chart_id):
     """In future can check people's luck pillar, for now just 
     check their natal chart"""
 
     natal_chart = NatalChart.query.filter_by(id=natal_chart_id).one()
-    pb_dict = {"Mao" : ["Yin", "Wu", "Xu"], "Wu" : ["Si", "Chou", "You"],
-    "You" : ["Shen", "Zi", "Chen"], "Zi" : ["Hao", "Mao", "Wei"]}
+    pb_dict = {"Mao": ["Yin", "Wu", "Xu"], "Wu": ["Si", "Chou", "You"],
+               "You": ["Shen", "Zi", "Chen"], "Zi": ["Hao", "Mao", "Wei"]}
 
     elements_i_attract = []
     for animal in [natal_chart.hour_e, natal_chart.day_e, natal_chart.month_e, natal_chart.year_e]:
         if animal == "Mao":
             elements_i_attract += pb_dict["Mao"]
-        elif animal == "Wu": 
+        elif animal == "Wu":
             elements_i_attract += pb_dict["Wu"]
-        elif animal == "You": 
+        elif animal == "You":
             elements_i_attract += pb_dict["You"]
-        elif animal == "Zi": 
+        elif animal == "Zi":
             elements_i_attract += pb_dict["Zi"]
 
     filtered_data = []
@@ -88,4 +92,3 @@ def peach_blossom_others_to_me(table_data, natal_chart_id):
             filtered_data.append(t)
             remarks.append(r)
     return filtered_data, remarks
-

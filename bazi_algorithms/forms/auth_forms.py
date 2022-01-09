@@ -1,7 +1,12 @@
 """Sign-up & log-in forms."""
 from flask_wtf import FlaskForm
 from wtforms import PasswordField, StringField, SubmitField
-from wtforms.validators import DataRequired, Email, EqualTo, Length, Optional
+from wtforms.validators import (DataRequired,
+                                Email,
+                                EqualTo,
+                                Length,
+                                )
+
 
 class SignupForm(FlaskForm):
     """User Sign-up Form."""
@@ -46,7 +51,6 @@ class LoginForm(FlaskForm):
     submit = SubmitField('Log In')
 
 
-
 class ForgotPasswordForm(FlaskForm):
     """Forgot Password Form."""
     email = StringField(
@@ -62,11 +66,11 @@ class ForgotPasswordForm(FlaskForm):
 class ResetPasswordForm(FlaskForm):
     """User Reset-Password Form."""
     password = PasswordField(
-    'Password',
-    validators=[
-        DataRequired(),
-        Length(min=6, message='Select a stronger password.')
-    ])
+        'Password',
+        validators=[
+            DataRequired(),
+            Length(min=6, message='Select a stronger password.')
+        ])
     confirm = PasswordField(
         'Confirm Your Password',
         validators=[

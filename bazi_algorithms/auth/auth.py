@@ -1,27 +1,40 @@
 """Routes for user authentication."""
-from email import message
-from re import template
-from flask import Blueprint, flash, redirect, render_template, request, url_for, abort
-from flask_login import current_user, login_user, login_required, logout_user
-from .. import login_manager
-from ..forms.auth_forms import LoginForm, SignupForm, ForgotPasswordForm, ResetPasswordForm
-from ..persistence.models import User, db
-from flask import session
-from itsdangerous import JSONWebSignatureSerializer as Serializer, exc
-from flask_mail import Message
-import smtplib,ssl
-from email.mime.text import MIMEText
-from email.mime.multipart import MIMEMultipart
+import smtplib
+import ssl
 from email.header import Header
-# from flaskblog import mail
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
 
-    
+from flask import (Blueprint,
+                   flash,
+                   redirect,
+                   render_template,
+                   request,
+                   url_for,
+                   abort,
+                   )
+from flask import session
+from flask_login import (current_user,
+                         login_user,
+                         login_required,
+                         logout_user,
+                         )
+
+from .. import login_manager
+from ..forms.auth_forms import (LoginForm,
+                                SignupForm,
+                                ForgotPasswordForm,
+                                ResetPasswordForm,
+                                )
+from ..persistence.models import User, db
+
 # Blueprint Configuration
 auth_bp = Blueprint(
     'auth_bp', __name__,
     template_folder='templates',
     static_folder='static'
 )
+
 
 @auth_bp.route('/signup', methods=['GET', 'POST'])
 def signup():
@@ -49,11 +62,11 @@ def signup():
 
             try:
                 db.session.add(user)
-                db.session.commit() 
+                db.session.commit()
             except:
                 db.session.rollback()
                 abort(500)
-            
+
             login_user(user)  # Log in as newly created user
 
             if "next" in session.keys():
@@ -72,6 +85,7 @@ def signup():
         body="Sign up for a user account."
     )
 
+
 @auth_bp.route('/login', methods=['GET', 'POST'])
 def login():
     """
@@ -83,12 +97,12 @@ def login():
 
     # Bypass if user is logged in
     if current_user.is_authenticated:
-        return redirect(url_for('main_bp.main'))  
+        return redirect(url_for('main_bp.main'))
 
     form = LoginForm()
     # Validate login attempt
     if form.validate_on_submit():
-        user = User.query.filter_by(email=form.email.data.lower()).first()  
+        user = User.query.filter_by(email=form.email.data.lower()).first()
         if user and user.check_password(password=form.password.data):
             login_user(user)
             next_page = request.args.get('next')
@@ -103,6 +117,7 @@ def login():
         body="Log in with your User account."
     )
 
+
 @auth_bp.route("/logout")
 @login_required
 def logout():
@@ -112,6 +127,7 @@ def logout():
     sessions_reset()
     return redirect(url_for('auth_bp.login'))
 
+
 @login_manager.user_loader
 def load_user(user_id):
     """Check if user is logged-in upon page load."""
@@ -119,11 +135,13 @@ def load_user(user_id):
         return User.query.get(user_id)
     return None
 
+
 @login_manager.unauthorized_handler
 def unauthorized():
     """Redirect unauthorized users to Login page."""
     flash('You Must Be Logged In To View That Page.')
     return redirect(url_for('auth_bp.login'))
+
 
 @auth_bp.errorhandler(500)
 def not_found_error(error):
@@ -142,7 +160,7 @@ def forgot_password():
     if current_user.is_authenticated:
         return redirect(url_for('main_bp.main'))
     if form.validate_on_submit():
-        user = User.query.filter_by(email=form.email.data.lower()).first()  
+        user = User.query.filter_by(email=form.email.data.lower()).first()
         if user:
             send_reset_email(user)
             flash('An email has been sent with instructions to reset your password.', 'info')
@@ -164,6 +182,7 @@ def forgot_password():
         body="Reset your password"
     )
 
+
 def send_reset_email(user):
     recipient = user.email
     port_number = 465
@@ -171,19 +190,19 @@ def send_reset_email(user):
     token = user.get_reset_token()
     app_password = "nyubrygylmnzctdb"
     link = url_for('auth_bp.reset_password', token=token, _external=True)
-    body = open("bazi_algorithms/static/src/email_forgot_pw.html","r")
+    body = open("bazi_algorithms/static/src/email_forgot_pw.html", "r")
     body = body.read()
-    body = body.replace("http://www.example.com",link)
+    body = body.replace("http://www.example.com", link)
     message = MIMEMultipart('alternative')
-    message["Subject"] = Header("Password reset request","utf-8")
-    message["From"] = Header(sender_email,"utf-8")
-    message["To"] = Header(recipient,"utf-8")
-    part1 = MIMEText(body,'html')
+    message["Subject"] = Header("Password reset request", "utf-8")
+    message["From"] = Header(sender_email, "utf-8")
+    message["To"] = Header(recipient, "utf-8")
+    part1 = MIMEText(body, 'html')
     message.attach(part1)
     context = ssl.create_default_context()
-    with smtplib.SMTP_SSL("smtp.gmail.com",port_number,context=context) as server:
-        server.login(sender_email,app_password)
-        server.sendmail(sender_email,recipient,message.as_string())
+    with smtplib.SMTP_SSL("smtp.gmail.com", port_number, context=context) as server:
+        server.login(sender_email, app_password)
+        server.sendmail(sender_email, recipient, message.as_string())
 
     # msg = Message('Password Reset Request',
     #               sender='noreply@demo.com',
@@ -192,10 +211,10 @@ def send_reset_email(user):
 
     # mail.send(msg)
 
+
 @auth_bp.route("/reset_password/<token>", methods=['GET', 'POST'])
-@auth_bp.route("/reset_password",defaults={'token': None}, methods=['GET', 'POST'])
+@auth_bp.route("/reset_password", defaults={'token': None}, methods=['GET', 'POST'])
 def reset_password(token):
-    
     if token:
         session['token'] = token
         print("        Token :          ")
@@ -209,7 +228,7 @@ def reset_password(token):
     if user is None:
         flash('That is an invalid or expired token, please request a new one.', 'warning')
         return redirect(url_for('auth_bp.forgot_password'))
-    
+
     form = ResetPasswordForm()
 
     if form.validate_on_submit():
@@ -221,10 +240,10 @@ def reset_password(token):
         except:
             flash('An error happened , please contact our service team.', 'warning')
             return redirect(url_for('main_bp.main'))
-      
+
     # using sessions for /signup due to SignupForm deleting request.args 
     return render_template('password_reset_page.jinja2',
-    title='User Password Reset',
-    form=form,
-    template='password-reset-page',
-    body='Change Password')
+                           title='User Password Reset',
+                           form=form,
+                           template='password-reset-page',
+                           body='Change Password')

@@ -1,12 +1,23 @@
-import os
-from flask_login.utils import login_required
-import stripe
-from flask import session, Flask, flash, jsonify, Blueprint, render_template, url_for, redirect, request, abort
-from flask_login import current_user
-from ..persistence.models import StripeCustomer, User, db
 import math
+import os
 import time
-from sqlalchemy import func
+
+import stripe
+from flask import (session,
+                   flash,
+                   jsonify,
+                   Blueprint,
+                   render_template,
+                   url_for,
+                   redirect,
+                   request,
+                   )
+from flask_login import current_user
+
+from ..persistence.models import (StripeCustomer,
+                                  User,
+                                  db,
+                                  )
 
 # Blueprint Configuration
 pay_bp = Blueprint(
@@ -20,29 +31,32 @@ stripe.api_key = os.getenv("STRIPE_SECRET_KEY")
 stripe_keys = {
     "secret_key": os.getenv("STRIPE_SECRET_KEY"),
     "publishable_key": os.getenv("STRIPE_PUBLISHABLE_KEY"),
-    "annual_price_id": os.getenv("STRIPE_ANNUAL_PLAN_PRICE_ID"), 
-    "premium_price_id": os.getenv("STRIPE_PREMIUM_PLAN_PRICE_ID"), 
+    "annual_price_id": os.getenv("STRIPE_ANNUAL_PLAN_PRICE_ID"),
+    "premium_price_id": os.getenv("STRIPE_PREMIUM_PLAN_PRICE_ID"),
     "plus_price_id": os.getenv("STRIPE_PLUS_PLAN_PRICE_ID"),
     "endpoint_secret": os.getenv("STRIPE_ENDPOINT_SECRET")
 }
 
-plan_dic = {"plusplan" : "plus_price_id", "premiumplan" : "premium_price_id", "annualplan" : "annual_price_id"}
+plan_dic = {"plusplan": "plus_price_id", "premiumplan": "premium_price_id", "annualplan": "annual_price_id"}
 
-@pay_bp.route("/pay") 
+
+@pay_bp.route("/pay")
 def pay():
     if not current_user.is_authenticated:
-      flash("To See Pricing, Kindly Login.", "info")
-      return redirect(url_for("auth_bp.login") + '?next=pay')
-    
+        flash("To See Pricing, Kindly Login.", "info")
+        return redirect(url_for("auth_bp.login") + '?next=pay')
+
     if "next" in session.keys():
         session.pop("next")
 
     return render_template("payment.jinja2")
 
+
 @pay_bp.route("/stripe_public")
 def get_publishable_key():
     stripe_config = {"publicKey": stripe_keys["publishable_key"]}
     return jsonify(stripe_config)
+
 
 @pay_bp.route("/create-checkout-session/<plan>")
 def create_checkout_session(plan):
@@ -51,18 +65,19 @@ def create_checkout_session(plan):
     try:
         checkout_session = stripe.checkout.Session.create(
             client_reference_id=current_user.id,
-            success_url= url_for('pay_bp.pay_success', _external=True) + '?session_id={CHECKOUT_SESSION_ID}',
-            cancel_url= url_for('pay_bp.pay_cancel', _external=True),
+            success_url=url_for('pay_bp.pay_success', _external=True) + '?session_id={CHECKOUT_SESSION_ID}',
+            cancel_url=url_for('pay_bp.pay_cancel', _external=True),
             payment_method_types=['card'],
             mode='subscription',
             line_items=[{
                 'price': stripe_keys[plan_dic[plan]],
                 'quantity': 1
-                }],
+            }],
         )
         return jsonify({'sessionId': checkout_session['id']})
     except Exception as e:
         return jsonify({'error': {'message': str(e)}}), 400
+
 
 @pay_bp.route("/webhook", methods=["POST"])
 def stripe_webhook():
@@ -88,8 +103,8 @@ def stripe_webhook():
 
     return "Success", 200
 
-def handle_checkout_session(data):
 
+def handle_checkout_session(data):
     if "client_reference_id" in data.keys():
         if data["client_reference_id"] is None:
             user_id = 0
@@ -118,7 +133,7 @@ def handle_checkout_session(data):
         if data["amount_subtotal"] is None:
             amount_subtotal = 0
         else:
-            amount_subtotal = data["amount_subtotal"]/ 100
+            amount_subtotal = data["amount_subtotal"] / 100
     else:
         amount_subtotal = 0
 
@@ -126,7 +141,7 @@ def handle_checkout_session(data):
         if data["amount_total"] is None:
             amount_total = 0
         else:
-            amount_total = data["amount_total"]/ 100
+            amount_total = data["amount_total"] / 100
     else:
         amount_total = 0
 
@@ -137,7 +152,7 @@ def handle_checkout_session(data):
             currency = data["currency"]
     else:
         currency = "no_result"
-        
+
     if "id" in data.keys():
         if data["id"] is None:
             stripe_session_id = "no_result"
@@ -165,21 +180,21 @@ def handle_checkout_session(data):
     date = math.floor(time.time())
 
     stripe_customer = StripeCustomer(
-            user_id=user_id,
-            email=email,
-            amount_subtotal=amount_subtotal,
-            amount_total=amount_total,
-            payment_status=payment_status,
-            currency=currency,
-            date=date,
-            stripe_session_id=stripe_session_id,
-            stripe_customer_id=stripe_customer_id,
-            stripe_subscription_id=stripe_subscription_id
-        )
+        user_id=user_id,
+        email=email,
+        amount_subtotal=amount_subtotal,
+        amount_total=amount_total,
+        payment_status=payment_status,
+        currency=currency,
+        date=date,
+        stripe_session_id=stripe_session_id,
+        stripe_customer_id=stripe_customer_id,
+        stripe_subscription_id=stripe_subscription_id
+    )
 
     try:
         db.session.add(stripe_customer)
-        db.session.commit() 
+        db.session.commit()
     except:
         db.session.rollback()
 
@@ -191,21 +206,24 @@ def handle_checkout_session(data):
 
         if "metadata" in product.keys():
             if "plan_name" in product["metadata"].keys():
-                user = User.query.filter_by(id=user_id).first() 
+                user = User.query.filter_by(id=user_id).first()
                 user.plan = product["metadata"]["plan_name"]
 
                 try:
-                    db.session.commit() 
+                    db.session.commit()
                 except:
                     db.session.rollback()
+
 
 @pay_bp.route("/pay_success")
 def pay_success():
     return render_template("success.jinja2")
 
+
 @pay_bp.route("/pay_cancel")
 def pay_cancel():
     return render_template("cancel.jinja2")
+
 
 @pay_bp.errorhandler(500)
 def not_found_error(error):

@@ -1,7 +1,10 @@
-from ..bazi_formulas.combines import count_earth_six_harmony_combine, count_earth_combo
+from ..bazi_formulas.combines import (count_earth_six_harmony_combine,
+                                      count_earth_combo,
+                                      )
 from ..persistence.models import NatalChart
+
+
 def career_plus(table_data, natal_chart_id):
-    
     natal_chart = NatalChart.query.filter_by(id=natal_chart_id).one()
     natal_chart_ext = [natal_chart.month_e, natal_chart.year_e]
 
@@ -19,6 +22,6 @@ def career_plus(table_data, natal_chart_id):
                 remarks += [bd_1 + bd_2]
                 filtered_data.append(natal_obj)
             else:
-                remarks[-1] += bd_1 + bd_2 
+                remarks[-1] += bd_1 + bd_2
 
     return filtered_data, remarks

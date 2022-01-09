@@ -1,6 +1,4 @@
-from flask import Blueprint, redirect, render_template, url_for
-from flask_login import current_user, login_required
-import os
+from flask import Blueprint, render_template
 
 # Blueprint Configuration
 landing_bp = Blueprint(
@@ -9,12 +7,14 @@ landing_bp = Blueprint(
     static_folder='static'
 )
 
+
 @landing_bp.route('/', methods=['GET'])
 def landing():
     return render_template(
         'landing.jinja2',
         title="Leverage Your Network's Bazi."
     )
+
 
 @landing_bp.route('/about', methods=['GET'])
 def about_us():
@@ -23,10 +23,10 @@ def about_us():
         title='Bazi For The Modern Age'
     )
 
+
 @landing_bp.route('/newsletter', methods=['GET'])
 def newsletter():
     return render_template(
         'newsletter.jinja2',
         title="Sign Up For Bazilogy's Newsletter"
     )
-

@@ -20,7 +20,7 @@ def find_rw(dm):
     elif dm == "Xin":
         return "Geng"
 
-  
+
 def find_dw(dm):
     if dm == "Jia":
         return "Ji"
@@ -42,6 +42,7 @@ def find_dw(dm):
         return "Yi"
     elif dm == "Xin":
         return "Jia"
+
 
 def find_iw(dm):
     if dm == "Yi":
@@ -65,6 +66,7 @@ def find_iw(dm):
     elif dm == "Geng":
         return "Jia"
 
+
 def find_ho(dm):
     if dm == "Jia":
         return "Ding"
@@ -87,6 +89,7 @@ def find_ho(dm):
     elif dm == "Xin":
         return "Ren"
 
+
 def find_7k(dm):
     if dm == "Jia":
         return "Geng"
@@ -108,7 +111,3 @@ def find_7k(dm):
         return "Bing"
     elif dm == "Xin":
         return "Ding"
-
-    
-
-  

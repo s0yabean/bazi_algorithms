@@ -1,4 +1,3 @@
-
 def find_nobleman(dm):
     if dm in ["Jia", "Wu", "Geng"]:
         return ["Chou", "Wei"]
@@ -8,6 +7,5 @@ def find_nobleman(dm):
         return ["Hai", "You"]
     elif dm in ["Ren", "Gui"]:
         return ["Mao", "Si"]
-    else:# ["Xin"]:
-        return ["Wu", "Yin"]    
-
+    else:  # ["Xin"]:
+        return ["Wu", "Yin"]

@@ -1,14 +1,14 @@
-from flask import Blueprint, redirect, render_template, url_for, flash, session, request, abort
-from flask_login import current_user, login_required
-from flask_wtf.csrf import CSRFProtect
-from ..persistence.models import User, db, Profile
-import numpy as np
+from flask import Blueprint, render_template
+from flask_login import (current_user,
+                         login_required,
+                         )
 
 accounts_bp = Blueprint(
     'accounts_bp', __name__,
     template_folder='templates',
     static_folder='static'
 )
+
 
 @accounts_bp.route('/account', methods=['GET'])
 @login_required
