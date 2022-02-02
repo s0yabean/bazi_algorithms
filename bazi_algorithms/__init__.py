@@ -52,6 +52,7 @@ def create_app():
         from .legal import legal
         from .blog import blog
         from .payment import payment
+        from .nft import nft
         from .assets.assets import compile_static_assets
         from .persistence.models import User, NatalChart, ExternalPillars
 
@@ -65,6 +66,7 @@ def create_app():
         app.register_blueprint(legal.legal_bp)
         app.register_blueprint(blog.blog_bp)
         app.register_blueprint(payment.pay_bp)
+        app.register_blueprint(nft.nft_bp)
 
         # Remove protection for Stripe webhooks
         csrf.exempt(payment.pay_bp)
