@@ -13,6 +13,6 @@ nft_bp = Blueprint(
 def nft():
     return render_template(
         'nft.jinja2',
-        title='The BaziVerse.'
+        title='The BaziVerse NFT Collection on Rarible'
     )
 
